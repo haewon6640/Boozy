@@ -22,9 +22,7 @@ class Profile extends React.Component {
         }
         return (
             <div>
-                {this.props.currentUser.id}
-                <br/>
-                My Shelf
+                {`${this.props.user.handle}'s Shelf`}
                 <div>
                 {this.props.user.shelf.map(item=>(
                     <span>{this.props.ingredients[item].name}</span>

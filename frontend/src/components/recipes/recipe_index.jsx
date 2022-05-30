@@ -9,6 +9,7 @@ class RecipeIndex extends React.Component {
         };
     }
     componentDidMount() {
+        this.props.fetchIngredients();
         this.props.fetchRecipes()
     }
     componentWillReceiveProps(newState) {
@@ -24,7 +25,7 @@ class RecipeIndex extends React.Component {
                 <Link to="/recipes/new">New Recipe</Link>
                 <ul>
                     {this.state.recipes.map((recipe, idx)=> (
-                        <RecipeIndexItem key={recipe._id} recipe={recipe} />
+                        <RecipeIndexItem key={recipe._id} ingredients={this.props.ingredients} recipe={recipe} />
                     ))}
                 </ul>
             </div>

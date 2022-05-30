@@ -5,6 +5,9 @@ const RecipeIndexItem = (props) => {
         <li>
             <p>{props.recipe.name}</p>
             <p>{props.recipe.created_at}</p>
+            {props.recipe.ingredients.map(ingredient_id=>(
+                <span>{props.ingredients[ingredient_id].name}</span>
+            ))}
         </li>
     )
 }
