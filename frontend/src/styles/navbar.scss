@@ -1,11 +1,11 @@
-.navbar-outer-container {
+.navbar-inner-container {
     display: flex;
     justify-content: space-between;
     height: 100px;
-    width: 1000px;
-    // border: 1px solid magenta;
+    width: 100%;
     margin: auto;
     align-items:center;
+    // border: 1px solid magenta;
 }
 
 .nav-left, .nav-right{
@@ -20,6 +20,10 @@
 }
 .title {
     font-size: 80px;
+    font-family: $fancy-font;
+    font-style: italic;
+    font-weight: 300;
+    color: $dark-grey;
 }
 
 .nav-right {

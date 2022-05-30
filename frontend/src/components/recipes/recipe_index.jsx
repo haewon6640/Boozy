@@ -21,11 +21,15 @@ class RecipeIndex extends React.Component {
             return (<div>No recipes</div>)
         } else {
             return (
-            <div>
-                <Link to="/recipes/new">New Recipe</Link>
-                <ul>
+            <div className="webpage">
+                <Link className='btn' to="/recipes/new"><span className="">New Recipe</span></Link>
+                <ul className="recipe-index-container">
                     {this.state.recipes.map((recipe, idx)=> (
-                        <RecipeIndexItem key={recipe._id} ingredients={this.props.ingredients} recipe={recipe} />
+                        <RecipeIndexItem
+                            key={recipe._id} 
+                            ingredients={this.props.ingredients} 
+                            recipe={recipe}
+                        />
                     ))}
                 </ul>
             </div>
@@ -35,3 +39,4 @@ class RecipeIndex extends React.Component {
 }
 
 export default RecipeIndex;
+ 
