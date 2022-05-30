@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import './navbar.css'
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -17,16 +16,18 @@ class NavBar extends React.Component {
   getLinks() {
       if (this.props.loggedIn) {
         return (
-            <div>
+            <div className='nav-right'>
                 <Link to={'/profile'}>Profile</Link>
                 <button onClick={this.logoutUser}>Logout</button>
+                <Link to={'/recipes'}>Recipes</Link>
             </div>
         );
       } else {
         return (
-            <div>
+            <div className='nav-right'>
                 <Link to={'/signup'}>Signup</Link>
                 <Link to={'/login'}>Login</Link>
+                <Link to={'/recipes'}>Recipes</Link>
             </div>
         );
       }
@@ -34,10 +35,12 @@ class NavBar extends React.Component {
 
   render() {
       return (
-        <div>
-            <h1>Boozy</h1>
+        <div className='navbar-outer-container'>
+            <div className='nav-left'>
+                <img id="logo" src='https://images.squarespace-cdn.com/content/v1/56a01c5f5a56686ee6b460af/1608658525023-M5P08N1CGUQZJTRKSTVB/Summer+Wedding+Signature+Drink+Ideas?format=300w' alt='greyhound'></img>
+                <div className='title'>Boozy</div>
+            </div>
             { this.getLinks() }
-            <Link to={'/recipes'}>Recipes</Link>
         </div>
       );
   }

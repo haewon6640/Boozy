@@ -1,0 +1,36 @@
+.navbar-outer-container {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    width: 1000px;
+    // border: 1px solid magenta;
+    margin: auto;
+    align-items:center;
+}
+
+.nav-left, .nav-right{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+#logo{
+    height: 100px;
+    width: auto;
+}
+.title {
+    font-size: 80px;
+}
+
+.nav-right {
+    text-decoration: underline;
+    button {
+        background: none!important;
+        color: inherit;
+        border: none!important;
+        align-self: center;
+    }
+    a {
+        text-decoration: none;
+    }
+}
