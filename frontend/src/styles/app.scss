@@ -35,7 +35,7 @@ $phone-width: 400px;
     justify-content: space-around;
   }
   .recipe-index-container {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 4%;
   }
 }
@@ -52,5 +52,6 @@ $phone-width: 400px;
   font-weight: 500;
   letter-spacing: -.08px;
   border: none!important;
-  background-color: #af7f6a;
+  background-color: #f1eff2;
+  color: $dark-grey;
 }
