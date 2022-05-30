@@ -10,6 +10,7 @@ $fancy-font: 'Merriweather';
 $reg-font: 'Raleway';
 $webpage-width: 1200px;
 $phone-width: 400px;
+$light-button-color: #f1eff2;
 
 
 // imports go here
@@ -52,6 +53,6 @@ $phone-width: 400px;
   font-weight: 500;
   letter-spacing: -.08px;
   border: none!important;
-  background-color: #f1eff2;
+  background-color: $light-button-color;
   color: $dark-grey;
 }
