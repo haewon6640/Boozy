@@ -1,5 +1,6 @@
 import React from "react";
 import RecipeIndexItem from "./recipe_index_item";
+import {Link} from "react-router-dom";
 class RecipeIndex extends React.Component {
     constructor(props) {
         super(props);
@@ -20,6 +21,7 @@ class RecipeIndex extends React.Component {
         } else {
             return (
             <div>
+                <Link to="/recipes/new">New Recipe</Link>
                 <ul>
                     {this.state.recipes.map((recipe, idx)=> (
                         <RecipeIndexItem key={recipe._id} recipe={recipe} />

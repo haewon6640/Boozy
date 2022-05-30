@@ -8,6 +8,6 @@ export const getUserRecipes = id => {
   return axios.get(`/api/recipes/user/${id}`)
 };
 
-export const writeRecipe = data => {
+export const createRecipe = data => {
   return axios.post('/api/recipes/', data)
 }

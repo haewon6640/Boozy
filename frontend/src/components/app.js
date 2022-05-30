@@ -7,6 +7,7 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import ProfileContainer from './profile/profile_container';
 import RecipeIndexContainer from "./recipes/recipe_index_container";
+import CreateRecipeContainer from './forms/create_recipe_container';
 const App = () => (
   <div>
     <NavBarContainer />
@@ -15,6 +16,7 @@ const App = () => (
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
       <Route exact path="/recipes" component={RecipeIndexContainer} />
+      <ProtectedRoute exact path="/recipes/new" component={CreateRecipeContainer} />
       <ProtectedRoute exact path="/profile" component={ProfileContainer} />
     </Switch>
   </div>

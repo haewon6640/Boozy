@@ -29,7 +29,7 @@ export const fetchUserRecipes = (id) => (dispatch) =>
         .then((recipes) => dispatch(receiveUserRecipes(recipes)))
         .catch((err) => console.log(err));
 
-export const composeRecipe = (data) => (dispatch) =>
-    RecipeApiUtil.writeRecipe(data)
+export const createRecipe = (data) => (dispatch) =>
+    RecipeApiUtil.createRecipe(data)
         .then((recipe) => dispatch(receiveNewRecipe(recipe)))
         .catch((err) => console.log(err));
