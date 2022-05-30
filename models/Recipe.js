@@ -9,8 +9,8 @@ const RecipeSchema = new Schema({
     name: {
         type: String,
         required: true
-    } 
-    // ingredients: [{type: ObjectId, ref: 'ingredients'}]
+    },
+    ingredients: [{type: Schema.Types.ObjectId, ref: 'ingredients'}]
 }, {
     timestamps: true
 });

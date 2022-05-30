@@ -44,12 +44,11 @@ router.post('/',
       }
       const newRecipe = new Recipe({
           name: req.body.name,
-          user: req.user.id
+          user: req.user.id,
+          ingredients: req.body.ingredients
       })
       newRecipe.save().then(recipe => res.json(recipe));
     }
   );
 
 module.exports = router;
-
-

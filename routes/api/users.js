@@ -9,8 +9,6 @@ const passport = require("passport");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
-router.get("/boozy", (req, res) => res.json({ msg: "This is the users route" }));
-
 router.get(
     "/current",
     passport.authenticate("jwt", { session: false }),
@@ -19,9 +17,41 @@ router.get(
             id: req.user.id,
             handle: req.user.handle,
             email: req.user.email,
+            shelf: req.user.shelf
         });
     }
 );
+router.get("/:id",(req, res) => {
+    User.findById(req.params.id)
+        .then(user => {
+            if (!user) {
+                return res.status(404).json({ email: "This user does not exist" });
+            }
+            res.json({[user.id]: {
+                id: user.id,
+                handle: user.handle,
+                email: user.email,
+                shelf: user.shelf
+            }});
+        })
+    }
+);
+
+router.post("/shelf", 
+    passport.authenticate('jwt', {session:false}),
+    (req, res) => {
+        User.findByIdAndUpdate(
+            {_id:req.user.id},
+            { $set:
+                {shelf: req.body.shelf}
+            },
+            // Returns updated document back
+            {new: true}
+        )
+        .then(user => res.json({[user.id]:user}))
+    }
+);
+
 
 router.post("/register", (req, res) => {
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -34,11 +64,9 @@ router.post("/register", (req, res) => {
     User.findOne({ email: req.body.email }).then((user) => {
         if (user) {
             // Throw a 400 error if the email address already exists
-            return res
-                .status(400)
-                .json({
-                    email: "A user has already registered with this address",
-                });
+            return res.status(400).json({
+                email: "A user has already registered with this address",
+            });
         } else {
             // Otherwise create a new user
             const newUser = new User({
