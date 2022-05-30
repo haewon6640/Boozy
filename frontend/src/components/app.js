@@ -8,6 +8,7 @@ import SignupFormContainer from './session/signup_form_container';
 import ProfileContainer from './profile/profile_container';
 import RecipeIndexContainer from "./recipes/recipe_index_container";
 import CreateRecipeContainer from './forms/create_recipe_container';
+import '../styles/app.scss'
 const App = () => (
   <div>
     <NavBarContainer />
