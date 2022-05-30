@@ -35,12 +35,14 @@ class NavBar extends React.Component {
 
   render() {
       return (
-        <div className='navbar-outer-container'>
-            <div className='nav-left'>
-                <img id="logo" src='https://images.squarespace-cdn.com/content/v1/56a01c5f5a56686ee6b460af/1608658525023-M5P08N1CGUQZJTRKSTVB/Summer+Wedding+Signature+Drink+Ideas?format=300w' alt='greyhound'></img>
-                <div className='title'>Boozy</div>
-            </div>
-            { this.getLinks() }
+        <div className='webpage'>
+          <div className='navbar-inner-container'>
+              <div className='nav-left'>
+                  <img id="logo" src='https://images.squarespace-cdn.com/content/v1/56a01c5f5a56686ee6b460af/1608658525023-M5P08N1CGUQZJTRKSTVB/Summer+Wedding+Signature+Drink+Ideas?format=300w' alt='greyhound'></img>
+                  <div className='title'>Boozy</div>
+              </div>
+              { this.getLinks() }
+          </div>
         </div>
       );
   }

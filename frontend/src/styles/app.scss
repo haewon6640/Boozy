@@ -1,2 +1,57 @@
 @import './reset.scss';
+// fonts go here 
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+
+// constants go here
+$dark-grey: #484748;
+$fancy-font: 'Merriweather';
+$reg-font: 'Raleway';
+$webpage-width: 1200px;
+$phone-width: 400px;
+
+
+// imports go here
 @import './navbar.scss';
+@import './recipe-index.scss';
+@import './recipe-index-item.scss';
+
+
+
+// some all around classes
+.webpage {
+  width: $webpage-width;
+  margin: auto;
+  padding-top: 16px;
+}
+
+@media screen and (max-width: 420px) {
+  .webpage {
+    width: $phone-width;
+  }
+  .nav-right {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .recipe-index-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 4%;
+  }
+}
+
+.btn {
+  font-family: $reg-font;
+  font-size: 16px;
+  line-height: 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 8px 16px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: -.08px;
+  border: none!important;
+  background-color: #f1eff2;
+  color: $dark-grey;
+}
