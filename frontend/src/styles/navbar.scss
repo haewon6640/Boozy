@@ -17,7 +17,16 @@
     display: flex;
     height: 100%;
     align-items: center;
+    .nav-logo {
+        display: flex;
+        flex-direction: row;
+        text-decoration: none;
+
+
+    }
 }
+
+
 
 #logo{
     height: 100px;
