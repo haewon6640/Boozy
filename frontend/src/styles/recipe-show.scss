@@ -15,13 +15,20 @@
   height: 400px;
   img {
     max-height: 100%;
+    margin: auto;
   }
 }
 .recipe-show-details {
   padding-left: 4px;
+  width: 70%;
+  margin: auto!important;
   > div {
     font-size: 20px;
     line-height: 22px;
+    h2 {
+      width: auto;
+      border-bottom: 1px solid $bottle-green;
+    }
   }
   ol {
     list-style-type:decimal;
