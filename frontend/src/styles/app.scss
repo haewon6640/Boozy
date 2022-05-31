@@ -11,18 +11,21 @@ $reg-font: 'Raleway';
 $webpage-width: 1200px;
 $phone-width: 400px;
 $light-button-color: #f1eff2;
+$light-green: #acb2a9;
+$bottle-green: #093202;
 
 
 // imports go here
 @import './navbar.scss';
 @import './recipe-index.scss';
 @import './recipe-index-item.scss';
+@import './homepage.scss';
 
 
 
 // some all around classes
 .webpage {
-  width: $webpage-width;
+  max-width: $webpage-width;
   margin: auto;
   padding-top: 16px;
 }
@@ -34,10 +37,23 @@ $light-button-color: #f1eff2;
   .nav-right {
     flex-direction: column;
     justify-content: space-around;
+    align-items: flex-start;
   }
   .recipe-index-container {
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 4%;
+  }
+  .homepage-container {
+    grid-template-columns: 1fr;
+  }
+  .navbar-inner-container {
+    height: 160px;
+  }
+  .search-input-phone {
+    display: block;
+  }
+  .search-input-web {
+    display: none;
   }
 }
 
@@ -55,4 +71,11 @@ $light-button-color: #f1eff2;
   border: none!important;
   background-color: $light-button-color;
   color: $dark-grey;
+}
+
+.ico {
+  font-size: 24px;
+  height: 20px;
+  width: 20px;
+  margin: 4px;
 }

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+import { BsPersonFill } from 'react-icons/bs';
+import { GiMartini } from 'react-icons/gi';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -17,17 +19,32 @@ class NavBar extends React.Component {
       if (this.props.loggedIn) {
         return (
             <div className='nav-right'>
-                <Link to={'/profile'}>Profile</Link>
-                <button onClick={this.logoutUser}>Logout</button>
-                <Link to={'/recipes'}>Recipes</Link>
+				<a className='icon-and-title' href={'/#/profile'}>
+					<BsPersonFill className='ico'/>
+					<div>Profile</div>
+				</a>
+				<a className='icon-and-title' href={'/#/recipes'}>
+					<GiMartini className='ico'/>
+					<div>Recipes</div>
+              	</a>
+                <button className='icon-and-title' onClick={this.logoutUser}>Logout</button>
             </div>
         );
       } else {
         return (
-            <div className='nav-right'>
-                <Link to={'/signup'}>Signup</Link>
-                <Link to={'/login'}>Login</Link>
-                <Link to={'/recipes'}>Recipes</Link>
+            <div className='nav-right' >
+              	<a className='icon-and-title' href={'/#/signup'}>
+                	<BsPersonFill className='ico'/>
+                	<div>Signup</div>
+              	</a>
+              	<a className='icon-and-title' href={'/#/login'}>
+                	<BsPersonFill className='ico'/>
+                	<div>Login</div>
+				</a>
+				<a className='icon-and-title' href={'/#/recipes'}>
+					<GiMartini className='ico'/>
+					<div>Recipes</div>
+				</a>
             </div>
         );
       }
@@ -35,13 +52,27 @@ class NavBar extends React.Component {
 
   render() {
       return (
-        <div className='webpage'>
-          <div className='navbar-inner-container'>
-              <div className='nav-left'>
-                  <img id="logo" src='https://images.squarespace-cdn.com/content/v1/56a01c5f5a56686ee6b460af/1608658525023-M5P08N1CGUQZJTRKSTVB/Summer+Wedding+Signature+Drink+Ideas?format=300w' alt='greyhound'></img>
-                  <div className='title'>Boozy</div>
-              </div>
-              { this.getLinks() }
+        <div className='nav-outer-container'>
+          <div className='webpage nav-bar-flex'>
+            <div className='navbar-inner-container'>
+                <div className='nav-left'>
+                    <img id="logo" src='https://images.squarespace-cdn.com/content/v1/56a01c5f5a56686ee6b460af/1608658525023-M5P08N1CGUQZJTRKSTVB/Summer+Wedding+Signature+Drink+Ideas?format=300w' alt='greyhound'></img>
+                    <div className='title'>Boozy</div>
+                </div>
+                {/* <form> */}
+					<input type="text"
+						className='search-input-web'
+						placeholder="Find your next cocktail"
+						readOnly
+						/>
+                {/* </form> */}
+                { this.getLinks() }
+            </div>
+			<input type="text"
+						className='search-input-phone'
+						placeholder="Find your next cocktail"
+						readOnly
+						/>
           </div>
         </div>
       );
