@@ -19,6 +19,7 @@ const App = () => (
       <Route exact path="/recipes" component={RecipeIndexContainer} />
       <ProtectedRoute exact path="/recipes/new" component={CreateRecipeContainer} />
       <ProtectedRoute exact path="/profile" component={ProfileContainer} />
+      <ProtectedRoute exact path="/drink" component={()=>(<div>drinkshow</div>)} />
     </Switch>
   </div>
 );
