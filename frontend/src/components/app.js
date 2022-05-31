@@ -8,6 +8,7 @@ import SignupFormContainer from './session/signup_form_container';
 import ProfileContainer from './profile/profile_container';
 import RecipeIndexContainer from "./recipes/recipe_index_container";
 import CreateRecipeContainer from './forms/create_recipe_container';
+import RecipeShowContainer from './recipes/recipe_show_container'
 import '../styles/app.scss'
 const App = () => (
   <div>
@@ -19,7 +20,7 @@ const App = () => (
       <Route exact path="/recipes" component={RecipeIndexContainer} />
       <ProtectedRoute exact path="/recipes/new" component={CreateRecipeContainer} />
       <ProtectedRoute exact path="/profile" component={ProfileContainer} />
-      <ProtectedRoute exact path="/drink" component={()=>(<div>drinkshow</div>)} />
+      <ProtectedRoute exact path="/drink" component={RecipeShowContainer} />
     </Switch>
   </div>
 );
