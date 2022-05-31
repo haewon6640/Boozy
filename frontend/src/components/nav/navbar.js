@@ -56,8 +56,10 @@ class NavBar extends React.Component {
           <div className='webpage nav-bar-flex'>
             <div className='navbar-inner-container'>
                 <div className='nav-left'>
-                    <img id="logo" src='https://images.squarespace-cdn.com/content/v1/56a01c5f5a56686ee6b460af/1608658525023-M5P08N1CGUQZJTRKSTVB/Summer+Wedding+Signature+Drink+Ideas?format=300w' alt='greyhound'></img>
-                    <div className='title'>Boozy</div>
+                    <a className='nav-logo' href={'/#/'}>
+                        <img id="logo" src='https://images.squarespace-cdn.com/content/v1/56a01c5f5a56686ee6b460af/1608658525023-M5P08N1CGUQZJTRKSTVB/Summer+Wedding+Signature+Drink+Ideas?format=300w' alt='greyhound'></img>
+                        <span className='title'>Boozy</span>
+                    </a>
                 </div>
                 {/* <form> */}
 					<input type="text"
