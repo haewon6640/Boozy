@@ -38,7 +38,8 @@ $cream: #f9f7ea;
 }
 @media screen and (max-width: 420px) {
   .webpage {
-    width: $phone-width;
+    width: 100%;
+    padding: 0;
   }
   .nav-right {
     flex-direction: column;

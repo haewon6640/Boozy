@@ -56,7 +56,7 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div className='webpage'>
+      <div className='webpage auth'>
         <div className='two-col'>
         <div>
           <img src="https://www.hungrypinner.com/wp-content/uploads/2017/07/white-linen-cocktail-2.jpg"
