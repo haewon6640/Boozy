@@ -1,5 +1,8 @@
 import React from "react";
 import { GiOrangeSlice } from 'react-icons/gi';
+import ReviewIndex from '../reviews/review_index'
+import ReviewForm from '../reviews/review_form'
+
 class RecipeShow extends React.Component {
 
     componentDidMount() {
@@ -9,11 +12,6 @@ class RecipeShow extends React.Component {
     componentWillReceiveProps(newState) {
         // this.setState({recipes: newState.recipes})
     }
-
-	formatSteps(instructions){
-		
-
-	}
 
     render() {
 		let recipe = {
@@ -30,14 +28,14 @@ class RecipeShow extends React.Component {
 						<img src="https://www.liquor.com/thmb/yOze-jG9Dr7UjvNyQ3mKLELJh08=/720x720/filters:fill(auto,1)/__opt__aboutcom__coeus__resources__content_migration__liquor__2019__04__24153243__revolver-720x720-recipe-1-f662b26f4c3e49588c629a4533c8830b.jpg" alt="" />
 					</div>
 					<div className="recipe-show-details">
-						<div>Ingredients
+						<div> <h2>Ingredients</h2>
 							<ul>
 								{recipe.ingredients.map((ingredient)=>(<li key={ingredient}>
 									<GiOrangeSlice/> {ingredient}</li>))}
 							</ul>
 						</div>
 						
-						<div>Steps
+						<div><h2>Steps</h2>
 							<ol>
 								{recipe.instructions.split("\n").map((step)=> (<li key={step}>{step}</li>))}
 							</ol>
@@ -49,12 +47,12 @@ class RecipeShow extends React.Component {
 						{recipe.reviews}
 					</div>
 					<div className="review-form-box">
-						this will be a form
+						<ReviewForm/>
 					</div>
 				</div>
 			</div>
 			<div className="review-show-container">
-				this will be the review-show
+				<ReviewIndex/>
 			</div>
 		</div>
 	)}
