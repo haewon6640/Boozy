@@ -1,0 +1,11 @@
+.homepage-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.drink-feed {
+  margin: 16px;
+  padding: 8px;
+  border: 1px solid $dark-grey;
+
+}
