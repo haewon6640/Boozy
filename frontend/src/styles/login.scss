@@ -1,0 +1,22 @@
+.auth-right {
+  margin: 0 56px;
+  margin-top: 10%;
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 8px;
+  }
+  .auth-header {
+    font-family: $reg-font;
+    font-weight: 400;
+    font-size: 32px;
+  }
+}
+.auth-form {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+}

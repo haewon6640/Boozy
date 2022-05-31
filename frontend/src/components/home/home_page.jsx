@@ -5,7 +5,7 @@ class HomePage extends React.Component {
 	render() {
 		return (
 			<div className='webpage'>
-				<div className='homepage-container'>
+				<div className='two-col'>
 					<div className='drink-feed'>
 						I am the drink feed
 						<br />

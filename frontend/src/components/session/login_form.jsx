@@ -54,27 +54,38 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <br/>
-              <input type="text"
-                value={this.state.email}
-                onChange={this.update('email')}
-                placeholder="Email"
-              />
-            <br/>
-              <input type="password"
-                value={this.state.password}
-                onChange={this.update('password')}
-                placeholder="Password"
-              />
-            <br/>
-            <input type="submit" value="Submit" />
-            {this.renderErrors()}
-          </div>
-        </form>
-      </div>
+	<div className='webpage'>
+		<div className='two-col'>
+			<div>
+				<img src="https://www.hungrypinner.com/wp-content/uploads/2017/07/white-linen-cocktail-2.jpg"
+					alt="" 
+					/>
+			</div>
+			<div className='auth-right'>
+				<div>
+					<div className='auth-header'>Sign in</div>
+					<a href='/#/signup'>Create Account</a>
+				</div>
+				<form 
+					onSubmit={this.handleSubmit}
+					className="auth-form">
+				<input type="text"
+					value={this.state.email}
+					onChange={this.update('email')}
+					placeholder="Email"
+				/>
+				<input type="password"
+					value={this.state.password}
+					onChange={this.update('password')}
+					placeholder="Password"
+				/>
+				<input type="submit" value="Submit" className='btn' />
+				{this.renderErrors()}
+
+				</form>
+			</div>
+		</div>
+	</div>
     );
   }
 }
