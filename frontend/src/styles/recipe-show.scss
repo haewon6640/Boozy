@@ -1,0 +1,53 @@
+.recipe-left, .recipe-right {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid magenta;
+  > div {
+    border: 1px solid blue;
+    margin: 8px 0;
+  }
+}
+
+.show-photo {
+  vertical-align: middle;
+  display: table-cell;
+  padding: 5px;
+  height: 400px;
+  img {
+    max-height: 100%;
+    margin: auto;
+  }
+}
+.recipe-show-details {
+  padding-left: 4px;
+  width: 70%;
+  margin: auto!important;
+  > div {
+    font-size: 20px;
+    line-height: 22px;
+    h2 {
+      width: auto;
+      border-bottom: 1px solid $bottle-green;
+    }
+  }
+  ol {
+    list-style-type:decimal;
+    margin-bottom: 16px;
+  }
+  li {
+    display: list-item;
+    list-style-position: inside;
+    font-size: 18px;
+    line-height: 20px;
+    margin-left: 16px;
+  }
+  ul {
+    margin-bottom: 16px
+  }
+}
+
+.review-show-container {
+  height: 300px;
+  width: 100%;
+  border: 1px solid red;
+}
