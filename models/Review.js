@@ -11,7 +11,7 @@ const ReviewSchema = new Schema({
         ref: 'recipes'
     },
     rating: [
-                {spicy: {type: Number, default:0}},
+                {boozy: {type: Number, default:0}},
                 {sweet: {type: Number, default:0}},
                 {sour: {type: Number, default:0}},
                 {bitter: {type: Number, default:0}},
