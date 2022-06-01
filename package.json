@@ -22,14 +22,18 @@
   },
   "homepage": "https://github.com/haewon6640/Boozy#readme",
   "dependencies": {
+    "@googlemaps/react-wrapper": "^1.1.34",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "concurrently": "^7.2.1",
+    "d3": "^7.4.4",
     "express": "^4.18.1",
+    "google-maps-react": "^2.0.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.4",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
+    "stream": "^0.0.2",
     "validator": "^13.7.0"
   },
   "devDependencies": {

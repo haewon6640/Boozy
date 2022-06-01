@@ -1,4 +1,6 @@
 import React from "react";
+import Boozymap from '../map/map'
+
 
 class Profile extends React.Component {
     constructor(props) {
@@ -39,6 +41,9 @@ class Profile extends React.Component {
                 <br />
 
                 <button onClick={this.handleShelf}>Add Ingredients to Shelf</button>
+
+            <Boozymap/>
+
             </div>
         )
     }
