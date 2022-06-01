@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
-
+import {fetchRecipe} from "./actions/recipe_actions";
 document.addEventListener('DOMContentLoaded', () => {
   let store;
 
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
 
   ReactDOM.render(<Root store={store} />, root);
-
+  window.fetchRecipe = fetchRecipe;
   window.store = store;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
