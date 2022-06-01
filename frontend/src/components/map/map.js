@@ -5,31 +5,21 @@ import { Map, GoogleApiWrapper } from 'google-maps-react';
 class BoozyMap extends React.Component {
     constructor(props) {
         super(props)
+    //     const {lat, lng} = this.props.initialCenter;
 
-    }
-  
-    // componentDidMount() {
-    //   // set the map to show SF
-    // // try to show current location?
-    //   const mapOptions = {
-    //     center: { lat:t mapOptions = {
-    //     center: { lat: 37.66385274501688, lng: -122.4351120016871}, 
-    //     zoom: 8
-    //   }; 37.66385274501688, lng: -122.4351120016871}, 
-    //     zoom: 8
-    //   };
-  
-    //   // wrap this.mapNode in a Google Map
-    //   this.map = new google.maps.Map(this.mapNode, mapOptions);
+    //     this.state = {
+    //         currentLocation: {
+    //             lat: lat,
+    //             lng: lng
+    //   }
 
     // }
+}
+  
 
-    componentDidUpdate() {
-    }
   
     render() {
-        console.log(process.env.REACT_APP_GOOGLE_API_KEY)
-        debugger 
+
       return (
         <div className="map-component">
             <Map
