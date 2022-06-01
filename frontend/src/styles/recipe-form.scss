@@ -1,0 +1,19 @@
+.outer-create-recipe-form {
+    position: absolute;
+    left: 20%
+}
+.create-recipe-form {
+    // border: 1px solid black;
+    display: block;
+    width: 75%;
+    > div {
+        padding-bottom: 8px;
+    }
+}
+.recipe-input-forms {
+    display: flex;
+    flex-direction: column;
+    > textarea {
+        padding-bottom: 8px;
+    }
+}

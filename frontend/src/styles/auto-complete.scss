@@ -1,0 +1,12 @@
+.dropdown-ing {
+  position: fixed;
+  background-color: white;
+  border: 1px solid $dark-grey;
+  border-radius: 4px;
+  >li {
+    margin: 4px;
+    padding: 4px;
+    width: 95%;
+    cursor: pointer;
+  }
+}

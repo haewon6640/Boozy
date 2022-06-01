@@ -1,13 +1,33 @@
 import React from "react";
+import FilterItem from "./ingredient_filter_item";
 
 export default class RecipeForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             name: "",
-            ingredients: []
+            ingredients: [], 
+            instructions: "",
+            additionalInfo: "",
+            categories: {
+                alcohol: [],
+                produce: [],
+                mixers: [],
+                garnish: []
+            }
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.addToCart = this.addToCart.bind(this);
+    }
+
+    combineCategories(type){
+        let cats = [];
+        this.props.ingredients.forEach((ingredient) => {
+            if (ingredient.category === type) {
+                cats.push(ingredient)
+            }
+        })
+        return cats;
     }
 
     componentDidMount() {
@@ -23,33 +43,50 @@ export default class RecipeForm extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
+        console.log(this.state.ingredients)
         this.props.action(this.state)
     }
+
     addToCart(ing) {
-        return (e) => {
-            e.preventDefault();
-            this.setState({ingredients: this.state.ingredients.concat([ing])})
-        }
+        this.setState({ingredients: this.state.ingredients.concat([ing])})
     }
 
     render() {
+        this.alcoholArray = this.combineCategories("Alcohol")
+        this.produceArray = this.combineCategories("Produce")
+        this.mixersArray = this.combineCategories("Mixers")
+        this.garnishArray = this.combineCategories("Garnish")
         return (
-            <div>
+            <div className="webpage outer-create-recipe-form">
                 {this.props.formType}
-                <div></div>
-                {"Ingredient List   "}
-                {this.state.ingredients.map(ingredient=><span>{ingredient.name}</span>)}
-                <form onSubmit={this.handleSubmit}>
-                    <label>Recipe Name
-                        <input onChange={this.update("name")} type="text" value={this.state.name} />
-                    </label>
+                <div className="inner-create-recipe-form">
+               
+                <form onSubmit={this.handleSubmit} className="create-recipe-form">
+                    <input onChange={this.update("name")} type="text" value={this.state.name} placeholder="Recipe Name" />
+        
                     <div></div>
-                    {Object.values(this.props.ingredients).map(ing=>(
-                        <span><button onClick={this.addToCart(ing)}>Add {ing.name}</button></span>
-                    ))}
+                    <div className="ingredient-list">
+                        <div className="ingredient-list-title">Ingredients</div>
+                        <FilterItem addToCart={this.addToCart} subtitle="Alcohol" array={this.alcoholArray}/>
+                        <FilterItem addToCart={this.addToCart} subtitle="Produce" array={this.produceArray}/>
+                        <FilterItem addToCart={this.addToCart} subtitle="Mixers" array={this.mixersArray}/>
+                        <FilterItem addToCart={this.addToCart} subtitle="Garnish" array={this.garnishArray}/>
+                        {/* {"Ingredient List -   "}
+                        {this.state.ingredients.map(ingredient=><span >{ingredient.name}  </span>)} */}
+                    </div>
                     <div></div>
-                    <button>Submit</button>
+                    {/* <div>
+                        {Object.values(this.props.ingredients).map(ing=>(
+                            <span><button className="btn" onClick={this.addToCart(ing)}>Add {ing.name}</button></span>
+                        ))}
+                    </div> */}
+                    <div className="recipe-input-forms">
+                        <textarea onChange={this.update("instructions")} value={this.state.instructions} placeholder="Instructions"/>
+                        <textarea onChange={this.update("additionalInfo")} value={this.state.additionalInfo} placeholder="Additional Info"/>
+                    </div>
+                    <button className="btn">Submit</button>
                 </form>
+                </div>
             </div>
         )
     }

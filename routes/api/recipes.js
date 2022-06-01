@@ -73,7 +73,9 @@ router.post('/',
       const newRecipe = new Recipe({
           name: req.body.name,
           user: req.user.id,
-          ingredients: req.body.ingredients
+          ingredients: req.body.ingredients, 
+          instructions: req.body.instructions,
+          additionalInfo: req.body.additionalInfo
       })
       newRecipe.save()
         .then(recipe => res.json(recipe))
