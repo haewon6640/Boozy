@@ -4,7 +4,7 @@ import RecipeShow from "./recipe_show";
 
 const mSTP = (state, ownProps) => {
     return {
-        recipes: state.entities.recipes.all[ownProps.match.params.id],
+        recipe: state.entities.recipes.all[ownProps.match.params.id],
         ingredients: Object.values(state.entities.ingredients),
         reviews: Object.values(state.entities.reviews)
     }
