@@ -5,6 +5,10 @@ const IngredientSchema = new Schema({
     name: {
         type: String,
         required: true
+    },
+    category: {
+        type: String, 
+        required: true
     }
 });
 
