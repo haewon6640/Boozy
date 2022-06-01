@@ -4,7 +4,7 @@ import {fetchIngredients} from "../../actions/ingredient_actions";
 import RecipeForm from "./recipe_form";
 const mSTP = state => ({
     ingredients: Object.values(state.entities.ingredients),
-    formType: "Submit your Recipe"
+    formType: "Submit a New Recipe"
 });
 
 const mDTP = dispatch => ({
