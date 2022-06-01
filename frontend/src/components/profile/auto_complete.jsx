@@ -8,11 +8,12 @@ class Autocomplete extends React.Component {
     };
     this.updateInput = this.updateInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
-  findIngredient(){
+  findIngredient(testIng){
     let ingredients = this.props.dictionary
     let arr = Object.values(ingredients)
-    let ingArr = arr.filter((ing)=> (ing.name === this.state.inputVal))
+    let ingArr = arr.filter((ing)=> (ing.name === testIng))
     return(ingArr)
   }
 
@@ -22,17 +23,25 @@ class Autocomplete extends React.Component {
 
   handleSubmit(e){
     e.preventDefault()
-    let ing = this.findIngredient()
+    let ing = this.findIngredient(this.state.inputVal)
     if(ing.length > 0) {
       this.props.addItem(ing)
       this.setState({inputVal: ""})
     }
   }
+  handleClick(name){
+    let ing = this.findIngredient(name)
+    this.props.addItem(ing)
+    this.setState({inputVal: ""})
+  }
   
   render(){
     let matches = <ul className="dropdown-ing">
       {this.props.dictionary.filter((ing)=> ing.name.includes(this.state.inputVal)).map((ing)=> {
-        return <li key={ing.id}>{ing.name}</li>
+        return <li 
+        key={ing.id}
+        onClick={()=>this.handleClick(ing.name)}
+        >{ing.name}</li>
       })}
       </ul>
     return (
