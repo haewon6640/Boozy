@@ -48,5 +48,5 @@ class BoozyMap extends React.Component {
 
 
   export default GoogleApiWrapper({
-    apiKey: 'AIzaSyALMffS7syU5DF41_CYyUEuxlz9Qu71-D4'
+    apiKey: ''
 })(BoozyMap)
