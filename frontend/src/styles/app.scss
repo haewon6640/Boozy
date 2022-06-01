@@ -2,11 +2,15 @@
 // fonts go here 
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Neonderthaw&display=swap');
 
 // constants go here
 $dark-grey: #484748;
-$fancy-font: 'Merriweather';
+$title-color: #eaadad;
+$fancy-font: 'Neonderthaw';
+$title-font: 'Neonderthaw';
+$recipe-font: "Special Elite";
 $reg-font: 'Raleway';
 $webpage-width: 1200px;
 $phone-width: 400px;
@@ -16,16 +20,6 @@ $bottle-green: #092E20;
 $cream: #f9f7ea;
 
 
-// imports go here
-@import './navbar.scss';
-@import './recipe-index.scss';
-@import './recipe-index-item.scss';
-@import './homepage.scss';
-@import './login.scss';
-@import './recipe-show.scss';
-
-
-
 // some all around classes
 .webpage {
   max-width: $webpage-width;
@@ -33,36 +27,10 @@ $cream: #f9f7ea;
   padding-top: 16px;
   font-family: $reg-font;
 }
+
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
-}
-@media screen and (max-width: 420px) {
-  .webpage {
-    width: 100%;
-    padding: 0;
-  }
-  .nav-right {
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-  }
-  .recipe-index-container {
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 4%;
-  }
-  .two-col {
-    grid-template-columns: 1fr;
-  }
-  .navbar-inner-container {
-    height: 120px;
-  }
-  .search-input-phone {
-    display: block;
-  }
-  .search-input-web {
-    display: none;
-  }
 }
 
 .btn {
@@ -88,3 +56,40 @@ $cream: #f9f7ea;
   margin: 4px;
 }
 
+// imports go here
+@import './navbar.scss';
+@import './recipe-index.scss';
+@import './recipe-index-item.scss';
+@import './homepage.scss';
+@import './login.scss';
+@import './recipe-show.scss';
+@import './bar-cart.scss';
+
+// @media phone flip goes here
+@media screen and (max-width: 420px) {
+  .webpage {
+    width: 100%;
+    padding: 0;
+  }  
+  .nav-right {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }  
+  .recipe-index-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 4%;
+  }  
+  .two-col {
+    grid-template-columns: 1fr;
+  }  
+  .navbar-inner-container {
+    height: 120px;
+  }  
+  .search-input-phone {
+    display: block;
+  }  
+  .search-input-web {
+    display: none;
+  }  
+}  

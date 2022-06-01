@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Profile from './profile';
+import BarCart from './bar_cart';
 import jwt_decode from 'jwt-decode';
 import { fetchIngredients } from '../../actions/ingredient_actions';
 import { addShelf, fetchUser } from '../../actions/user_actions';
@@ -21,4 +21,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(BarCart);
