@@ -1,0 +1,37 @@
+.easy-drinqs, .hard-drinqs, .missing {
+  height: 50px;
+  width: 100%;
+  border: 1px solid blue;
+}
+
+.asym{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.cart-outer-container {
+  height: auto;
+  width: 90%;
+  // border: 1px solid magenta;
+  padding: 8px 0;
+  margin: auto;
+  .barcart-title {
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: double underline;
+  }
+}
+
+.bar-left {
+  .search-input-web{
+    width: 100%;
+  }
+}
+
+.bar-right {
+  padding: 8px;
+}
+
+.map-container {
+  padding: 36px;
+}
