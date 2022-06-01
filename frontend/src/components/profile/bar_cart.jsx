@@ -8,6 +8,7 @@ class BarCart extends React.Component {
             cart: []
         }
         this.handleShelf = this.handleShelf.bind(this);
+        this.addItem = this.addItem.bind(this)
     }
     componentDidMount() {
         this.props.fetchIngredients();
@@ -17,25 +18,32 @@ class BarCart extends React.Component {
         this.props.addIngredients(this.state.cart)
             .then(()=>this.setState({cart: []}))
     }
+    addItem(item) {
+        this.props.addIngredients(item)
+    }
     render() {
         if (!this.props.user) {
             return null;
         }
-        const dicitonary = Object.values(this.props.ingredients).map((ing)=>(ing.name))
+        const dicitonary = Object.values(this.props.ingredients)
         console.log(this.props)
         return (
             <div className="webpage">
               <div className="two-col asym">
                 <div className="bar-left">
                   <div className="cart-outer-container">
-                    <Autocomplete className='search-input-web' dictionary={dicitonary}/>
+                    <Autocomplete 
+                      className='search-input-web' 
+                      dictionary={dicitonary}
+                      addItem={this.addItem}
+                      />
                     <ul>
                       <div className="barcart-title">Your Bar Cart</div>
                       
                       {this.props.user.shelf !== [] && this.props.user.shelf.map(item=>(
                         <li>{this.props.ingredients[item].name}</li>
                         ))}
-                      </ul>
+                    </ul>
                   </div>
                 </div>
                 <div className="bar-right">
@@ -48,25 +56,7 @@ class BarCart extends React.Component {
                     <img src="https://mikesrpgcenter.com/zelda3/maps/lightworld_large.gif" alt="" />
                   </div>
                 </div>
-
               </div>
-                {`${this.props.user.handle}'s Bar Cart`}
-                <div>
-                {this.props.user.shelf.map(item=>(
-                    <span>{this.props.ingredients[item].name}</span>
-                ))}
-                </div>
-                My Cart
-                <div>
-                    {this.state.cart.map(val=><span>{val.name} </span>)}
-                </div>
-                {Object.values(this.props.ingredients).map(ing=>(
-                    <span><button onClick={()=>this.setState({cart: this.state.cart.concat([ing])})}>Add {ing.name}</button></span>
-                ))}
-
-                <br />
-
-                <button onClick={this.handleShelf}>Add Ingredients to Shelf</button>
             </div>
         )
     }

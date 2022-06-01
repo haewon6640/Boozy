@@ -42,7 +42,7 @@ router.post("/shelf",
     (req, res) => {
         User.findByIdAndUpdate(
             {_id:req.user.id},
-            { $set:
+            { $addToSet:
                 {shelf: req.body.shelf}
             },
             // Returns updated document back
