@@ -17,13 +17,13 @@ export default class RecipeForm extends React.Component {
             }
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.addToCart = this.addToCart.bind(this);
     }
 
     combineCategories(type){
         let cats = [];
         this.props.ingredients.forEach((ingredient) => {
             if (ingredient.category === type) {
-                //may need to push ingredient, to access the whole ingredient
                 cats.push(ingredient)
             }
         })
@@ -43,21 +43,19 @@ export default class RecipeForm extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
+        console.log(this.state.ingredients)
         this.props.action(this.state)
     }
 
     addToCart(ing) {
-        return (e) => {
-            e.preventDefault();
-            this.setState({ingredients: this.state.ingredients.concat([ing])})
-        }
+        this.setState({ingredients: this.state.ingredients.concat([ing])})
     }
 
     render() {
-        this.alcoholArray = this.combineCategories("alcohol")
-        this.produceArray = this.combineCategories("produce")
-        this.mixersArray = this.combineCategories("mixers")
-        this.garnishArray = this.combineCategories("garnish")
+        this.alcoholArray = this.combineCategories("Alcohol")
+        this.produceArray = this.combineCategories("Produce")
+        this.mixersArray = this.combineCategories("Mixers")
+        this.garnishArray = this.combineCategories("Garnish")
         return (
             <div className="webpage outer-create-recipe-form">
                 {this.props.formType}
