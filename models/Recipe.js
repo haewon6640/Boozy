@@ -8,9 +8,20 @@ const RecipeSchema = new Schema({
     },
     name: {
         type: String,
+        required: true,
+        unique: true
+    },
+    ingredients: [{type: Schema.Types.ObjectId, ref: 'ingredients'}],
+    reviews: [{type: Schema.Types.ObjectId, ref: 'reviews'}],
+    instructions: {
+        type: String,
         required: true
     },
-    ingredients: [{type: Schema.Types.ObjectId, ref: 'ingredients'}]
+    // Suggested ingredient brands
+    additionalInfo: {
+        type: String,
+        default: ""
+    }
 }, {
     timestamps: true
 });
