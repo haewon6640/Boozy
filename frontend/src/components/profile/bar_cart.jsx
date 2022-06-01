@@ -1,4 +1,5 @@
 import React from "react";
+import Autocomplete from "./auto_complete";
 
 class BarCart extends React.Component {
     constructor(props) {
@@ -20,20 +21,18 @@ class BarCart extends React.Component {
         if (!this.props.user) {
             return null;
         }
+        const dicitonary = Object.values(this.props.ingredients).map((ing)=>(ing.name))
+        console.log(this.props)
         return (
             <div className="webpage">
               <div className="two-col asym">
                 <div className="bar-left">
                   <div className="cart-outer-container">
-                    <input type="text"
-                      className='search-input-web'
-                      placeholder="Input Mixers"
-                      readOnly
-                      />
+                    <Autocomplete className='search-input-web' dictionary={dicitonary}/>
                     <ul>
                       <div className="barcart-title">Your Bar Cart</div>
                       
-                      {this.props.user.shelf.map(item=>(
+                      {this.props.user.shelf !== [] && this.props.user.shelf.map(item=>(
                         <li>{this.props.ingredients[item].name}</li>
                         ))}
                       </ul>
@@ -51,7 +50,7 @@ class BarCart extends React.Component {
                 </div>
 
               </div>
-                {/* {`${this.props.user.handle}'s Bar Cart`}
+                {`${this.props.user.handle}'s Bar Cart`}
                 <div>
                 {this.props.user.shelf.map(item=>(
                     <span>{this.props.ingredients[item].name}</span>
@@ -67,7 +66,7 @@ class BarCart extends React.Component {
 
                 <br />
 
-                <button onClick={this.handleShelf}>Add Ingredients to Shelf</button> */}
+                <button onClick={this.handleShelf}>Add Ingredients to Shelf</button>
             </div>
         )
     }
