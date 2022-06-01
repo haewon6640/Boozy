@@ -1,6 +1,6 @@
 import React from "react";
 import { Map, GoogleApiWrapper } from 'google-maps-react';
-
+import {mapsAPIKey} from '../../../../config/keys'
 
 class BoozyMap extends React.Component {
     constructor(props) {
@@ -48,5 +48,5 @@ class BoozyMap extends React.Component {
 
 
   export default GoogleApiWrapper({
-    apiKey: ''
+    apiKey: mapsAPIKey
 })(BoozyMap)
