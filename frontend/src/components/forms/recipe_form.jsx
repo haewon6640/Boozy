@@ -22,7 +22,7 @@ export default class RecipeForm extends React.Component {
     combineCategories(type){
         let cats = [];
         this.props.ingredients.forEach((ingredient) => {
-            if (ingredient[category] === type) {
+            if (ingredient.category === type) {
                 //may need to push ingredient, to access the whole ingredient
                 cats.push(ingredient)
             }
