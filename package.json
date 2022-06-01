@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Boozy is an social app for creating and sharing your favorite drinks with other cocktail enthusiasts.",
   "main": "app.js",
+ 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon app.js",
@@ -27,6 +28,7 @@
     "body-parser": "^1.20.0",
     "concurrently": "^7.2.1",
     "d3": "^7.4.4",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "google-maps-react": "^2.0.6",
     "jsonwebtoken": "^8.5.1",
@@ -34,7 +36,8 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "stream": "^0.0.2",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "webpack-dotenv": "^0.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.16",

@@ -7,6 +7,9 @@ const db = require('./config/keys').mongoURI
 const users = require("./routes/api/users")
 const recipes = require("./routes/api/recipes");
 const ingredients = require("./routes/api/ingredients");
+
+
+
 mongoose
     .connect(db, {useNewUrlParser: true})
     .then(()=> console.log("Connected to MongoDB successfully"))

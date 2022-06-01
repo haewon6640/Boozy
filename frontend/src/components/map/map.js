@@ -1,6 +1,6 @@
 import React from "react";
 import { Map, GoogleApiWrapper } from 'google-maps-react';
-import {mapsAPIKey} from '../../../../config/keys'
+// import 'dotenv/config' 
 
 class BoozyMap extends React.Component {
     constructor(props) {
@@ -28,8 +28,10 @@ class BoozyMap extends React.Component {
     }
   
     render() {
+        console.log(process.env.REACT_APP_GOOGLE_API_KEY)
+        debugger 
       return (
-        <div classname="map-component">
+        <div className="map-component">
             <Map
                 classname="map-component"
                 google={this.props.google}
@@ -48,5 +50,5 @@ class BoozyMap extends React.Component {
 
 
   export default GoogleApiWrapper({
-    apiKey: mapsAPIKey
+    apiKey: process.env.REACT_APP_GOOGLE_API_KEY
 })(BoozyMap)
