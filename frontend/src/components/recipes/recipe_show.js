@@ -27,6 +27,7 @@ class RecipeShow extends React.Component {
         if ( Object.keys(this.state.recipe).length === 0) {
             return null;
         }
+        console.log(this.state.recipe);
 		// let recipe = {
 		// 	name:"dinkypoo",
 		//  	ingredients:["vodhah", "arange"],

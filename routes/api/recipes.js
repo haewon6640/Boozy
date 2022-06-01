@@ -42,8 +42,9 @@ router.get('/:id', (req, res) => {
             // console.log(res);
             let ingredients = await Ingredient.find({'_id': {$in: recipe.ingredients}});
             let reviews = await Review.find({'_id': {$in: recipe.reviews}});
-            // console.log(ingredients);
-
+            console.log(ingredients);
+            // console.log(recipe.reviews);
+            console.log(reviews);
             let ingredientState = {};
             for (var i = 0; i < ingredients.length; i++) {
                 ingredientState[ingredients[i].id] = ingredients[i]

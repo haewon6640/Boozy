@@ -10,6 +10,12 @@ router.get("/", (req,res) => {
         .catch(err=> res.status(404).json(err))
 })
 
+router.get("/:id", (req,res) => {
+    Review.findById(req.params.id)
+        .then(reviews => res.json(reviews))
+        .catch(err=> res.status(404).json(err))
+})
+
 router.get('/user/:user_id', (req, res) => {
     Review.find({reviewer: req.params.user_id})
         .then(reviews => res.json(reviews))
