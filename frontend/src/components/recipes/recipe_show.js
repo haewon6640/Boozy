@@ -2,6 +2,7 @@ import React from "react";
 import { GiOrangeSlice } from 'react-icons/gi';
 import ReviewIndex from '../reviews/review_index'
 import ReviewForm from '../reviews/review_form'
+import ReviewGraphic from '../reviews/review_graphic'
 
 class RecipeShow extends React.Component {
 
@@ -44,14 +45,15 @@ class RecipeShow extends React.Component {
 				</div>
 				<div className="recipe-right">
 					<div className="review-show">
-						{recipe.reviews}
+            <div>{recipe.name}'s Flavor Profile</div>
+						<ReviewGraphic/>
 					</div>
 					<div className="review-form-box">
 						<ReviewForm/>
 					</div>
 				</div>
 			</div>
-			<div className="review-show-container">
+			<div className="review-index-container">
 				<ReviewIndex/>
 			</div>
 		</div>
