@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const RecipeIndexItem = (props) => {
     return (
-        <Link to={`/recipes/${props.key}`}>
+        <Link to={`/recipes/${props.recipe._id}`}>
             <li className="recipe-index-item">
                 <div className="photo-box">
                     <img src="https://www.yummymummykitchen.com/wp-content/uploads/2019/06/greyhound-drink-cocktail-10-720x720.jpg" 

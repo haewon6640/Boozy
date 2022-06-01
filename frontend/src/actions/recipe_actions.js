@@ -34,7 +34,7 @@ export const fetchRecipes = () => (dispatch) =>
 export const fetchRecipe = (id) => (dispatch) =>
     RecipeApiUtil.getRecipe(id)
         .then((res) => dispatch(receiveRecipe(res.data)))
-        .catch((err) => console.log(err.responseJSON));
+        .catch((err) => console.log(err));
 
 export const fetchUserRecipes = (id) => (dispatch) =>
     RecipeApiUtil.getUserRecipes(id)
