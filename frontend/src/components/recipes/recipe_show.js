@@ -31,7 +31,7 @@ class RecipeShow extends React.Component {
 		// 	name:"dinkypoo",
 		//  	ingredients:["vodhah", "arange"],
 		// 	reviews:"this will be review summary",
-		// 	instructions:"take the vodkah \n drink it \n eat the orage  \n be done"
+			// instructions:"take the vodkah \n drink it \n eat the orage  \n be done"
 		// }
 		return (
 		<div className="webpage">

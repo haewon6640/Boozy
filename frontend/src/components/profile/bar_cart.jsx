@@ -1,5 +1,6 @@
 import React from "react";
 import Autocomplete from "./auto_complete";
+import CanMake from "./can_make";
 
 class BarCart extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class BarCart extends React.Component {
     componentDidMount() {
         this.props.fetchIngredients();
         this.props.fetchUser();
+        this.props.fetchRecipes();
     }
     handleShelf() {
         this.props.addIngredients(this.state.cart)
@@ -26,7 +28,6 @@ class BarCart extends React.Component {
             return null;
         }
         const dicitonary = Object.values(this.props.ingredients)
-        console.log(this.props)
         return (
             <div className="webpage">
               <div className="two-col asym">
@@ -36,24 +37,31 @@ class BarCart extends React.Component {
                       className='search-input-web' 
                       dictionary={dicitonary}
                       addItem={this.addItem}
+                    
                       />
                     <ul>
                       <div className="barcart-title">Your Bar Cart</div>
                       
                       {this.props.user.shelf !== [] && this.props.user.shelf.map(item=>(
-                        <li>{this.props.ingredients[item].name}</li>
+                        <li key={item}>{this.props.ingredients[item].name}</li>
                         ))}
                     </ul>
                   </div>
                 </div>
                 <div className="bar-right">
                   <div className="two-col">
-                    <div className="easy-drinqs">easy peasy</div>
+                    <CanMake 
+                      recipes={this.props.recipes.all} 
+                      shelf={this.props.user.shelf}
+                      ingredients={this.props.ingredients}
+                      />
                     <div className="hard-drinqs">Quite the Challenge!</div>
                   </div>
-                  <div className="missing">missing ingredients</div>
-                  <div className="map-container">
-                    <img src="https://mikesrpgcenter.com/zelda3/maps/lightworld_large.gif" alt="" />
+                  <div className="two-col">
+                    <div className="missing">missing ingredients</div>
+                    <div className="map-container">
+                      <img src="https://mikesrpgcenter.com/zelda3/maps/lightworld_large.gif" alt="" />
+                    </div>
                   </div>
                 </div>
               </div>
