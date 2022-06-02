@@ -1,14 +1,5 @@
-import { RECEIVE_RECIPE } from "../actions/recipe_actions";
+import * as ReviewApiUtil from "../util/review_api_util";
 
-const ReviewsReducer = (state = {}, action) => {
-    Object.freeze(state);
-    let newState = Object.assign({},state);
-    switch(action.type) {
-        case RECEIVE_RECIPE:
-            return Object.assign({},action.reviews)
-        default:
-            return state
-    }
-}
+export const RECEIVE_REVIEW = "RECEIVE_REVIEW";
 
-export default ReviewsReducer;
+// const receiveReview = () => 
