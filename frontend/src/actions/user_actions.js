@@ -8,9 +8,10 @@ const receiveUser = (user) => ({
     user
 })
 
-const removeFromShelf = (ingredientId) => ({
+const removeFromShelf = (ingredientId, currUserId) => ({
     type: REMOVE_FROM_SHELF,
-    ingredientId
+    ingredientId,
+    currUserId
 })
 
 export const fetchUser = (id) => dispatch => (
@@ -23,8 +24,8 @@ export const addShelf = (ingredients) => dispatch => (
         .then(res=>dispatch(receiveUser(res.data)))
 )
 
-export const deleteFromShelf = (ingredientId) => dispatch => (
+export const deleteFromShelf = (ingredientId, currUserId) => dispatch => (
     UserApiUtil.deleteFromShelf(ingredientId)
-        .then(res=>dispatch(removeFromShelf(ingredientId)))
+        .then(res=>dispatch(removeFromShelf(ingredientId,currUserId)))
         .catch(err => {throw "err"})
 )
