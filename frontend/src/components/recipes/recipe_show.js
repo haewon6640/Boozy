@@ -4,6 +4,7 @@ import ReviewIndex from '../reviews/review_index'
 import ReviewForm from '../reviews/review_form'
 import ReviewGraphic from '../reviews/review_graphic'
 
+
 class RecipeShow extends React.Component {
     constructor(props) {
         super(props);
@@ -39,7 +40,7 @@ class RecipeShow extends React.Component {
 			<div className="two-col">
 				<div className="recipe-left">
 					<div className="show-photo">
-						<img src="https://www.liquor.com/thmb/yOze-jG9Dr7UjvNyQ3mKLELJh08=/720x720/filters:fill(auto,1)/__opt__aboutcom__coeus__resources__content_migration__liquor__2019__04__24153243__revolver-720x720-recipe-1-f662b26f4c3e49588c629a4533c8830b.jpg" alt="" />
+						<img src={this.props.recipe.imgUrl} alt="" />
 					</div>
                     <h1 className="recipe-title">{recipe.name}</h1>
                     <div className="recipe-bottom-left">
@@ -68,9 +69,13 @@ class RecipeShow extends React.Component {
                             {this.state.recipe.instructions.split("\n").map((step,idx)=> (<li key={idx}>{step}</li>))}
                         </ol>
                     </div>
+                    <div className="review-form-container">
+				              <ReviewForm reviews={this.state.reviews} />
+			              </div>
 				</div>
 			</div>
             <div className="separator"></div>
+      
 			<div className="review-index-container">
 				<ReviewIndex reviews={this.state.reviews}/>
 			</div>
