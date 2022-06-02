@@ -21,7 +21,7 @@ $light-button-color: #f1eff2;
 $light-green: #acb2a9;
 $bottle-green: #092E20;
 $cream: #f9f7ea;
-
+$serif-font: 'Merriweather';
 
 // some all around classes
 .webpage {
@@ -89,6 +89,8 @@ input, textarea {
 @import './auto-complete.scss';
 @import './recipe-form.scss';
 @import './ingredient-filter-list.scss';
+@import './auto-complete.scss';
+
 
 // @media phone flip goes here
 @media screen and (max-width: 420px) {

@@ -3,10 +3,10 @@
   background-color: white;
   border: 1px solid $dark-grey;
   border-radius: 4px;
-  >li {
+  .autocomplete-res {
     margin: 4px;
     padding: 4px;
-    width: 95%;
+    width: 100%;
     cursor: pointer;
   }
 }
