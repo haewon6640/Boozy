@@ -73,13 +73,13 @@
     padding: 4px;
 }
 
-.make-box {
-    font-size: 13px;
-    > h2 {
+.make-box, .radio-box, .cart-box {
+    font-size: 16px;
+     h2 {
         font-family: $serif-font;
         color: #EF6079FF;
-        padding-bottom: 3px;
-        width: fit-content;
+        padding: 3px 0;
+        width: 100%;
         margin-bottom: 5px;
         border-bottom: 1px solid $warm-pink;
     }
@@ -95,8 +95,6 @@
         font-size: 13px;
         margin-top:10px;
     }
-}
-.make-box {
     margin-bottom: 30px;
 }
 
@@ -109,4 +107,17 @@
         cursor: pointer;
         padding-left: 8px;
     }
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  padding: 10px;
+}
+
+.arrow {
+    color: $dark-grey;
+    // font-size: 16px;
+    margin-bottom: 5px;
+    align-self: center;
 }

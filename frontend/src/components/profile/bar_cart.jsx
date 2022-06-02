@@ -3,6 +3,7 @@ import Autocomplete from "./auto_complete";
 import CanMake from "./can_make";
 import CanMaybeMake from "./can_mayby_make";
 import {AiOutlineCloseCircle} from 'react-icons/ai'; 
+import { IoIosArrowBack, IoIosArrowDown } from 'react-icons/io';
 import BarCartRecipeShow from "./barcart_recipe_show";
 import FilterChoice from "./filter_choice";
 class BarCart extends React.Component {
@@ -10,7 +11,10 @@ class BarCart extends React.Component {
         super(props);
         this.state = {
             missing: [],
-            barcart_modal_open: false,
+            barcart_open: false,
+            filter_open: false,
+            can_open: true,
+            cant_open: true,
             curr_recipe: {},
             curr_ingredients: [],
             user: {},
@@ -46,8 +50,8 @@ class BarCart extends React.Component {
         this.props.addIngredients(item);
     }
 
-    toggleBarCart(e) {
-        this.setState({barcart_modal_open: !this.state.barcart_modal_open})
+    toggleBarCart(type) {
+        this.setState({[type]: !this.state[type]})
     }
 
     render() {
@@ -59,58 +63,63 @@ class BarCart extends React.Component {
         }
         let barcart = "";
         const dictionary = Object.values(this.props.ingredients);
-        if (!this.state.barcart_modal_open) {
+        // if (!this.state.barcart_open) {
+        //     barcart = (
+        //         <button onClick={()=>this.toggleBarCart("barcart_open")} className="btn btn-barcart">
+        //             Open Barcart
+        //         </button>
+        //     )
+        // } else {
             barcart = (
-                <button onClick={this.toggleBarCart} className="btn btn-barcart">
-                    Open Barcart
-                </button>
-            )
-        } else {
-            barcart = (
-                <div className="cart-outer-container">
-                    <AiOutlineCloseCircle 
-						size={30} 
-						onClick={this.toggleBarCart} 
-						className="close-barcart"
-					/>
-                    <Autocomplete
-                        className="search-input-web"
-                        dictionary={dictionary}
-                        addItem={this.addItem}
-                    />
-                    <ul>
-                        <div className="barcart-title">
-                            Your Bar Cart
-                        </div>
-                        {this.props.user.shelf !== [] &&
-                            this.props.user.shelf.map((item) => (
-                                <li className="bar-items" key={item}>
-                                    {this.props.ingredients[item].name}
-                                </li>
-                            ))}
-                    </ul>
+                <div className="cart-box">
+					<div className="in-line" onClick={()=>this.toggleBarCart("barcart_open")}>
+						<h2> Your Bar Cart</h2>
+						{!this.state.barcart_open && <IoIosArrowBack className='arrow'/>}
+            			{this.state.barcart_open && <IoIosArrowDown className='arrow'/>}
+					</div>
+					{ this.state.barcart_open && <div>
+						<Autocomplete
+							className="search-input-web"
+							dictionary={dictionary}
+							addItem={this.addItem}
+						/>
+						<ul>
+							{this.props.user.shelf !== [] &&
+								this.props.user.shelf.map((item) => (
+									<li className="bar-items" key={item}>
+										{this.props.ingredients[item].name}
+									</li>
+								))}
+						</ul>
+					</div>}
                 </div>
             )
-        }
+        // }
         return (
             <div className="webpage">
                 <div className="two-col asym">
                     <div className="bar-left">
-                        {barcart}
-						<FilterChoice
-							handleSelection={this.handleSelection}
-						/>
-                        <div className="recipes-possible">
+                        <div className="recipes-possible sticky ">
+                        	{barcart}
+							<FilterChoice
+								handleSelection={this.handleSelection}
+								toggleBarCart={this.toggleBarCart}
+								filter_open={this.state.filter_open}
+							/>
                             <CanMake
 								filter_choice={this.state.filter_choice}
                                 recipes={this.props.recipes.all}
                                 shelf={this.props.user.shelf}
+								toggleBarCart={this.toggleBarCart}
+								open={this.state.can_open}
                             />
                             <CanMaybeMake
 								filter_choice={this.state.filter_choice}
                                 recipes={this.props.recipes.all}
                                 shelf={this.props.user.shelf}
                                 handleHover={this.handleHover}
+								toggleBarCart={this.toggleBarCart}
+								open={this.state.cant_open}
                             />
                         </div>
                     </div>
