@@ -88,7 +88,7 @@ class BoozyMap extends React.Component {
             <Map
                 className="map-component"
                 google={this.props.google}
-                zoom={14}
+                zoom={16}
                 center={this.state.center}
                 onReady={(mapProps, map) => this.onMapLoad(mapProps, map)}
                 // mapContainerStyle={{ height: "200px", width: "200px" }}
