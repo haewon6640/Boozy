@@ -2,12 +2,16 @@ import React from 'react';
 // import { Link } from 'react-router-dom'
 import { BsPersonFill } from 'react-icons/bs';
 import { GiMartini } from 'react-icons/gi';
-
+import {FaSearch} from 'react-icons/fa';
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+        searchString: ""
+    }
     this.logoutUser = this.logoutUser.bind(this);
     this.getLinks = this.getLinks.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   logoutUser(e) {
@@ -49,6 +53,16 @@ class NavBar extends React.Component {
         );
       }
   }
+  handleSearchType() {
+    return e => {
+        return this.setState({searchString: e.target.value})
+    }
+  }
+  handleSearch(e) {
+      if (e.key === "Enter") {
+          this.props.history.push(`/recipes/search/search?${this.state.searchString}`)
+      }
+  }
 
   render() {
       return (
@@ -62,18 +76,28 @@ class NavBar extends React.Component {
                     </a>
                 </div>
                 {/* <form> */}
-					<input type="text"
-						className='search-input-web'
-						placeholder="Find your next cocktail"
-						readOnly
-						/>
+                    <div className='search-bar'>
+                        <input type="text"
+                            onChange={this.handleSearchType()}
+                            value={this.state.searchString}
+                            onKeyDown={this.handleSearch}
+                            className='search-input-web'
+                            placeholder="Find your next cocktail"
+                            />
+                            <div onClick={()=>this.props.history.push(`/recipes/search/search?${this.state.searchString}`)} 
+                                className="search-icon-container">
+                                <FaSearch className="search-icon"/>
+                            </div>
+                    </div>
                 {/* </form> */}
                 { this.getLinks() }
             </div>
 			<input type="text"
 						className='search-input-phone'
+                        onChange={this.handleSearchType()}
+                        value={this.state.searchString}
+                        onKeyDown={this.handleSearch}
 						placeholder="Find your next cocktail"
-						readOnly
 						/>
           </div>
         </div>

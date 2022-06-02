@@ -26,11 +26,13 @@ export const receiveNewRecipe = (recipe) => ({
     recipe,
 });
 
-export const fetchRecipes = () => (dispatch) =>
-    RecipeApiUtil.getRecipes()
+export const fetchRecipes = (searchString) => (dispatch) => {
+    console.log(searchString);
+    searchString = searchString ? searchString : "";
+    return RecipeApiUtil.getRecipes(searchString)
         .then((recipes) => dispatch(receiveRecipes(recipes.data)))
         .catch((err) => console.log(err));
-
+}
 export const fetchRecipe = (id) => (dispatch) =>
     RecipeApiUtil.getRecipe(id)
         .then((res) => dispatch(receiveRecipe(res.data)))

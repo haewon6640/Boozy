@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { schema } = require('./Review');
 const Schema = mongoose.Schema;
 
 const RecipeSchema = new Schema({

@@ -10,9 +10,10 @@ const mSTP = (state) => {
     }
 }
 
-const mDTP = dispatch => {
+const mDTP = (dispatch,ownProps) => {
+    let searchString = ownProps.location.search.slice(1);
     return {
-        fetchRecipes: () => dispatch(fetchRecipes()),
+        fetchRecipes: () => dispatch(fetchRecipes(searchString)),
         fetchIngredients: () => dispatch(fetchIngredients())
     }
 }
