@@ -8,7 +8,7 @@
 // constants go here
 $dark-grey: #484748;
 $title-color: #eaadad;
-$fancy-font: 'Neonderthaw';
+$fancy-font: 'Merriweather';
 $title-font: 'Neonderthaw';
 $recipe-font: "Special Elite";
 $reg-font: 'Raleway';
@@ -67,6 +67,7 @@ $cream: #f9f7ea;
 @import './auto-complete.scss';
 @import './recipe-form.scss';
 @import './ingredient-filter-list.scss';
+@import './auto-complete.scss';
 
 // @media phone flip goes here
 @media screen and (max-width: 420px) {

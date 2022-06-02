@@ -1,8 +1,8 @@
-.easy-drinqs, .hard-drinqs, .missing {
-  height: 50px;
-  width: 100%;
-  border: 1px solid blue;
-}
+// .easy-drinqs, .hard-drinqs, .missing {
+//   height: 50px;
+//   width: 100%;
+//   border: 1px solid blue;
+// }
 
 .asym{
   display: grid;
@@ -11,8 +11,6 @@
 
 .cart-outer-container {
   height: auto;
-  width: 90%;
-  // border: 1px solid magenta;
   padding: 8px 0;
   margin: auto;
   position: absolute;
@@ -21,6 +19,9 @@
     font-weight: 500;
     text-decoration: double underline;
   }
+}
+.bar-items {
+  width: 200px!important;
 }
 
 .bar-left {
@@ -36,4 +37,25 @@
 
 .map-container {
   padding: 4px;
+}
+
+.make-box {
+  >h2 {
+    font-family: $fancy-font;
+  }
+  >ul li{
+    font-family: $reg-font;
+    cursor: pointer;
+  }
+}
+
+.missing {
+  >h2 {
+    font-family: $fancy-font;
+  }
+  >ul li{
+    font-family: $recipe-font;
+    cursor: pointer;
+    padding-left: 8px ;
+  }
 }
