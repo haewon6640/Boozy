@@ -93,8 +93,8 @@ const seedDB = async () => {
       password: '123456',
       shelf: shelf})
   }
-  // await User.deleteMany()
-  // await User.insertMany(userSeeds) // insert userSeeds into DB
+  await User.deleteMany()
+  await User.insertMany(userSeeds) // insert userSeeds into DB
   userSeeds = await User.find() // take all the user objects from the database and stick them into an array
 
   // create recipe seeds
@@ -111,6 +111,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
+    description: faker.lorem.paragraph(),
     additionalInfo: '',
 
   },
@@ -126,6 +127,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -144,6 +146,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -159,6 +162,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -174,6 +178,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -188,6 +193,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -202,6 +208,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -215,6 +222,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -229,6 +237,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -245,7 +254,9 @@ const seedDB = async () => {
     reviews: [],
     instructions: `1) Shake sugar and 1/3 cup hot water in a jar until sugar dissolves; chill until ready to use. \n 
                    2) Combine whiskey, absinthe, bitters, 1/3 cup simple syrup, and ¾ cup ice water in a large pitcher; chill \n
-                      until very cold, at least 2 hours and uprosemary`
+                      until very cold, at least 2 hours and uprosemary`,
+    description: faker.lorem.paragraph(),
+    additionalInfo: ''
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -263,6 +274,7 @@ const seedDB = async () => {
                       Fill with ice; shake until outside is frosty, about 30 seconds. Strain into a coupe glass. \n
                       Top with Angostura bitters. \n
                    2) *Raw egg is not recommended for the elderly, people with weakened immune systems...or people who don’t like raw egg.`,
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -290,6 +302,7 @@ const seedDB = async () => {
     to Pimm's mixture, cover, and shake vigorously 20 times. Strain into glasses. Push 1 rosemary sprig, 1 \n
     thyme sprig, 1 mint sprig, 1 lemon slice, and 2 strawberry halves down into each glass. Fill glasses with \n 
     ginger beer. Garnish with cucumber spears and rhubarb stalks.`,
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -306,6 +319,7 @@ const seedDB = async () => {
     reviews: [],
     instructions: `1) Pour club soda, vodka, and ginger syrup into a Moscow Mule mug filled with ice; stir gently to combine. \n
     Garnish with lime wedges.`,
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -328,6 +342,7 @@ const seedDB = async () => {
     2) Using a small serrated knife, remove a 1" strip of peel from lime (some white pith is okay); it should be \n
     stiff enough to provide some resistance when bent. Twist over drink to express oils; discard. Garnish \n 
     with a lime twist. \n`,
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -347,6 +362,7 @@ const seedDB = async () => {
     ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. \n    
     2) Strain cocktail through a Hawthorne strainer or a slotted spoon into a tall Collins glass filled with ice. \n
     Top off with club soda; garnish with more mint`,
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -366,6 +382,7 @@ const seedDB = async () => {
     cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. \n
     2) Strain cocktail through a Hawthorne strainer or a slotted spoon into a martini glass. Garnish with \n
     orange twist.`,
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -383,6 +400,7 @@ const seedDB = async () => {
     reviews: [],
     instructions: `1) Place sugar cube in an Irish coffee mug. Add coffee and whiskey and stir to combine. Top with whipped \n
     cream and bitters, if using.`,
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -411,6 +429,7 @@ const seedDB = async () => {
     of ice. \n
     4) For each cocktail, muddle ingredients of your choice (mix and match!) in a Collins glass. Fill with ice, \n 
     then add ¼ cup gin mixture and top off with club soda.`,
+    description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
   {
@@ -431,7 +450,8 @@ const seedDB = async () => {
     vigorously until outside of shaker is very cold, about 20 seconds. \n
     2) Strain cocktail through a Hawthorne strainer or a slotted spoon into a large flute. Top with \n 
     Champagne; garnish with lemon twist. \n`,
-    additionalInfo: "Hendrick's Gin ia recommended"
+    description: faker.lorem.paragraph(),
+    additionalInfo: "Hendrick's Gin is recommended"
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -449,12 +469,12 @@ const seedDB = async () => {
     reviews: [],
     instructions: `1) Thread olives onto a swizzle stick. Pour Aperol and Prosecco into a rocks glass filled with ice. \n 
     Top off with soda and gently stir with swizzle stick with olives \n`,
-   
-    additionalInfo: "Hendrick's Gin ia recommended"
+    description: faker.lorem.paragraph(),
+    additionalInfo: ""
   }
-
-
  ]
+
+//  recipeSeeds.forEach((recipe => console.log(recipe.name, recipe.description)))
  await Recipe.deleteMany({});
  await Recipe.insertMany(recipeSeeds)
 
@@ -481,11 +501,11 @@ const seedDB = async () => {
       title: faker.company.companyName(),
       body: faker.lorem.paragraph(),
     }
-    console.log(`Review seed ${i}:`, reviewSeeds[i])
+    // console.log(`Review seed ${i}:`, reviewSeeds[i])
   };
   //delete all the existing reviews then insert all the reviews into the database
   await Review.deleteMany();
-  // await Review.insertMany(reviewSeeds)
+  await Review.insertMany(reviewSeeds)
 
   // assign the reviews made, to the recipes that they belong to
   reviewSeeds = await Review.find()
