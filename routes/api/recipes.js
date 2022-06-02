@@ -12,7 +12,7 @@ const Review = require('../../models/Review');
 const recipe = require("../../validation/recipe");
 
 router.get("/", (req, res) => {
-    Recipe.find()
+    Recipe.find({ "name": {"$regex": req.query.search, "$options": "i"}})
         .sort({ date: -1 })
         .then((recipes) => {
             let response = {};
@@ -36,6 +36,7 @@ router.get('/user/:user_id', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+    console.log(req.params);
     Recipe.findById(req.params.id)
         .then(async recipe => {
             let recipeState = {recipe: {[recipe.id] : recipe}};
