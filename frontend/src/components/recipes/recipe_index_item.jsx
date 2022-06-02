@@ -5,7 +5,7 @@ const RecipeIndexItem = (props) => {
         <Link to={`/recipes/${props.recipe._id}`}>
             <li className="recipe-index-item">
                 <div className="photo-box">
-                    <img src="https://www.yummymummykitchen.com/wp-content/uploads/2019/06/greyhound-drink-cocktail-10-720x720.jpg" 
+                    <img src={props.recipe.imgUrl} 
                     alt={props.recipe.name}
                     />
                 </div>
