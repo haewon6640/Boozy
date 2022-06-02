@@ -37,7 +37,8 @@ export const signup = user => dispatch => (
         dispatch(receiveUserSignIn(decoded))
     })
     .catch(err => {
-        dispatch(receiveErrors(err.response.data))
+        dispatch(receiveErrors(err.response.data));
+        throw 'signup error'
     })
 );
 

@@ -1,19 +1,18 @@
 import {connect} from "react-redux";
-// import { fetchRecipes } from "../../actions/recipe_actions";
-// import { fetchIngredients } from "../../actions/ingredient_actions";
+import { fetchRecipe } from "../../actions/recipe_actions";
 import RecipeShow from "./recipe_show";
 
-const mSTP = (state) => {
+const mSTP = (state, ownProps) => {
     return {
-        // recipes: Object.values(state.entities.recipes.all),
-        // ingredients: state.entities.ingredients
+        recipe: state.entities.recipes.all[ownProps.match.params.id],
+        ingredients: Object.values(state.entities.ingredients),
+        reviews: Object.values(state.entities.reviews)
     }
 }
 
-const mDTP = dispatch => {
+const mDTP = (dispatch, ownProps) => {
     return {
-        // fetchRecipes: () => dispatch(fetchRecipes()),
-        // fetchIngredients: () => dispatch(fetchIngredients())
+        fetchRecipe: () => dispatch(fetchRecipe(ownProps.match.params.id))
     }
 }
 

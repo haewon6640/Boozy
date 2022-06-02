@@ -1,0 +1,43 @@
+{
+  name: 'negroni',
+  imgUrl: https://assets.bonappetit.com/photos/626710f327b006dd474788c9/1:1/w_1280,c_limit/0425-negroni-recipe.jpg
+},
+
+{
+  name: 'Old-fashioned',
+  imgUrl: https://assets.bonappetit.com/photos/58409ff731e0aa8a6cd383f8/1:1/w_1280,c_limit/bas-best-old-fashioned.jpg
+},
+{
+  name: 'Bloody Mary',
+  imgUrl: https://assets.bonappetit.com/photos/57aceb5af1c801a1038bc8fb/1:1/w_1280%2Cc_limit/BLOODY-MARY-RESIZED-1-of-1.jpg
+},
+{
+  name: 'Margarita',
+  imgUrl: https://assets.bonappetit.com/photos/5b69f16006027f654a27cd19/1:1/w_1280,c_limit/ba-margarita-1.jpg
+},
+{
+  name: 'Sidecar',
+  imgUrl: https://assets.bonappetit.com/photos/5b69f16006027f654a27cd19/1:1/w_1280,c_limit/ba-margarita-1.jpg
+},
+{
+  name: 'Whiskey Smash',
+  imgUrl: https://assets.bonappetit.com/photos/57ae4a7953e63daf11a4e4d0/1:1/w_1280%2Cc_limit/classic-whiskey-smash.jpg
+},
+{
+  name: 'Sloe Gin',
+  imgUrl: https://assets.bonappetit.com/photos/57adf8881b3340441497584a/1:1/w_1280%2Cc_limit/sloe-gin.jpg
+},
+{
+  name: 'Boulevardier',
+  imgUrl: https://assets.bonappetit.com/photos/57ae2ec953e63daf11a4e2fd/1:1/w_1280%2Cc_limit/boulevardier.jpg
+},
+{
+  name: 'Gin and Tonic',
+  imgUrl: https://assets.bonappetit.com/photos/57adf784f1c801a1038bcddf/1:1/w_1280%2Cc_limit/gin-and-tonic.jpg
+},
+{
+  name: 'Spiced Dark and Stormy',
+  imgUrl: https://assets.bonappetit.com/photos/57add934f1c801a1038bcc4f/1:1/w_1280%2Cc_limit/spiced-dark-and-stormy3.jpg
+}
+
+

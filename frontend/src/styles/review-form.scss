@@ -1,0 +1,24 @@
+.review-form-header {
+  color: $title-color;
+  font-family: $readible-fancy-font;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  margin-bottom: 5px;
+  
+}
+
+.review-form-initiator {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.review-form-container {
+  border: black solid;
+}
+
+.review-form .hidden {
+  border: black solid;
+  width: 100px;
+  height: 100px;
+}

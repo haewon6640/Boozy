@@ -1,12 +1,19 @@
 import * as RecipeApiUtil from "../util/recipe_api_util";
 
 export const RECEIVE_RECIPES = "RECEIVE_RECIPES";
+export const RECEIVE_RECIPE = "RECEIVE_RECIPE";
 export const RECEIVE_USER_RECIPES = "RECEIVE_USER_RECIPES";
 export const RECEIVE_NEW_RECIPE = "RECEIVE_NEW_RECIPE";
 
 export const receiveRecipes = (recipes) => ({
     type: RECEIVE_RECIPES,
-    recipes,
+    recipes
+});
+export const receiveRecipe = (res) => ({
+    type: RECEIVE_RECIPE,
+    recipe: res.recipe,
+    ingredients: res.ingredients,
+    reviews: res.reviews
 });
 
 export const receiveUserRecipes = (recipes) => ({
@@ -21,7 +28,12 @@ export const receiveNewRecipe = (recipe) => ({
 
 export const fetchRecipes = () => (dispatch) =>
     RecipeApiUtil.getRecipes()
-        .then((recipes) => dispatch(receiveRecipes(recipes)))
+        .then((recipes) => dispatch(receiveRecipes(recipes.data)))
+        .catch((err) => console.log(err));
+
+export const fetchRecipe = (id) => (dispatch) =>
+    RecipeApiUtil.getRecipe(id)
+        .then((res) => dispatch(receiveRecipe(res.data)))
         .catch((err) => console.log(err));
 
 export const fetchUserRecipes = (id) => (dispatch) =>
@@ -32,4 +44,4 @@ export const fetchUserRecipes = (id) => (dispatch) =>
 export const createRecipe = (data) => (dispatch) =>
     RecipeApiUtil.createRecipe(data)
         .then((recipe) => dispatch(receiveNewRecipe(recipe)))
-        .catch((err) => console.log(err));
+        .catch((err) => {throw "err"});
