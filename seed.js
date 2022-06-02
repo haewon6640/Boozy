@@ -5,7 +5,7 @@ const Ingredient = require('./models/Ingredient')
 const User = require('./models/User')
 const Recipe = require('./models/Recipe')
 const Review = require('./models/Review')
-
+const bcrypt = require('bcryptjs')
 
 //connection to the database 
 mongoose
@@ -79,10 +79,12 @@ const seedDB = async () => {
   let userSeeds = []
   let shelf = [...ingredientSeeds]
   shelf = getRandomSubarray(ingredientSeeds,5)
+
+  
   userSeeds.push({
     handle: 'DemoUser',
     email: 'DemoUser@gmail.com',
-    password: '123456',
+    password: '$2a$10$NcUeyj5yCHoJTvRgOlw7Cef01EXTP7TfVwAf3qf2ZR.cdz2L0QU3q',
     shelf: shelf
   })
   // create 10 users with faker data
@@ -90,7 +92,7 @@ const seedDB = async () => {
     shelf = getRandomSubarray(ingredientSeeds,5)
     userSeeds.push({handle: faker.name.findName(),
       email: faker.internet.email(),
-      password: '123456',
+      password: '$2a$10$NcUeyj5yCHoJTvRgOlw7Cef01EXTP7TfVwAf3qf2ZR.cdz2L0QU3q',
       shelf: shelf})
   }
   await User.deleteMany()
@@ -123,7 +125,7 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'bitters'}),
       await Ingredient.findOne({name: 'whiskey'}),
       await Ingredient.findOne({name: 'orange'}),
-      await Ingredient.findOne({name: 'maraschino-cherries'})
+      await Ingredient.findOne({name: 'maraschino cherries'})
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
@@ -501,7 +503,7 @@ const seedDB = async () => {
       title: faker.company.companyName(),
       body: faker.lorem.paragraph(),
     }
-    // console.log(`Review seed ${i}:`, reviewSeeds[i])
+    console.log(`Review seed ${i}:`, reviewSeeds[i].rating)
   };
   //delete all the existing reviews then insert all the reviews into the database
   await Review.deleteMany();
