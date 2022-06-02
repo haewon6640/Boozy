@@ -50,7 +50,7 @@ class BoozyMap extends React.Component {
         const {google} = mapProps
         let coords= []
         let request = {
-          query: "Safeway",
+          query: "wine",
           fields: ["name", "geometry"]
         };
     
@@ -58,7 +58,6 @@ class BoozyMap extends React.Component {
 
         // debugger
         service.findPlaceFromQuery(request, (results, status) => {
-            console.log(results, status)
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length; i++) {
               coords.push(results[i]);
@@ -66,7 +65,16 @@ class BoozyMap extends React.Component {
             this.setState({
             //   center: results[0].geometry.location,
               coordsResult: coords
+
             });
+            // console.log(coords)
+            // let marker1 = new google.maps.Marker({
+            //     position: coords[0].results.geometry.location,
+            //     map,
+            //     title: "Hello World!",
+            //   });
+            //   marker1.setMap(map);
+
           }
         });
       };
@@ -89,13 +97,15 @@ class BoozyMap extends React.Component {
                     this.state.coordsResult.map(function(results, i) {
                         return (
                             <Marker key={i} position={results.geometry.location}>
-                            <InfoWindow 
-                            options={{ maxWidth: 300 }}>
-                                
-                                <span>{results.name}</span>
-                                
-                            </InfoWindow>
+                                <InfoWindow key={i} visible={true} position={results.geometry.location}>
+                                    
+                                    <div className="info-div">
+                                        <h3>{results.name}</h3>
+                                    </div>
+                                    
+                                </InfoWindow>
                             </Marker>
+                            
                         )
                     }
               )}
