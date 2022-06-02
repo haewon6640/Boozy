@@ -1,5 +1,7 @@
 import React from "react";
 import { GiOrangeSlice, GiTrophiesShelf } from 'react-icons/gi';
+import Boozymap from '../map/map'
+
 class BarCartRecipeShow extends React.Component {
     constructor(props) {
         super(props);
@@ -66,10 +68,11 @@ class BarCartRecipeShow extends React.Component {
 				</div>
 			</div>
             <div className="map-container">
-                <img
+                {/* <img
                     src="https://mikesrpgcenter.com/zelda3/maps/lightworld_large.gif"
                     alt=""
-                />
+                /> */}
+                <Boozymap/>
             </div>
 		</div>
 	)}

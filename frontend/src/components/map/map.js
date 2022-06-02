@@ -10,7 +10,6 @@ class BoozyMap extends React.Component {
         this.state = {
             center: { lat: 0, lng: 0},
             coordsResult: [],
-            trigger: 0
         }
     }
 
@@ -33,7 +32,6 @@ class BoozyMap extends React.Component {
             
             this.setState({
                 center: { lat: crd.latitude, lng: crd.longitude},
-                trigger: 1
 
             })
         }.bind(this)
@@ -45,23 +43,26 @@ class BoozyMap extends React.Component {
        
         
         navigator.geolocation.getCurrentPosition(success, error, options);
+        
     }
 
-    onMapLoad = map => {
-        let coords= {}
+    onMapLoad = (mapProps, map) => {
+        const {google} = mapProps
+        let coords= []
         let request = {
           query: "Safeway",
           fields: ["name", "geometry"]
         };
     
-        let service = new window.google.maps.places.PlacesService(map);
-    
+        let service = new google.maps.places.PlacesService(map);
+
+        // debugger
         service.findPlaceFromQuery(request, (results, status) => {
-          if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+            console.log(results, status)
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length; i++) {
               coords.push(results[i]);
             }
-    
             this.setState({
             //   center: results[0].geometry.location,
               coordsResult: coords
@@ -75,14 +76,14 @@ class BoozyMap extends React.Component {
     render() {
         console.log(this.state)
       return (
-        <div className="map-component">
+        <div className="map-container">
             <Map
-                classname="map-component"
+                className="map-component"
                 google={this.props.google}
                 zoom={14}
-                initialCenter={this.state.center}
-                onClick={this.onMapClicked}
-                onLoad={map => this.onMapLoad(map)}
+                center={this.state.center}
+                onReady={(mapProps, map) => this.onMapLoad(mapProps, map)}
+                // mapContainerStyle={{ height: "200px", width: "200px" }}
             >
                 {this.state.coordsResult !== [] &&
                     this.state.coordsResult.map(function(results, i) {
@@ -109,3 +110,4 @@ class BoozyMap extends React.Component {
   export default GoogleApiWrapper({
     apiKey: process.env.REACT_APP_GOOGLE_API_KEY
 })(BoozyMap)
+
