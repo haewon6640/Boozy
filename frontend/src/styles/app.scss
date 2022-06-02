@@ -37,6 +37,11 @@ $dark-coral: #EF6079FF;
   font-family: $reg-font;
 }
 
+.in-line{
+  display: flex;
+  flex-direction: row;
+}
+
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
