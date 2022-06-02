@@ -23,7 +23,7 @@ class RecipeIndex extends React.Component {
 
     render() {
         if (this.state.recipes.length === 0) {
-            return (<div>No recipes</div>)
+            return null;
         } else {
             return (
             <div className="webpage">
