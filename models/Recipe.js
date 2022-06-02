@@ -6,6 +6,10 @@ const RecipeSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users'
     },
+    imgUrl: {
+      type: String,
+      default: "https://www.yummymummykitchen.com/wp-content/uploads/2019/06/greyhound-drink-cocktail-10-720x720.jpg"
+    },
     name: {
         type: String,
         required: true,
