@@ -28,11 +28,14 @@ const ReviewIndexItem = ({review}) => {
                     ))}
                 </span>
                 <span className='flavor_profile'>
-                    {Object.keys(rating).map((taste, idx) => 
-                        <span key={idx} className="flavor_profile_item">
+                    {Object.keys(rating).map((taste, idx) => {
+                        if (taste === "rating") {
+                            return null;
+                        }
+                        return <span key={idx} className="flavor_profile_item">
                             {<strong>{taste}</strong>}{`: ${rating[taste]}`}
                         </span>
-                    )}
+                    })}
                 </span>
             </div>
             
