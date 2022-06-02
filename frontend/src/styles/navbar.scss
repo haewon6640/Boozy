@@ -1,5 +1,6 @@
 .nav-outer-container {
-   background-image: url('https://image.shutterstock.com/image-photo/dark-old-rustic-wood-background-260nw-328179002.jpg');
+    background-image: url('https://image.shutterstock.com/image-photo/dark-old-rustic-wood-background-260nw-328179002.jpg');
+    width: 100%;
 }
 .navbar-inner-container {
     display: flex;
@@ -76,6 +77,9 @@ a:visited {
 	font-size: 16px;
 	font-family: Graphik web regular,"Helvetica Neue",sans-serif;
 	width: 30%;
+    &:focus {
+        box-shadow: $title-color 0px 0px 0px 4px;
+    }
 }
 .search-input-phone{
   display: none;

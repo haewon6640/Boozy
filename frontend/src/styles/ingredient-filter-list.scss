@@ -1,45 +1,41 @@
-.ingredient-list {
-    width: 200px;
-    height: auto;
-    padding: 32px;
-    border-radius: 4px;
-    border: 1px solid #DCD6CB;
-    background-color: #F7F7F7;
-    position: sticky;
-    top: 0;
+.ingredient-list-title {
     font-family: $reg-font;
-    color: rgba(12,11,8,.75);
-  }
-  .ingredient-list-title {
-    font-family: $reg-font;
+    font-weight: 700;
     padding: 8px;
-    border-bottom: 1px solid rgba(229,224,216,255);
-  }
-  .ingredients-list-subtitle {
+    border-bottom: 1px solid rgba(229, 224, 216, 255);
+}
+.ingredients-list-subtitle {
     .category-title {
-      padding-bottom: 4px;
+        padding-bottom: 4px;
     }
     font-family: $reg-font;
-    padding: 4px 8px;
+    padding: 10px 8px 4px 8px;
     cursor: pointer;
-    border-bottom: 1px solid rgba(229,224,216,255);
-  }
-  .subject-box{
-    display: flex;
-    flex-direction: column;
-  }
-  .mycheckbox {
-    font-size: 16px;
-    font-family: $reg-font;
+    border-bottom: 1px solid rgba(229, 224, 216, 255);
+}
+.subject-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 5px;
+}
+.open {
+    padding: 7px;
+    margin-bottom: 10px;
+}
+.mycheckbox {
+}
+.mycheckbox {
+    font-size: 12px;
+    font-weight: 700px;
     padding: 2px;
-  }
-  input[type=checkbox] {
-    accent-color: #4E4D49;
-  }
-  .subtitle-box {
+}
+input[type="checkbox"] {
+    accent-color: #4e4d49;
+}
+.subtitle-box {
     display: flex;
     justify-content: space-between;
-  }
-  .filter-ico {
-    color:  #C5C5C5;
-  }
+}
+.filter-ico {
+    color: #c5c5c5;
+}

@@ -14,7 +14,8 @@ export default class RecipeForm extends React.Component {
                 produce: [],
                 mixers: [],
                 garnish: []
-            }
+            }, 
+            description: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.addToCart = this.addToCart.bind(this);
@@ -45,6 +46,7 @@ export default class RecipeForm extends React.Component {
         e.preventDefault();
         console.log(this.state.ingredients)
         this.props.action(this.state)
+            .then(()=>this.props.history.push("/recipes"))
     }
 
     addToCart(ing) {
@@ -52,40 +54,51 @@ export default class RecipeForm extends React.Component {
     }
 
     render() {
+        const description_explanation = "Write a short description of your cocktail.";
+        const description_placeholder = 'The cosmopolitan cocktail, typically referred to as the "cosmo," gained popularity during the 1990s when it was frequently mentioned on the television show Sex and the City. The combination of vodka, orange liqueur, lime juice, and cranberry juice have made it a timeless classic.';
+        const instructions_explanation = "Give detailed step by step instructions to create your cocktail."
+        const instructions_placeholder = 'Combine vodka, lime juice, triple sec, and cranberry juice in a cocktail shaker. Add ice, cover and shake until chilled. Strain into a chilled cocktail glass.\nGarnish with a lime wedge.'
+        const additionalInfo_explanation = "Provide suggested alcohol brands, or ingredient replacements."
+        const additionalInfo_placeholder = "Use high quality vodka such as Hangar 1, Square One. \n Fresh lime juice is best. Don't throw that peel away! You can use it as a garnish." 
+
         this.alcoholArray = this.combineCategories("Alcohol")
         this.produceArray = this.combineCategories("Produce")
         this.mixersArray = this.combineCategories("Mixers")
         this.garnishArray = this.combineCategories("Garnish")
         return (
             <div className="webpage outer-create-recipe-form">
-                {this.props.formType}
                 <div className="inner-create-recipe-form">
-               
-                <form onSubmit={this.handleSubmit} className="create-recipe-form">
-                    <input onChange={this.update("name")} type="text" value={this.state.name} placeholder="Recipe Name" />
-        
-                    <div></div>
-                    <div className="ingredient-list">
-                        <div className="ingredient-list-title">Ingredients</div>
+                    <aside className="ingredient-list">
+                        <div className="ingredient-list-title">Add Ingredients</div>
                         <FilterItem addToCart={this.addToCart} subtitle="Alcohol" array={this.alcoholArray}/>
                         <FilterItem addToCart={this.addToCart} subtitle="Produce" array={this.produceArray}/>
                         <FilterItem addToCart={this.addToCart} subtitle="Mixers" array={this.mixersArray}/>
                         <FilterItem addToCart={this.addToCart} subtitle="Garnish" array={this.garnishArray}/>
                         {/* {"Ingredient List -   "}
                         {this.state.ingredients.map(ingredient=><span >{ingredient.name}  </span>)} */}
+                    </aside>
+                    <div className="recipe-form-container">
+                        <form onSubmit={this.handleSubmit} className="create-recipe-form">
+                            <h1 className="form-title">{this.props.formType}</h1>
+                            <label className="main-label">Recipe Name</label>
+                                <input onChange={this.update("name")} type="text" value={this.state.name} placeholder="Cosmopolitan" />
+                            <label className="main-label" htmlFor="description">Description</label>
+                            <p className="description-label">{description_explanation}</p>
+                            <textarea name="description" type="text" onChange={this.update("description")} value={this.state.description} 
+                                placeholder={description_placeholder}/>
+
+                            <label className="main-label" htmlFor="instruction">Instructions</label>
+                            <p className="description-label">{instructions_explanation}</p>
+                            <textarea name="instruction" type="text" onChange={this.update("instructions")} value={this.state.instructions} 
+                                placeholder={instructions_placeholder}/>
+
+                            <label className="main-label" htmlFor="additional-info">Additional Info</label>
+                            <p className="description-label">{additionalInfo_explanation}</p>
+                            <textarea name="additional-info" type="text" onChange={this.update("additionalInfo")} value={this.state.additionalInfo} 
+                                placeholder={additionalInfo_placeholder}/>
+                            <button className="btn">Submit</button>
+                        </form>
                     </div>
-                    <div></div>
-                    {/* <div>
-                        {Object.values(this.props.ingredients).map(ing=>(
-                            <span><button className="btn" onClick={this.addToCart(ing)}>Add {ing.name}</button></span>
-                        ))}
-                    </div> */}
-                    <div className="recipe-input-forms">
-                        <textarea onChange={this.update("instructions")} value={this.state.instructions} placeholder="Instructions"/>
-                        <textarea onChange={this.update("additionalInfo")} value={this.state.additionalInfo} placeholder="Additional Info"/>
-                    </div>
-                    <button className="btn">Submit</button>
-                </form>
                 </div>
             </div>
         )
