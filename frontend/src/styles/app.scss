@@ -8,7 +8,7 @@
 // constants go here
 $dark-grey: #484748;
 $title-color: #eaadad;
-$fancy-font: 'Merriweather';
+$fancy-font: 'Neonderthaw';
 $title-font: 'Neonderthaw';
 $recipe-font: "Special Elite";
 $reg-font: 'Raleway';
@@ -18,7 +18,7 @@ $light-button-color: #f1eff2;
 $light-green: #acb2a9;
 $bottle-green: #092E20;
 $cream: #f9f7ea;
-
+$serif-font: 'Merriweather';
 
 // some all around classes
 .webpage {
@@ -68,6 +68,7 @@ $cream: #f9f7ea;
 @import './recipe-form.scss';
 @import './ingredient-filter-list.scss';
 @import './auto-complete.scss';
+
 
 // @media phone flip goes here
 @media screen and (max-width: 420px) {
