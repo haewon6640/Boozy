@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Recipe = require('./Recipe');
 const Schema = mongoose.Schema;
 
 const ReviewSchema = new Schema({
@@ -30,5 +31,14 @@ const ReviewSchema = new Schema({
 }, {
     timestamps: true
 })
+
+ReviewSchema.pre('remove',function(next) {
+    Recipe.update(
+        {reviews: this._id},
+        {$pull: { reviews: this._id}},
+        {multi:true}
+    ).exec();
+    next();
+});
 
 module.exports = Review = mongoose.model('Review', ReviewSchema);

@@ -53,3 +53,18 @@
 .review-item-body{
     font-size: 13px;
 }
+
+.modify-review {
+    font-size: 11px;
+    li {
+        display:inline;
+        color: $dark-grey;
+        cursor:pointer;
+        &:hover {
+            color: $title-color;
+        }
+    }
+    .edit-review {
+        margin-right: 20px;
+    }
+}

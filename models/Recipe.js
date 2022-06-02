@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const { schema } = require('./Review');
+const Review = require('./Review');
+const User = require('./User');
 const Schema = mongoose.Schema;
-
 const RecipeSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'User'
     },
     imgUrl: {
       type: String,
@@ -20,8 +20,8 @@ const RecipeSchema = new Schema({
         type: String,
         required: true
     },
-    ingredients: [{type: Schema.Types.ObjectId, ref: 'ingredients'}],
-    reviews: [{type: Schema.Types.ObjectId, ref: 'reviews'}],
+    ingredients: [{type: Schema.Types.ObjectId, ref: 'Ingredient'}],
+    reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
     instructions: {
         type: String,
         required: true
@@ -35,4 +35,8 @@ const RecipeSchema = new Schema({
     timestamps: true
 });
 
+RecipeSchema.pre('remove', function(next) {
+    Review.remove({reviewer: this._id }).exec();
+    next();
+})
 module.exports = Recipe = mongoose.model('Recipe', RecipeSchema);

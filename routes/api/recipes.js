@@ -9,7 +9,6 @@ const Ingredient = require("../../models/Ingredient");
 const Recipe = require("../../models/Recipe");
 const validateRecipeInput = require("../../validation/recipe");
 const Review = require('../../models/Review');
-const recipe = require("../../validation/recipe");
 
 router.get("/", (req, res) => {
     Recipe.find({ "name": {"$regex": req.query.search, "$options": "i"}})
@@ -36,7 +35,6 @@ router.get('/user/:user_id', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    console.log(req.params);
     Recipe.findById(req.params.id)
         .then(async recipe => {
             let recipeState = {recipe: {[recipe.id] : recipe}};
@@ -68,6 +66,7 @@ router.post('/',
       if (!isValid) {
         return res.status(400).json(errors);
       }
+
       const newRecipe = new Recipe({
           name: req.body.name,
           user: req.user.id,
@@ -110,4 +109,19 @@ router.post('/:id/review',
         }
     });
 
+router.post('/:id/update',
+    passport.authenticate('jwt', { session: false }),
+    async (req,res) => {
+        Recipe.findByIdAndUpdate(req.params.id, req.body.recipe, {new:true})
+            .then(recipe=> res.json(recipe))
+            .catch(err=>res.status(400).send({message: err.message}))
+    })
+
+router.post('/:id/delete',
+    passport.authenticate('jwt', { session: false }),
+    async (req,res) => {
+        Review.findByIdAndDelete(req.params.id, {new:true})
+            .then(review => res.json(review))
+            .catch(err=>res.status(400).send({message: err.message})) 
+    });
 module.exports = router;
