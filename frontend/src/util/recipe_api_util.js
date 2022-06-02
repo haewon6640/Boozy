@@ -15,3 +15,11 @@ export const getUserRecipes = (id) => {
 export const createRecipe = (data) => {
     return axios.post("/api/recipes/", data);
 };
+
+export const updateRecipe =(recipe) => {
+    return axios.post(`/api/recipes/${recipe._id}/update`);
+}
+
+export const deleteRecipe = (recipeId) => {
+    return axios.post(`/api/recipes/${recipeId}/delete`);
+}

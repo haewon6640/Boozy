@@ -27,7 +27,13 @@ router.get("/", (req, res) => {
 
 router.get('/user/:user_id', (req, res) => {
     Recipe.find({user: req.params.user_id})
-        .then(recipes => res.json(recipes))
+        .then(recipes => {
+            let response = {};
+            for (var i = 0; i < recipes.length; i++) {
+                response[recipes[i].id] = recipes[i]
+            }
+            return res.json(response);
+        })
         .catch(err =>
             res.status(404).json({ norecipesfound: 'No recipes found from that user' }
         )
@@ -76,7 +82,7 @@ router.post('/',
           additionalInfo: req.body.additionalInfo
       })
       newRecipe.save()
-        .then(recipe => res.json(recipe))
+        .then(recipe => res.json({[recipe.id]:recipe}))
         .catch(err=> res.json(err));
     }
   );
@@ -113,7 +119,7 @@ router.post('/:id/update',
     passport.authenticate('jwt', { session: false }),
     async (req,res) => {
         Recipe.findByIdAndUpdate(req.params.id, req.body.recipe, {new:true})
-            .then(recipe=> res.json(recipe))
+            .then(recipe=> res.json({[recipe.id]: recipe}))
             .catch(err=>res.status(400).send({message: err.message}))
     })
 
@@ -121,7 +127,7 @@ router.post('/:id/delete',
     passport.authenticate('jwt', { session: false }),
     async (req,res) => {
         Review.findByIdAndDelete(req.params.id, {new:true})
-            .then(review => res.json(review))
+            .then(review => res.json({[recipe.id]: recipe}))
             .catch(err=>res.status(400).send({message: err.message})) 
     });
 module.exports = router;

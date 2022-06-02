@@ -3,6 +3,7 @@ import {
     RECEIVE_RECIPE,
     RECEIVE_USER_RECIPES,
     RECEIVE_NEW_RECIPE,
+    REMOVE_RECIPE
 } from "../actions/recipe_actions";
 import { REMOVE_REVIEW } from "../actions/review_actions";
 const RecipesReducer = (
@@ -24,6 +25,9 @@ const RecipesReducer = (
             return newState;
         case RECEIVE_NEW_RECIPE:
             newState.new = action.recipe.data;
+            return newState;
+        case REMOVE_RECIPE:
+            delete newState.all[action.recipeId]
             return newState;
         default:
             return state;
