@@ -4,7 +4,7 @@ export default class CanMaybeMake extends Component {
   constructor(props){
     super(props)
     this.state={
-      limit:5
+      limit:10
     }
     this.toggleList = this.toggleList.bind(this)
   }
@@ -36,10 +36,10 @@ export default class CanMaybeMake extends Component {
   }
 
   toggleList(){
-    if (this.state.limit === 5) {
+    if (this.state.limit === 10) {
       this.setState({limit:20})
     } else {
-      this.setState({limit:5})
+      this.setState({limit:10})
     }
   }
 
@@ -47,15 +47,15 @@ export default class CanMaybeMake extends Component {
     let canMaybeMake = this.findDrinks()
     return (
       <div className="make-box"> 
-        <h2>You might try these, bro</h2>
+        <h2>Missing a few ingredients..</h2>
         <ul>
           {canMaybeMake.map((dataObj, i)=> ( i < this.state.limit && <li
-            onClick={()=>this.props.handleMissing(dataObj.missing_ing)} 
+            onClick={()=>this.props.handleHover(dataObj.recipe, dataObj.missing_ing, dataObj.recipe.ingredients)} 
             key={i + "canMaybe"} 
           >{dataObj.recipe.name}</li>))}
         </ul>
-        {canMaybeMake.length > 5 && this.state.limit === 5 && <button onClick={this.toggleList}>(Show More)</button>}
-        {canMaybeMake.length > 5 && this.state.limit === 20 && <button onClick={this.toggleList}>(Show Less)</button>}
+        {canMaybeMake.length > 10 && this.state.limit === 10 && <button className="btn" onClick={this.toggleList}>(Show More)</button>}
+        {canMaybeMake.length > 10 && this.state.limit === 20 && <button className="btn" onClick={this.toggleList}>(Show Less)</button>}
       </div>
     )
   }

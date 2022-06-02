@@ -1,0 +1,13 @@
+.barcart-recipe-show {
+    margin-left: 10px;
+}
+.missing-title {
+    color: $title-color;
+    font-family: $readible-fancy-font;
+}
+.missing-ingredient {
+    color: red;
+    .orange, p {
+        color: red
+    }
+}

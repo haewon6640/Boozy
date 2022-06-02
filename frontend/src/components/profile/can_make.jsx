@@ -51,7 +51,7 @@ export default class CanMake extends Component {
     let canMake = this.findDrinks()
     return (
       <div className="make-box">
-        <h2>You can def Makes these, bro</h2>
+        <h2>Cocktails You Can Make</h2>
         <ul>
           {canMake.map((recipe, i)=> ( i < this.state.limit && <li key={"canMake" + i}>{recipe.name}</li>))}
         </ul>
