@@ -1,10 +1,23 @@
 import React, { Component } from 'react'
 
 export default class CanMake extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      limit:5
+    }
+    this.toggleList = this.toggleList.bind(this)
+  }
+  toggleList(){
+    if (this.state.limit === 5) {
+      this.setState({limit:20})
+    } else {
+      this.setState({limit:5})
+    }
+  }
   findDrinks(){
     let shelf = this.props.shelf  //list of ids
     let recipes = Object.values(this.props.recipes) //has ids as ingredients in array
-    // console.log(shelf)
     return recipes.filter(recipe=>recipe.ingredients.every(ingredient=>shelf.includes(ingredient)))
     // let filtered=[];
     // recipes.forEach((recipe)=>{
@@ -36,12 +49,16 @@ export default class CanMake extends Component {
   }
   render() {
     let canMake = this.findDrinks()
-    console.log(canMake)
     return (
-      <div>
-        You can def Makes these, bro
-        {canMake.map((recipe)=> (<div>{recipe.name}</div>))}
+      <div className="make-box">
+        <h2>You can def Makes these, bro</h2>
+        <ul>
+          {canMake.map((recipe, i)=> ( i < this.state.limit && <li key={"canMake" + i}>{recipe.name}</li>))}
+        </ul>
+        {canMake.length > 5 && this.state.limit === 5 && <button onClick={this.toggleList}>(Show More)</button>}
+        {canMake.length > 5 && this.state.limit === 20 && <button onClick={this.toggleList}>(Show Less)</button>}
       </div>
+      
     )
   }
 }

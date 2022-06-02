@@ -48,20 +48,23 @@ class Autocomplete extends React.Component {
   }
   
   render(){
-    let matches = <ul className="dropdown-ing">
+    let matches = <div>
       {this.props.dictionary.filter((ing)=> ing.name.slice(0, this.state.inputVal.length) === this.state.inputVal).map((ing)=> {
         return <li 
+        className="autocomplete-res"
         key={ing.name}
         onClick={()=>this.handleClick(ing.name)}
         >{ing.name}</li>
       })}
-      </ul>
-    return (
-      <div className="autocomplete">
+      </div>
+      return (
+        <div className="autocomplete">
         <form  onSubmit={this.handleSubmit}>
           <input value={this.state.inputVal} type="text" onChange={this.updateInput}/>
         </form>
+        <ul className="dropdown-ing">
         { (this.state.inputVal !== "")? matches : null}
+        </ul>
       </div>
     )
   }

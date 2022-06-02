@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const ReviewSchema = new Schema({
     reviewer: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'User'
     }, 
     recipe: {
         type: Schema.Types.ObjectId,
-        ref: 'recipes'
+        ref: 'Recipe'
     },
     rating: [
                 {boozy: {type: Number, default:0}},

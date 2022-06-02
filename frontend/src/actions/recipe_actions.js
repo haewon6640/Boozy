@@ -44,4 +44,4 @@ export const fetchUserRecipes = (id) => (dispatch) =>
 export const createRecipe = (data) => (dispatch) =>
     RecipeApiUtil.createRecipe(data)
         .then((recipe) => dispatch(receiveNewRecipe(recipe)))
-        .catch((err) => console.log(err));
+        .catch((err) => {throw "err"});

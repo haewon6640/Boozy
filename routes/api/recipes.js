@@ -39,12 +39,9 @@ router.get('/:id', (req, res) => {
     Recipe.findById(req.params.id)
         .then(async recipe => {
             let recipeState = {recipe: {[recipe.id] : recipe}};
-            // console.log(res);
             let ingredients = await Ingredient.find({'_id': {$in: recipe.ingredients}});
-            let reviews = await Review.find({'_id': {$in: recipe.reviews}});
-            console.log(ingredients);
-            // console.log(recipe.reviews);
-            console.log(reviews);
+            let reviews = await Review.find({'_id': {$in: recipe.reviews}})
+                .populate('reviewer');
             let ingredientState = {};
             for (var i = 0; i < ingredients.length; i++) {
                 ingredientState[ingredients[i].id] = ingredients[i]
@@ -73,7 +70,8 @@ router.post('/',
       const newRecipe = new Recipe({
           name: req.body.name,
           user: req.user.id,
-          ingredients: req.body.ingredients, 
+          ingredients: req.body.ingredients,
+          description: req.body.description, 
           instructions: req.body.instructions,
           additionalInfo: req.body.additionalInfo
       })

@@ -3,12 +3,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Neonderthaw&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Neonderthaw&family=Courgette&display=swap');
 
 // constants go here
 $dark-grey: #484748;
+$light-grey: rgb(214, 217, 220);
 $title-color: #eaadad;
+$light-main-color: #f8e1e1;
+$less-light-main-color: #fddede;
 $fancy-font: 'Neonderthaw';
+$readible-fancy-font: 'Courgette';
 $title-font: 'Neonderthaw';
 $recipe-font: "Special Elite";
 $reg-font: 'Raleway';
@@ -17,8 +21,9 @@ $phone-width: 400px;
 $light-button-color: #f1eff2;
 $light-green: #acb2a9;
 $bottle-green: #092E20;
+$light-black: #252525;
 $cream: #f9f7ea;
-
+$serif-font: 'Merriweather';
 
 // some all around classes
 .webpage {
@@ -47,14 +52,32 @@ $cream: #f9f7ea;
   border: none!important;
   background-color: $light-button-color;
   color: $dark-grey;
+  &:hover {
+    background-color: $less-light-main-color;
+  }
+  &:focus {
+    background-color: $title-color;
+  }
 }
-
 .ico {
   font-size: 24px;
   height: 20px;
   width: 20px;
   margin: 4px;
 }
+
+input, textarea {
+    border-radius: 3px;
+    border: 1px solid $light-grey;
+    outline:none;
+    font-size: 14px;
+    padding: 10px;
+    &:focus {
+        outline:none;
+        box-shadow: $light-main-color 0px 0px 0px 4px
+    }
+}
+
 
 // imports go here
 @import './navbar.scss';
@@ -67,7 +90,7 @@ $cream: #f9f7ea;
 @import './auto-complete.scss';
 @import './recipe-form.scss';
 @import './ingredient-filter-list.scss';
-
+@import './review-index.scss';
 // @media phone flip goes here
 @media screen and (max-width: 420px) {
   .webpage {
