@@ -12,7 +12,6 @@ class BoozyMap extends React.Component {
             coordsResult: [],
             trigger: 0
         }
-        this.setState = this.setState.bind(this)
     }
 
     componentDidMount() {
