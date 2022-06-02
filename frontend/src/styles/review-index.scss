@@ -1,0 +1,55 @@
+.review-index-container {
+    padding: 20px 8%;
+    .review-index-title {
+        font-family: $readible-fancy-font;
+        color: $title-color;
+        font-weight: 700;
+        font-size: 24px;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+    }
+}
+.review-index-item {
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 13px;
+    border-top: 1px solid $title-color;
+    border-bottom: 1px solid $title-color;
+    padding: 15px 5px 15px 5px;
+}
+
+.review-item-top-row {
+    display:flex;
+    justify-content: space-between;
+    .overall-rating {
+        > * {
+            width: 20px;
+        }
+    }
+    .flavor_profile_item {
+        margin-left: 5px;
+        strong {
+            font-weight: 600;
+        }
+    }
+}
+
+.review-item-bottom-row {
+    display:flex;
+    justify-content: space-between;
+    .review-item-title {
+        font-weight: 700;
+    }
+    a {
+        color: black;
+        // text-decoration: none;
+        font-size: 13px;
+        &:hover {
+            color: $title-color;
+        }
+    }
+}
+.review-item-body{
+    font-size: 13px;
+}

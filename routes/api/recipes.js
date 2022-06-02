@@ -40,7 +40,8 @@ router.get('/:id', (req, res) => {
         .then(async recipe => {
             let recipeState = {recipe: {[recipe.id] : recipe}};
             let ingredients = await Ingredient.find({'_id': {$in: recipe.ingredients}});
-            let reviews = await Review.find({'_id': {$in: recipe.reviews}});
+            let reviews = await Review.find({'_id': {$in: recipe.reviews}})
+                .populate('reviewer');
             let ingredientState = {};
             for (var i = 0; i < ingredients.length; i++) {
                 ingredientState[ingredients[i].id] = ingredients[i]
