@@ -1,6 +1,9 @@
 import React from 'react'
 import { FaStar } from "react-icons/fa";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {updateReview, deleteReview} from "../../actions/review_actions";
+
 function Star({ filled, onClick }) {
   return (
     <FaStar 
@@ -9,7 +12,8 @@ function Star({ filled, onClick }) {
   );
 }
 
-const ReviewIndexItem = ({review}) => {
+const ReviewIndexItem = (props) => {
+    const {review,currUserId} = props
     let titleExists = review.title.length !== 0;
     let bodyExists = review.body.length !== 0;
     if (!titleExists || !bodyExists) {
@@ -51,9 +55,27 @@ const ReviewIndexItem = ({review}) => {
             <div className="review-item-body">
                 {review.body}
             </div>
+            {review.reviewer === currUserId &&
+                <ul className="modify-review">
+                    <li className='edit-review'>Edit</li>
+                    <li onClick={()=>props.deleteReview(review._id)} className='delete-review'>Delete</li>
+                </ul>
+            }
         </li>
     )
 
 }
 
-export default ReviewIndexItem;
+const mSTP = state => {
+    if (!state.session.isAuthenticated) {
+        return {currUserId: ""}
+    } else {
+        return {currUserId: state.session.user.id}
+    }
+}
+
+const mDTP = dispatch => ({
+    updateReview: (review)=> dispatch(updateReview(review)),
+    deleteReview: (reviewId) => dispatch(deleteReview(reviewId))
+})
+export default connect(mSTP,mDTP)(ReviewIndexItem);

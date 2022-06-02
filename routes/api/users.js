@@ -51,6 +51,18 @@ router.post("/shelf",
         .then(user => res.json({[user.id]:user}))
     }
 );
+router.post("/shelf/delete",
+    passport.authenticate('jwt', {session:false}),
+    (req,res) => {
+        User.findByIdAndUpdate(
+            {_id: req.user.id},
+            { $pull: 
+                {shelf: req.body.shelfItem}
+            },
+            {new:true}
+        )
+        .then(user => res.json({[user.id]:user}))
+    })
 
 
 router.post("/register", (req, res) => {
