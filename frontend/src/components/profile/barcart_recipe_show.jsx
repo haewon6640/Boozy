@@ -1,6 +1,7 @@
 import React from "react";
 import { GiOrangeSlice, GiTrophiesShelf } from 'react-icons/gi';
 import Boozymap from '../map/map'
+import BoozyMap2 from '../map/map2'
 import ReviewGraphic from "../reviews/review_graphic";
 
 class BarCartRecipeShow extends React.Component {
@@ -78,7 +79,7 @@ class BarCartRecipeShow extends React.Component {
                     </div>
 				</div>
 			</div>
-            {this.props.missing.length > 0 && <Boozymap query={this.state.selectedMissing}/>}
+            {this.props.missing.length > 0 && <BoozyMap2 query={this.state.selectedMissing}/>}
 		</div>
 	)}
 }
