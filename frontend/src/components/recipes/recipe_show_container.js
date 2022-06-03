@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import { fetchRecipe } from "../../actions/recipe_actions";
+import { createReview } from "../../actions/review_actions";
 import RecipeShow from "./recipe_show";
 
 const mSTP = (state, ownProps) => {
@@ -15,7 +16,7 @@ const mSTP = (state, ownProps) => {
 const mDTP = (dispatch, ownProps) => {
     return {
         fetchRecipe: () => dispatch(fetchRecipe(ownProps.match.params.id)),
-        fetch
+        createReview: (review) => dispatch(createReview(review))
     }
 }
 
