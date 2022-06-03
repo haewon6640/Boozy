@@ -22,3 +22,22 @@
   width: 100px;
   height: 100px;
 }
+.ratings-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ratings-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.category{
+  width: 15%;
+}
+.category-slider {
+  width: 70%
+}

@@ -11,15 +11,13 @@ const ReviewSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Recipe'
     },
-    rating: [
-                {boozy: {type: Number, default:0}},
-                {sweet: {type: Number, default:0}},
-                {sour: {type: Number, default:0}},
-                {bitter: {type: Number, default:0}},
-                {salty: {type: Number, default:0}},
-                {umami: {type: Number, default:0}},
-                {rating: {type: Number, default:0}}
-                    ],
+    rating:   {boozy: {type: Number, default:0}, 
+              sweet: {type: Number, default:0},
+              sour: {type: Number, default:0},
+              bitter: {type: Number, default:0},
+              salty: {type: Number, default:0},
+              umami: {type: Number, default:0},
+              rating: {type: Number, default:0}},
     title: {
         type: String,
         default: ""
