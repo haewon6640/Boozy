@@ -82,8 +82,10 @@ router.get('/random',async (req,res) => {
 
 router.get('/:id', (req, res) => {
     Recipe.findById(req.params.id)
+        .populate('reviews')
         .then(async recipe => {
-            let recipeState = {recipe: {[recipe.id] : recipe}};
+            let rec = Object.assign({},recipe._doc,{avg_rating: getAverageRating(recipe)});
+            let recipeState = {recipe: {[recipe.id] : rec}};
             let ingredients = await Ingredient.find({'_id': {$in: recipe.ingredients}});
             let reviews = await Review.find({'_id': {$in: recipe.reviews}})
                 .populate('reviewer');
