@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import BarCart from './bar_cart';
 import jwt_decode from 'jwt-decode';
 import { fetchIngredients } from '../../actions/ingredient_actions';
-import { addShelf, fetchUser } from '../../actions/user_actions';
+import { addShelf, deleteFromShelf, fetchUser } from '../../actions/user_actions';
 import { fetchRecipes } from '../../actions/recipe_actions';
 const mapStateToProps = (state) => {
   return {
@@ -20,7 +20,8 @@ const mapDispatchToProps = dispatch => {
     fetchIngredients: () => dispatch(fetchIngredients()),
     fetchUser: () => dispatch(fetchUser(decodedUser.id)),
     addIngredients: (ingredients) =>dispatch(addShelf(ingredients)),
-    fetchRecipes: ()=>dispatch(fetchRecipes())
+    fetchRecipes: ()=>dispatch(fetchRecipes()),
+    deleteFromShelf: (ingredientId, currUserId)=>dispatch(deleteFromShelf(ingredientId, decodedUser.id)) 
   };
 };
 

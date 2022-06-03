@@ -6,6 +6,7 @@ import {AiOutlineCloseCircle} from 'react-icons/ai';
 import { IoIosArrowBack, IoIosArrowDown } from 'react-icons/io';
 import BarCartRecipeShow from "./barcart_recipe_show";
 import FilterChoice from "./filter_choice";
+import { fetchUser } from "../../actions/user_actions";
 class BarCart extends React.Component {
     constructor(props) {
         super(props);
@@ -42,7 +43,6 @@ class BarCart extends React.Component {
     }
 
 	handleSelection(value){
-		console.log("I've changed")
 		this.setState({filter_choice:value},()=> console.log(this.state))
 	}
 
@@ -61,6 +61,7 @@ class BarCart extends React.Component {
         if (Object.values(this.props.ingredients).length === 0) {
             return null;
         }
+		console.log(this.props.user)
         let barcart = "";
         const dictionary = Object.values(this.props.ingredients);
         // if (!this.state.barcart_open) {
@@ -88,6 +89,10 @@ class BarCart extends React.Component {
 								this.props.user.shelf.map((item) => (
 									<li className="bar-items" key={item}>
 										{this.props.ingredients[item].name}
+										<AiOutlineCloseCircle 
+											onClick={()=>this.props.deleteFromShelf(item, this.props.user.id).then(()=>this.props.fetchUser())}
+											className="remove"
+										/>
 									</li>
 								))}
 						</ul>
