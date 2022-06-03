@@ -20,7 +20,7 @@ class BarCartRecipeShow extends React.Component {
         if (Object.values(recipe).length === 0) {
             return null;
         }
-        // console.log(recipe);
+        console.log(recipe.avg_rating);
 		return (
 		<div className="barcart-recipe-show">
 			<div className="two-col">
@@ -53,7 +53,7 @@ class BarCartRecipeShow extends React.Component {
                         </ul>
 					</div>
 					<div className="review-graphic">
-						<ReviewGraphic/>
+						<ReviewGraphic flavor_profile={recipe.avg_rating}/>
 					</div>
 
 					</div>
