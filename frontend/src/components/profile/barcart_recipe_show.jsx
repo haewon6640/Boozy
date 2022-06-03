@@ -53,7 +53,7 @@ class BarCartRecipeShow extends React.Component {
                                     <p>{ingredient.name}</p>
                                 </li>
                             ))}
-                            {this.props.missing.length > 0 && <div>setMissing
+                            {this.props.missing.length > 0 && <div>
                                 <p className="missing-title">--Missing Ingredients--</p>
                                 {this.props.missing.map((ingredient)=>(
                                     <li onClick={this.setMissing(ingredient.name)} className="missing-ingredient" key={ingredient._id}>
