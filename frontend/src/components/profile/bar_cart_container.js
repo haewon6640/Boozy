@@ -10,7 +10,6 @@ const mapStateToProps = (state) => {
     ingredients: state.entities.ingredients,
     user: state.entities.users[state.session.user.id],
     recipes: state.entities.recipes
-    // user: state.entities.users[]
   };
 };
 

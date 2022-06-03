@@ -35,10 +35,6 @@ export default class CanMaybeMake extends Component {
     return a.missing_ing.length > b.missing_ing.length ? 1 : -1
   }
 
-  test(thing){
-    console.log(thing)
-  }
-
   toggleList(){
     if (this.state.limit === 10) {
       this.setState({limit:20})

@@ -13,10 +13,10 @@ class BarCartRecipeShow extends React.Component {
         }
     }
     render() {
-		let ingredients_we_have = this.props.ingredients.filter((el)=>(!this.props.missing.includes(el)))
+      let ingredients_we_have;
+		  if(this.props.missing) ingredients_we_have = this.props.ingredients.filter((el)=>(!this.props.missing.includes(el)))
 
         const recipe = this.props.recipe;
-        // console.log(recipe);
         if (Object.values(recipe).length === 0) {
             return null;
         }
@@ -41,13 +41,15 @@ class BarCartRecipeShow extends React.Component {
                                     <p>{ingredient.name}</p>
                                 </li>
                             ))}
-                            <p className="missing-title">--Missing Ingredients--</p>
-                            {this.props.missing.map((ingredient)=>(
-                                <li className="missing-ingredient" key={ingredient._id}>
-                                    <GiOrangeSlice className="orange"/> 
-                                    <p>{ingredient.name}</p>
-                                </li>
-                            ))}
+                            {this.props.missing.length > 0 && <div>
+                                <p className="missing-title">--Missing Ingredients--</p>
+                                {this.props.missing.map((ingredient)=>(
+                                    <li className="missing-ingredient" key={ingredient._id}>
+                                        <GiOrangeSlice className="orange"/> 
+                                        <p>{ingredient.name}</p>
+                                    </li>
+                                ))}
+                            </div>}
                         </ul>
 					</div>
 					<div className="review-graphic">
@@ -66,7 +68,7 @@ class BarCartRecipeShow extends React.Component {
                     </div>
 				</div>
 			</div>
-					<Boozymap/>
+            {this.props.missing.length > 0 && <Boozymap/>}
 		</div>
 	)}
 }
