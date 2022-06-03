@@ -1,6 +1,6 @@
 .asym {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 3fr;
     // height: 1000px;
 }
 .btn-barcart {
@@ -79,7 +79,8 @@
         margin-bottom: 5px;
         border-bottom: 1px solid $warm-pink;
     }
-    > ul li {
+    ul li {
+      padding-left: 4px;
         font-family: $reg-font;
         cursor: pointer;
         &:hover {
@@ -116,4 +117,18 @@
     // font-size: 16px;
     margin-bottom: 5px;
     align-self: center;
+}
+.remove {
+  display: none;
+}
+.bar-items {
+  display: flex;
+  &:hover {
+    .remove {
+      display: block;
+      margin: 4px;
+      color: $dark-coral;
+    }
+    
+  }
 }

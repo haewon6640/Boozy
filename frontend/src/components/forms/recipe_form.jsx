@@ -15,10 +15,38 @@ export default class RecipeForm extends React.Component {
                 mixers: [],
                 garnish: []
             }, 
-            description: ""
+            description: "",
+            imageFile: "",
+            imgUrl: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.addToCart = this.addToCart.bind(this);
+        this.handleFile = this.handleFile.bind(this);
+        this.handleFormData = this.handleFormData.bind(this);
+    }
+
+    handleFile(e){
+        const file = e.target.files[0];
+        const fileReader = new FileReader();
+        fileReader.onloadend = function () {
+            this.setState({imageFile: file, imgUrl: fileReader.result})
+        }.bind(this)
+        if (file){
+            fileReader.readAsDataURL(file);
+        }
+    }
+
+    handleFormData(state){
+        let formData = new FormData();
+        console.log(state)
+        formData.append("recipe[name]", state.name)
+        formData.append("recipe[ingredients]", JSON.stringify(state.ingredients))
+        formData.append("recipe[instructions]", state.instructions)
+        formData.append("recipe[additionalInfo]", state.additionalInfo)
+        formData.append("recipe[description]", state.description)
+        formData.append("recipe[photo]", state.imageFile)
+        
+        return formData;
     }
 
     combineCategories(type){
@@ -45,7 +73,7 @@ export default class RecipeForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         console.log(this.state.ingredients)
-        this.props.action(this.state)
+        this.props.action(this.handleFormData(this.state))
             .then(()=>this.props.history.push("/recipes"))
     }
 
@@ -96,6 +124,7 @@ export default class RecipeForm extends React.Component {
                             <p className="description-label">{additionalInfo_explanation}</p>
                             <textarea name="additional-info" type="text" onChange={this.update("additionalInfo")} value={this.state.additionalInfo} 
                                 placeholder={additionalInfo_placeholder}/>
+                            <input type="file" name="photo" onChange={this.handleFile} />
                             <button className="btn">Submit</button>
                         </form>
                     </div>

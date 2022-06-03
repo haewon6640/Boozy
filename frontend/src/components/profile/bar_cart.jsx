@@ -12,7 +12,7 @@ class BarCart extends React.Component {
         super(props);
         this.state = {
             missing: [],
-            barcart_open: false,
+            barcart_open: true,
             filter_open: false,
             can_open: true,
             cant_open: true,
@@ -34,16 +34,23 @@ class BarCart extends React.Component {
             .then(()=>this.setState({user: this.props.user}));
     }
     getNeededIngredients(ingredientList) {
-        return Object.values(this.props.ingredients).filter(ing=>
-            ingredientList.includes(ing._id))
-    }
+		if (ingredientList) {
+			return Object.values(this.props.ingredients).filter(ing=>
+				ingredientList.includes(ing._id))
+		}
+
+		}
 
     handleHover(recipe, missing, ingredients) {
-        this.setState({ curr_recipe: recipe, missing: this.getNeededIngredients(missing, missing), curr_ingredients: this.getNeededIngredients(ingredients, missing) });
+        this.setState({ 
+			curr_recipe: recipe, 
+			missing: this.getNeededIngredients(missing, missing), 
+			curr_ingredients: this.getNeededIngredients(ingredients, missing) 
+		});
     }
 
 	handleSelection(value){
-		this.setState({filter_choice:value},()=> console.log(this.state))
+		this.setState({filter_choice:value})
 	}
 
     addItem(item) {
@@ -61,7 +68,6 @@ class BarCart extends React.Component {
         if (Object.values(this.props.ingredients).length === 0) {
             return null;
         }
-		console.log(this.props.user)
         let barcart = "";
         const dictionary = Object.values(this.props.ingredients);
         // if (!this.state.barcart_open) {
@@ -88,9 +94,10 @@ class BarCart extends React.Component {
 							{this.props.user.shelf !== [] &&
 								this.props.user.shelf.map((item) => (
 									<li className="bar-items" key={item}>
-										{this.props.ingredients[item].name}
+										{<h3>{this.props.ingredients[item].name}</h3>}
 										<AiOutlineCloseCircle 
-											onClick={()=>this.props.deleteFromShelf(item, this.props.user.id).then(()=>this.props.fetchUser())}
+											onClick={()=>this.props.deleteFromShelf(item, this.props.user.id)
+												.then(()=>this.props.fetchUser())}
 											className="remove"
 										/>
 									</li>
@@ -115,6 +122,7 @@ class BarCart extends React.Component {
 								filter_choice={this.state.filter_choice}
                                 recipes={this.props.recipes.all}
                                 shelf={this.props.user.shelf}
+                                handleHover={this.handleHover}
 								toggleBarCart={this.toggleBarCart}
 								open={this.state.can_open}
                             />
@@ -129,7 +137,7 @@ class BarCart extends React.Component {
                         </div>
                     </div>
                     <div className="bar-right">
-                        {console.log(this.state.curr_recipe)}
+                        {/* {console.log(this.state.curr_recipe)} */}
                         <BarCartRecipeShow 
 							recipe={this.state.curr_recipe}
                             ingredients={this.state.curr_ingredients}
