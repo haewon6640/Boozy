@@ -8,6 +8,9 @@ export const getRecipe = (id) => {
     return axios.get(`/api/recipes/${id}`);
 };
 
+export const getDrinkOfTheDay = () => {
+    return axios.get('/api/recipes/random')
+}
 export const getUserRecipes = (id) => {
     return axios.get(`/api/recipes/user/${id}`);
 };

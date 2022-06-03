@@ -44,6 +44,15 @@ router.get('/user/:user_id', (req, res) => {
     );
 });
 
+router.get('/random',async (req,res) => {
+    let today = new Date().getDay();
+    let count = await Recipe.count().exec();
+    var random = today % count;
+    console.log(random);
+    let recipe = await Recipe.findOne().skip(random).exec();
+    res.json({[recipe.id]: recipe});
+})
+
 router.get('/:id', (req, res) => {
     Recipe.findById(req.params.id)
         .then(async recipe => {
@@ -67,7 +76,6 @@ router.get('/:id', (req, res) => {
             res.status(404).json({err})
         );
 });
-
 // AWS
 
 const storage = multer.memoryStorage({
