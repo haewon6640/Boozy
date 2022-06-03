@@ -3,7 +3,7 @@ import { IoIosArrowBack, IoIosArrowDown } from 'react-icons/io';
 
 export default class FilterChoice extends Component {
   render() {
-    console.log(this.props.filter_open)
+    // console.log(this.props.filter_open)
     return (
       	<div className="radio-box">
           <div className="in-line" onClick={()=>this.props.toggleBarCart("filter_open")}>
