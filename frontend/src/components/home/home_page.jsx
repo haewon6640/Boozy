@@ -35,16 +35,16 @@ class HomePage extends React.Component {
                             <FeedIndex feed={this.state.feed} />
                         </div>
                         <div className='dotd'>
+                            <Link to={`/recipes/${this.state.dotd._id}`}>
+                                <img className="dotd-img"src={this.state.dotd.imgUrl}
+                                alt="drink of the day"/>
+                            </Link>
                             <div className="dotd-title">
                                 Drink Of the Day:
                                 <Link to={`/recipes/${this.state.dotd._id}`}>
                                 <span className="dotd-name">{this.state.dotd.name}</span>
                                 </Link>
                             </div>
-                            <Link to={`/recipes/${this.state.dotd._id}`}>
-                                <img className="dotd-img"src={this.state.dotd.imgUrl}
-                                alt="drink of the day"/>
-                            </Link>
                         </div>
                     </div>
                 </div>
