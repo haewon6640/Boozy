@@ -36,6 +36,7 @@ class RecipeShow extends React.Component {
 			// instructions:"take the vodkah \n drink it \n eat the orage  \n be done"
 		// }
         const recipe = this.state.recipe;
+        console.log("recipe show:",this.props)
 		return (
 		<div className="recipe-show">
 			<div className="two-col">
@@ -71,7 +72,7 @@ class RecipeShow extends React.Component {
                         </ol>
                     </div>
                     <div className="review-form-container">
-				              <ReviewForm props={this.props} />
+				              <ReviewForm createReview={this.props.createReview} props={this.props} />
 			              </div>
 				</div>
 			</div>
