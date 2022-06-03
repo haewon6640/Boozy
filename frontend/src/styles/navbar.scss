@@ -94,6 +94,9 @@ a:visited {
   width: auto;
   padding-left: 16px;
   position: relative;
+  &:hover {
+      text-decoration: underline;
+  }
 }
 .search-input-web, .search-input-phone {
 	height: 36px;
