@@ -60,7 +60,7 @@ class Autocomplete extends React.Component {
       return (
         <div className="autocomplete">
         <form  onSubmit={this.handleSubmit}>
-          <input value={this.state.inputVal} type="text" onChange={this.updateInput}/>
+          <input value={this.state.inputVal} type="text" onChange={this.updateInput} placeholder="search for ingredients"/>
         </form>
         <ul className="dropdown-ing">
         { (this.state.inputVal !== "")? matches : null}

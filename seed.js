@@ -491,15 +491,14 @@ const seedDB = async () => {
       reviewer: getRandomSubarray(userSeeds,1)[0],
       // assign that review to a random recipe object
       recipe: getRandomSubarray(recipeSeeds,1)[0],
-      rating: [
-                  {boozy: Math.floor(Math.random()*5)},
-                  {sweet: Math.floor(Math.random()*5)},
-                  {sour: Math.floor(Math.random()*5)},
-                  {bitter: Math.floor(Math.random()*5)},
-                  {salty: Math.floor(Math.random()*5)},
-                  {umami: Math.floor(Math.random()*5)},
-                  {rating: Math.floor(Math.random()*5)}
-        ],
+      rating: 
+                  {boozy: Math.floor(Math.random()*5),
+                  sweet: Math.floor(Math.random()*5),
+                  sour: Math.floor(Math.random()*5),
+                  bitter: Math.floor(Math.random()*5),
+                  salty: Math.floor(Math.random()*5),
+                  umami: Math.floor(Math.random()*5),
+                  rating: Math.floor(Math.random()*5)},
       title: faker.company.companyName(),
       body: faker.lorem.paragraph(),
     }

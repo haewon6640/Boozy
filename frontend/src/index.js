@@ -4,9 +4,11 @@ import Root from './components/root';
 import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 
+
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
 import {fetchRecipe} from "./actions/recipe_actions";
+import {deleteReview} from "./util/review_api_util";
 document.addEventListener('DOMContentLoaded', () => {
   let store;
 
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   ReactDOM.render(<Root store={store} />, root);
   window.fetchRecipe = fetchRecipe;
+  window.deleteReview = deleteReview;
   window.store = store;
   window.getState = store.getState;
   window.dispatch = store.dispatch;

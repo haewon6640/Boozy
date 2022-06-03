@@ -8,8 +8,10 @@
 // constants go here
 $dark-grey: #484748;
 $light-grey: rgb(214, 217, 220);
+$lighter-grey: rgb(236, 239, 243);
 $title-color: #eaadad;
 $light-main-color: #f8e1e1;
+$lighter-main-color: #f6e9e9;
 $less-light-main-color: #fddede;
 $fancy-font: 'Neonderthaw';
 $readible-fancy-font: 'Courgette';
@@ -23,7 +25,9 @@ $light-green: #acb2a9;
 $bottle-green: #092E20;
 $light-black: #252525;
 $cream: #f9f7ea;
+$warm-pink: #f99fc9ff;
 $serif-font: 'Merriweather';
+$dark-coral: #EF6079FF;
 
 // some all around classes
 .webpage {
@@ -31,6 +35,11 @@ $serif-font: 'Merriweather';
   margin: auto;
   padding-top: 16px;
   font-family: $reg-font;
+}
+
+.in-line{
+  display: flex;
+  flex-direction: row;
 }
 
 .two-col {
@@ -78,6 +87,11 @@ input, textarea {
     }
 }
 
+a {
+    text-decoration:none;
+    color:black;
+}
+
 
 // imports go here
 @import './navbar.scss';
@@ -91,6 +105,7 @@ input, textarea {
 @import './recipe-form.scss';
 @import './ingredient-filter-list.scss';
 @import './review-index.scss';
+@import './bar_cart_recipe_show.scss';
 @import './review-form.scss';
 // @media phone flip goes here
 @media screen and (max-width: 420px) {

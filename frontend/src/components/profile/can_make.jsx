@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { IoIosArrowBack, IoIosArrowDown } from 'react-icons/io';
 
 export default class CanMake extends Component {
   constructor(props){
@@ -8,6 +9,7 @@ export default class CanMake extends Component {
     }
     this.toggleList = this.toggleList.bind(this)
   }
+
   toggleList(){
     if (this.state.limit === 5) {
       this.setState({limit:20})
@@ -15,50 +17,35 @@ export default class CanMake extends Component {
       this.setState({limit:5})
     }
   }
+
   findDrinks(){
     let shelf = this.props.shelf  //list of ids
     let recipes = Object.values(this.props.recipes) //has ids as ingredients in array
-    return recipes.filter(recipe=>recipe.ingredients.every(ingredient=>shelf.includes(ingredient)))
-    // let filtered=[];
-    // recipes.forEach((recipe)=>{
-    //   let count = 0;
-    //   recipe.ingredients.forEach((ingId)=> {
-    //     // let thing = this.props.ingredients[ingId]
-    //     // if (this.props.ingredients[ingId]) console.log(thing.name)
-    //     shelf.forEach((ing2Id)=> {
-    //       if (ing2Id === ingId){
-    //         count ++
-    //         // console.log("its a match")
-    //         // if (this.props.ingredients[ingId]) console.log(this.props.ingredients[ingId].name)
-    //         // if (this.props.ingredients[ing2Id]) console.log(this.props.ingredients[ing2Id].name)
-    //         // console.log("its a match")
-    //       } else {
-    //         // console.log("its not a match")
-    //         // if (this.props.ingredients[ingId]) console.log(ingId === ing2Id)
-    //         // if (this.props.ingredients[ing2Id]) console.log(this.props.ingredients[ing2Id])
-    //       }
-    //     })
+    
+    let flavor_profile_test = {boozy:4, sweet: 2, sour:4,bitter: 1,salty:3,umami:5, rating:4}
 
-    //   })
-    //   if (count === recipe.ingredients.length) filtered.push(recipe)
-    //   console.log(recipe)
-    //   console.log(count)
-
-    // })
-    // return filtered
+    return recipes.filter(recipe=>(recipe.ingredients.every(ingredient=>shelf.includes(ingredient))) &&
+     (flavor_profile_test[this.props.filter_choice] >= 3 || this.props.filter_choice === "")
+     )
   }
+
   render() {
     let canMake = this.findDrinks()
     return (
       <div className="make-box">
-        <h2>You can def Makes these, bro</h2>
-        <ul>
-          {canMake.map((recipe, i)=> ( i < this.state.limit && <li key={"canMake" + i}>{recipe.name}</li>))}
-        </ul>
-        {canMake.length > 5 && this.state.limit === 5 && <button onClick={this.toggleList}>(Show More)</button>}
-        {canMake.length > 5 && this.state.limit === 20 && <button onClick={this.toggleList}>(Show Less)</button>}
+          <div className="in-line"onClick={()=>this.props.toggleBarCart("can_open")}>
+            <h2 >You can make</h2>
+            {!this.props.open && <IoIosArrowBack className='arrow'/>}
+            {this.props.open && <IoIosArrowDown className='arrow'/>}
+          </div>
+        {this.props.open && <div>
+            <ul>
+              {canMake.map((recipe, i)=> ( i < this.state.limit && <li key={"canMake" + i}>{recipe.name}</li>))}
+            </ul>
+            {canMake.length > 5 && this.state.limit === 5 && <button onClick={this.toggleList}>(Show More)</button>}
+            {canMake.length > 5 && this.state.limit === 20 && <button onClick={this.toggleList}>(Show Less)</button>}
+          </div>}
       </div>
-      
     )
   }
 }

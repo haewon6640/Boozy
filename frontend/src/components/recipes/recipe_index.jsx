@@ -15,10 +15,15 @@ class RecipeIndex extends React.Component {
     componentWillReceiveProps(newState) {
         this.setState({recipes: newState.recipes})
     }
+    componentDidUpdate(prevProps) {
+        if (prevProps.location.search != this.props.location.search) {
+            this.props.fetchRecipes();
+        }
+    }
 
     render() {
         if (this.state.recipes.length === 0) {
-            return (<div>No recipes</div>)
+            return null;
         } else {
             return (
             <div className="webpage">
