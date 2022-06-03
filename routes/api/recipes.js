@@ -10,6 +10,9 @@ const Recipe = require("../../models/Recipe");
 const validateRecipeInput = require("../../validation/recipe");
 const Review = require('../../models/Review');
 const recipe = require("../../validation/recipe");
+const multer = require('multer');  // multer used to handle form data
+const Aws = require('aws-sdk');  // aws-sdk lib used to upload images to s3 bucket
+require("dotenv/config");
 
 router.get("/", (req, res) => {
     Recipe.find()
@@ -59,25 +62,65 @@ router.get('/:id', (req, res) => {
         );
 });
 
+// AWS
+
+const storage = multer.memoryStorage({
+    destination: function(req, file, cb) {
+        cb(null, '')
+    }
+})
+
+const filefilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg') {
+        cb(null, true)
+    } else {
+        cb(null, false)
+    }
+}
+
+const upload = multer({ storage: storage, fileFilter: filefilter});
+
+const s3 = new Aws.S3({
+    accessKeyId:process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey:process.env.AWS_ACCESS_KEY_SECRET
+})
+
 router.post('/',
     passport.authenticate('jwt', { session: false }),
-    (req, res) => {
+    upload.single('recipe[photo]'),
+    (req, res) => { 
       const { errors, isValid } = validateRecipeInput(req.body);
   
       if (!isValid) {
         return res.status(400).json(errors);
       }
-      const newRecipe = new Recipe({
-          name: req.body.name,
-          user: req.user.id,
-          ingredients: req.body.ingredients,
-          description: req.body.description, 
-          instructions: req.body.instructions,
-          additionalInfo: req.body.additionalInfo
-      })
-      newRecipe.save()
-        .then(recipe => res.json(recipe))
-        .catch(err=> res.json(err));
+    const params = {
+        
+        Bucket:process.env.AWS_BUCKET_NAME,      // bucket that we made earlier
+        Key:req.file.originalname,               // Name of the image
+        Body:req.file.buffer,                    // Body which will contain the image in buffer format
+        // ACL:"public-read-write",                 // defining the permissions to get the public link
+        ContentType:"image/jpeg"                 // Necessary to define the image content-type to view the photo in the browser with the link
+    }
+    console.log(params)
+      s3.upload(params, (error,data) =>{
+          if(error){
+              res.status(500).send({"err":error})
+          }
+          const newRecipe = new Recipe({
+                imgUrl: data.Location,
+                name: req.body.recipe.name,
+                user: req.user.id,
+                ingredients: JSON.parse(req.body.recipe.ingredients),
+                description: req.body.recipe.description, 
+                instructions: req.body.recipe.instructions,
+                additionalInfo: req.body.recipe.additionalInfo
+            })
+            newRecipe.save()
+            .then(recipe => res.json(recipe))
+            .catch(err=> console.log(err));
+            
+        })
     }
   );
 

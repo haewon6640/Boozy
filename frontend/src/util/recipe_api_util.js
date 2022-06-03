@@ -13,5 +13,6 @@ export const getUserRecipes = id => {
 };
 
 export const createRecipe = data => {
-  return axios.post('/api/recipes/', data)
+    console.log(data)
+    return axios.post('/api/recipes/', data)
 }
