@@ -7,6 +7,7 @@
 
 // constants go here
 $dark-grey: #484748;
+$less-dark-grey: #858585;;
 $light-grey: rgb(214, 217, 220);
 $lighter-grey: rgb(236, 239, 243);
 $title-color: #eaadad;
@@ -28,6 +29,7 @@ $cream: #f9f7ea;
 $warm-pink: #f99fc9ff;
 $serif-font: 'Merriweather';
 $dark-coral: #EF6079FF;
+$light-grey-border: rgb(221, 221, 221);
 
 // some all around classes
 .webpage {
@@ -107,6 +109,7 @@ a {
 @import './review-index.scss';
 @import './bar_cart_recipe_show.scss';
 @import './review-form.scss';
+@import './feed.scss';
 // @media phone flip goes here
 @media screen and (max-width: 420px) {
   .webpage {
@@ -134,4 +137,7 @@ a {
   .search-input-web {
     display: none;
   }  
+  .search-icon-container {
+      display:none;
+  }
 }  

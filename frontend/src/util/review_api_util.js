@@ -11,3 +11,7 @@ export const updateReview = (review) => (
 export const deleteReview = (reviewId) => (
     axios.post(`/api/reviews/${reviewId}/delete`)
 )
+
+export const getReviews = () => (
+    axios.get(`/api/reviews`)
+)

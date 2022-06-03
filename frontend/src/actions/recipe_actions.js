@@ -5,12 +5,16 @@ export const RECEIVE_RECIPE = "RECEIVE_RECIPE";
 export const RECEIVE_USER_RECIPES = "RECEIVE_USER_RECIPES";
 export const RECEIVE_NEW_RECIPE = "RECEIVE_NEW_RECIPE";
 export const REMOVE_RECIPE = "REMOVE_RECIPE";
-
+export const RECEIVE_DOTD = "RECEIVE_DOTD";
 export const receiveRecipes = (recipes) => ({
     type: RECEIVE_RECIPES,
     recipes
 });
 
+export const receiveDOTD = (recipe) => ({
+    type: RECEIVE_DOTD,
+    recipe
+})
 const removeRecipe = (recipeId) => ({
     type: REMOVE_RECIPE,
     recipeId
@@ -63,3 +67,7 @@ export const deleteRecipe = (recipeId) => dispatch =>
     RecipeApiUtil.deleteRecipe(recipeId)
         .then(()=>dispatch(removeRecipe(recipeId)))
         .catch(err=>{throw "err"});
+
+export const fetchDrinkOfTheDay = () => dispatch =>
+    RecipeApiUtil.getDrinkOfTheDay()
+        .then(recipe =>dispatch(receiveDOTD(recipe)))
