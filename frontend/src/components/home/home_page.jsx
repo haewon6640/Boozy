@@ -11,15 +11,15 @@ class HomePage extends React.Component {
         }
     }
 
-    // async componentDidMount() {
-    //     await this.props.fetchReviews()
-    //     // await this.props.fetchRecipes();
-    //     await this.props.fetchDrinkOfTheDay()
-    //     this.setState({
-    //         dotd: Object.values(this.props.dotd)[0],
-    //         feed: this.props.reviews.slice(0,20)
-    //     });
-    // }
+    async componentDidMount() {
+        await this.props.fetchReviews()
+        // await this.props.fetchRecipes();
+        await this.props.fetchDrinkOfTheDay()
+        this.setState({
+            dotd: Object.values(this.props.dotd)[0],
+            feed: this.props.reviews.slice(0,20)
+        });
+    }
 
 	render() {
         if (Object.values(this.state.dotd).length === 0) {
@@ -29,7 +29,7 @@ class HomePage extends React.Component {
         const review = {}
 		return (
             <div className="homepage">
-                {/* <div className='webpage '>
+                <div className='webpage '>
                     <div className='two-col feed-two-col'>
                         <div className="feed-container-top">                            
                             <FeedIndex feed={this.state.feed} />
@@ -47,7 +47,7 @@ class HomePage extends React.Component {
                             </div>
                         </div>
                     </div>
-                </div> */}
+                </div>
             </div>
 		);
 	}
