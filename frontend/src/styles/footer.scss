@@ -1,0 +1,45 @@
+footer {
+    background-image: url('https://image.shutterstock.com/image-photo/dark-old-rustic-wood-background-260nw-328179002.jpg');
+    width: 100%;
+    font-size: 15px;
+    margin-top: 20px;
+    font-family: $readible-fancy-font;
+    .footer-container {
+        max-width: 1264px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 32px 12px 32px 12px;
+        display:flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        .main-label {
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 24px;
+            color: $title-color;
+            line-height: 17px;
+            cursor: pointer;
+        }
+        li{
+            margin-top: 10px;
+            color: $title-color;
+            font-family: $reg-font;
+            
+        }
+        li:hover {
+            color: $warm-pink;
+        }
+        .footer-left {
+            display:flex;
+
+
+        }
+        .footer-right {
+            margin-right: 50px;
+        }
+    }
+}
+.footer-icon {
+    width: 20px;
+    margin: -12px 24px 32px 0px;
+}

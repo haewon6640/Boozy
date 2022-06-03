@@ -28,12 +28,12 @@ export const deleteReview = (reviewId) => dispatch => {
 }
 
 export const updateReview =(review) => dispatch => {
-    ReviewApiUtil.updateReview(review)
+    return ReviewApiUtil.updateReview(review)
         .then((review)=>dispatch(receiveReview(review)))
 }
 
-export const createReview =(review) => dispatch => {
-  ReviewApiUtil.createReview(review)
+export const createReview =(review, recipeId) => dispatch => {
+  return ReviewApiUtil.createReview(review, recipeId)
         .then((review)=>dispatch(receiveReview(review)))
 }
 // const receiveReview = () => 

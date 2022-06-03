@@ -1,12 +1,11 @@
 .recipe-show {
-    position:absolute;
+    position:relative;
+    width: 80%;
     left: 10%;
-    right: 10%;
     padding-top: 20px;
-    top: 150px;
+    // top: 150px;
     height: fit-content;
     padding-bottom: 50px;
-    margin-bottom: 100px;
     border: 1px solid $light-grey;
     border-radius: 5px;
     font-family: $reg-font;
@@ -48,6 +47,11 @@
     }
     .recipe-bottom-left {
         display: flex;
+        justify-content: center;
+        .recipe-description {
+            width: 70%;
+            line-height: 22.5px;
+        }
     }
 }
 

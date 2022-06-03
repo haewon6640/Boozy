@@ -15,6 +15,7 @@ class RecipeShow extends React.Component {
             reviews: []
         }
         console.log('recipe show props:', this.props)
+        this.rerenderPage = this.rerenderPage.bind(this);
     }
     componentDidMount() {
         this.props.fetchRecipe()
@@ -24,6 +25,15 @@ class RecipeShow extends React.Component {
                 ingredients: this.props.ingredients,
                 reviews: this.props.reviews
             }))
+    }
+    rerenderPage() {
+        this.props.fetchRecipe()
+        .then(()=> this.setState({
+            loading: false,
+            recipe: this.props.recipe,
+            ingredients: this.props.ingredients,
+            reviews: this.props.reviews
+        }))
     }
     render() {
         if ( Object.keys(this.state.recipe).length === 0) {
@@ -72,7 +82,7 @@ class RecipeShow extends React.Component {
                         </ol>
                     </div>
                     <div className="review-form-container">
-				              <ReviewForm createReview={this.props.createReview} props={this.props} />
+				              <ReviewForm fetchRecipe={this.rerenderPage} createReview={this.props.createReview} recipe={recipe}/>
 			              </div>
 				</div>
 			</div>

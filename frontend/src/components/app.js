@@ -9,6 +9,7 @@ import BarCartContainer from './profile/bar_cart_container';
 import RecipeIndexContainer from "./recipes/recipe_index_container";
 import CreateRecipeContainer from './forms/create_recipe_container';
 import RecipeShowContainer from './recipes/recipe_show_container'
+import Footer from './footer/footer';
 import '../styles/app.scss'
 const App = () => (
   <div>
@@ -22,6 +23,7 @@ const App = () => (
       <Route path="/recipes" component={RecipeIndexContainer} />s
       <ProtectedRoute exact path="/profile" component={BarCartContainer} />
     </Switch>
+    <Footer />
   </div>
 );
 

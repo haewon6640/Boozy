@@ -13,6 +13,9 @@ class NavBar extends React.Component {
     this.getLinks = this.getLinks.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
   logoutUser(e) {
       e.preventDefault();
