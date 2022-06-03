@@ -19,13 +19,15 @@ class BarCart extends React.Component {
             curr_recipe: {},
             curr_ingredients: [],
             user: {},
-			filter_choice:""
+            first:true,
+			      filter_choice:""
         };
         this.addItem = this.addItem.bind(this);
         this.handleHover = this.handleHover.bind(this);
         this.toggleBarCart = this.toggleBarCart.bind(this);
         this.getNeededIngredients = this.getNeededIngredients.bind(this);
 		this.handleSelection = this.handleSelection.bind(this);
+		this.autoPopulate = this.autoPopulate.bind(this)
     }
     componentDidMount() {
         this.props.fetchIngredients();
@@ -40,6 +42,13 @@ class BarCart extends React.Component {
 		}
 
 		}
+
+    autoPopulate(data){
+		if (data && this.state.first && Object.values(this.state.curr_recipe).length === 0){
+			this.handleHover(data.recipe, [], data.ingredients)
+		}
+
+    }
 
     handleHover(recipe, missing, ingredients) {
         this.setState({ 
@@ -77,6 +86,7 @@ class BarCart extends React.Component {
         //         </button>
         //     )
         // } else {
+          console.log(this.props)
             barcart = (
                 <div className="cart-box">
 					<div className="in-line" onClick={()=>this.toggleBarCart("barcart_open")}>
@@ -125,6 +135,7 @@ class BarCart extends React.Component {
                                 handleHover={this.handleHover}
 								toggleBarCart={this.toggleBarCart}
 								open={this.state.can_open}
+								autoPopulate={this.autoPopulate}
                             />
                             <CanMaybeMake
 								filter_choice={this.state.filter_choice}
