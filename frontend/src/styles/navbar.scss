@@ -83,6 +83,7 @@
     }
     a div {
 		text-decoration: none!important;
+    margin-top: 3px;
 	}
 }
 a:visited {
@@ -94,6 +95,9 @@ a:visited {
   width: auto;
   padding-left: 16px;
   position: relative;
+  &:hover {
+      text-decoration: underline;
+  }
 }
 .search-input-web, .search-input-phone {
 	height: 36px;

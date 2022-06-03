@@ -2,11 +2,21 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Review = require('../../models/Review');
+const Recipe = require('./recipes');
 const passport = require("passport");
 router.get("/", (req,res) => {
     Review.find()
+        .populate('reviewer')
+        .populate('recipe')
         .sort({date:-1})
-        .then(reviews => res.json(reviews))
+        .limit(20)
+        .then(reviews => {
+            let response = {};
+            for (var i = 0; i < reviews.length; i++) {
+                response[reviews[i].id] = reviews[i]
+            }
+            return res.json(response);
+        })
         .catch(err=> res.status(404).json(err))
 })
 
@@ -37,5 +47,6 @@ router.post('/:id/delete',
             .then(review => res.json(review))
             .catch(err=>res.status(400).send({message: err.message})) 
     });
+
 
 module.exports = router;

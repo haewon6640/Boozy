@@ -2,25 +2,10 @@ import React, { useRef, useEffect } from 'react'
 import * as d3 from 'd3'
 import { pie } from 'd3';
 
-export default function ReviewGraphic() {
-  let name = "Drinkypoo"
-  let review = {
-    flavor_profile: {
-      spicy:5,
-      sweet:2,
-      sour:3,
-      bitter:4,
-      salty:5,
-      umami:1,
-      rating:5
-    },
-    title: "Sure, its orange and driqable",
-    body:"heay, this one was g-reatbey!"
-  }
-  //update with props.review.flavor_profile
+export default function ReviewGraphic(props) {
   let chartData=[];
-  Object.keys(review.flavor_profile).slice(0,6).forEach((variable)=>{
-    chartData.push({item:variable, count:review.flavor_profile[variable]})
+  Object.keys(props.flavor_profile).slice(0,6).filter((key)=>(props.flavor_profile[key] !== 0)).forEach((variable)=>{
+    chartData.push({item:variable, count:props.flavor_profile[variable]})
   })
   
   const pieChart = useRef();

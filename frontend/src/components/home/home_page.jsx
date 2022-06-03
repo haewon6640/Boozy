@@ -1,29 +1,54 @@
 import React from 'react';
-
+import {combineAndSortArrByTime} from "../../reducers/selector";
+import FeedIndex from './feed_index';
+import {Link} from "react-router-dom";
 class HomePage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dotd: {},
+            feed: []
+        }
+    }
+
+    async componentDidMount() {
+        await this.props.fetchReviews()
+        // await this.props.fetchRecipes();
+        await this.props.fetchDrinkOfTheDay()
+        this.setState({
+            dotd: Object.values(this.props.dotd)[0],
+            feed: this.props.reviews.slice(0,20)
+        });
+    }
 
 	render() {
+        if (Object.values(this.state.dotd).length === 0) {
+            return null;
+        }
+        // title, body
+        const review = {}
 		return (
-			<div className='webpage'>
-				<div className='two-col'>
-					<div className='drink-feed'>
-						I am the drink feed
-						<br />
-						I will feed you drinks
-						<br />
-						get it?
-						#drinkfeed
-					</div>
-					<div>
-						<div className='photo-box'>
-							<img src="https://www.washingtonpost.com/resizer/bc1HepbzdO4UExB0ePr_YXPSVRc=/arc-anglerfish-washpost-prod-washpost/public/CL4WKYGACEI6ZNO7D65GDJTMOU.jpg"
-							alt="dirnk of the day"
-							/>
-							<div>Drink of the day</div>
-						</div>
-					</div>
-				</div>
-			</div>
+            <div className="homepage">
+                <div className='webpage '>
+                    <div className='two-col feed-two-col'>
+                        <div className="feed-container-top">                            
+                            <FeedIndex feed={this.state.feed} />
+                        </div>
+                        <div className='dotd'>
+                            <Link to={`/recipes/${this.state.dotd._id}`}>
+                                <img className="dotd-img"src={this.state.dotd.imgUrl}
+                                alt="drink of the day"/>
+                            </Link>
+                            <div className="dotd-title">
+                                Drink Of the Day:
+                                <Link to={`/recipes/${this.state.dotd._id}`}>
+                                <span className="dotd-name">{this.state.dotd.name}</span>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		);
 	}
 }

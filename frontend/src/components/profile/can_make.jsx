@@ -22,11 +22,18 @@ export default class CanMake extends Component {
     let shelf = this.props.shelf  //list of ids
     let recipes = Object.values(this.props.recipes) //has ids as ingredients in array
     
-    let flavor_profile_test = {boozy:4, sweet: 2, sour:4,bitter: 1,salty:3,umami:5, rating:4}
-
-    return recipes.filter(recipe=>(recipe.ingredients.every(ingredient=>(shelf.includes(ingredient)|| ingredient === null))) &&
-     (flavor_profile_test[this.props.filter_choice] >= 3 || this.props.filter_choice === "")
+    let filtered = recipes.filter(recipe=>(recipe.ingredients.every(ingredient=>(shelf.includes(ingredient)|| ingredient === null))) &&
+     (recipe.avg_rating[this.props.filter_choice] >= 3 || this.props.filter_choice === "")
      )
+     if (filtered.length > 0) {
+       let data = {
+         recipe:filtered[0],
+         ingredients:filtered[0].ingredients
+       }
+  
+       this.props.autoPopulate(data)
+     }
+     return filtered
   }
 
   render() {
