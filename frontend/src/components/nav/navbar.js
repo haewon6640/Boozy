@@ -25,7 +25,7 @@ class NavBar extends React.Component {
             <div className='nav-right'>
 				<a className='icon-and-title' href={'/#/profile'}>
 					<BsPersonFill className='ico'/>
-					<div>Profile</div>
+					<div>Bar Cart</div>
 				</a>
 				<a className='icon-and-title' href={'/#/recipes'}>
 					<GiMartini className='ico'/>
