@@ -1,6 +1,7 @@
 import React from "react";
 import { GiOrangeSlice, GiTrophiesShelf } from 'react-icons/gi';
 import Boozymap from '../map/map'
+import BoozyMap2 from '../map/map2'
 import ReviewGraphic from "../reviews/review_graphic";
 
 class BarCartRecipeShow extends React.Component {
@@ -9,9 +10,20 @@ class BarCartRecipeShow extends React.Component {
         this.state = {
             recipe: this.props.recipe,
             ingredients: this.props.ingredients,
-            missing: this.props.missing
+            missing: this.props.missing,
+            selectedMissing: ""
         }
+        this.setMissing = this.setMissing.bind(this)
+
     }
+
+    setMissing(missingIngredient) {
+        return e => this.setState({
+            selectedMissing: missingIngredient
+        });
+        
+    }
+
     render() {
       let ingredients_we_have;
 		  if(this.props.missing) ingredients_we_have = this.props.ingredients.filter((el)=>(!this.props.missing.includes(el)))
@@ -20,7 +32,7 @@ class BarCartRecipeShow extends React.Component {
         if (Object.values(recipe).length === 0) {
             return null;
         }
-        console.log(recipe.avg_rating);
+        // console.log(recipe.avg_rating);
 		return (
 		<div className="barcart-recipe-show">
 			<div className="two-col">
@@ -41,10 +53,10 @@ class BarCartRecipeShow extends React.Component {
                                     <p>{ingredient.name}</p>
                                 </li>
                             ))}
-                            {this.props.missing.length > 0 && <div>
+                            {this.props.missing.length > 0 && <div>setMissing
                                 <p className="missing-title">--Missing Ingredients--</p>
                                 {this.props.missing.map((ingredient)=>(
-                                    <li className="missing-ingredient" key={ingredient._id}>
+                                    <li onClick={this.setMissing(ingredient.name)} className="missing-ingredient" key={ingredient._id}>
                                         <GiOrangeSlice className="orange"/> 
                                         <p>{ingredient.name}</p>
                                     </li>
@@ -68,7 +80,7 @@ class BarCartRecipeShow extends React.Component {
                     </div>
 				</div>
 			</div>
-            {this.props.missing.length > 0 && <Boozymap/>}
+            {this.props.missing.length > 0 && <BoozyMap2 query={this.state.selectedMissing}/>}
 		</div>
 	)}
 }

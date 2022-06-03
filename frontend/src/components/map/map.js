@@ -47,10 +47,11 @@ class BoozyMap extends React.Component {
     }
 
     onMapLoad = (mapProps, map) => {
+        console.log(this.props)
         const {google} = mapProps
         let coords= []
         let request = {
-          query: "wine",
+          query: this.props.query,
           fields: ["name", "geometry"]
         };
     
@@ -63,18 +64,29 @@ class BoozyMap extends React.Component {
               coords.push(results[i]);
             }
             this.setState({
-            //   center: results[0].geometry.location,
               coordsResult: coords
 
             });
-            // console.log(coords)
+            // console.log(coords[0])
             // let marker1 = new google.maps.Marker({
-            //     position: coords[0].results.geometry.location,
+            //     position: coords[0].geometry.location,
             //     map,
-            //     title: "Hello World!",
-            //   });
-            //   marker1.setMap(map);
+            //     title: "store location"
+            // });
 
+            // marker1.setMap(map);
+
+            // const infowindow = new google.maps.InfoWindow({
+            //     content: '<div> buy {this.props.query} at {coords[0].name}</div>'
+            // });
+
+            // marker1.addListener("click", () => {
+            //     infowindow.open({
+            //       anchor: marker1,
+            //       map,
+            //       shouldFocus: false,
+            //     });
+            // });
           }
         });
       };
@@ -82,18 +94,21 @@ class BoozyMap extends React.Component {
 
   
     render() {
-        // console.log(this.state)
+        console.log(this.state)
       return (
-        <div className="map-container">
+        <div className="map-container">   
             <Map
                 className="map-component"
                 google={this.props.google}
-                zoom={16}
+                zoom={10}
                 center={this.state.center}
-                onReady={(mapProps, map) => this.onMapLoad(mapProps, map)}
+                onLoad={(mapProps, map) => this.onMapLoad(mapProps, map)}
+                ma
+                
+                on
                 // mapContainerStyle={{ height: "200px", width: "200px" }}
             >
-                {this.state.coordsResult !== [] &&
+                {/* {this.state.coordsResult !== [] &&
                     this.state.coordsResult.map(function(results, i) {
                         return (
                             <Marker key={i} position={results.geometry.location}>
@@ -108,7 +123,7 @@ class BoozyMap extends React.Component {
                             
                         )
                     }
-              )}
+              )} */}
             </Map>
         </div>
       )
