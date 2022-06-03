@@ -4,11 +4,17 @@ export const RECEIVE_RECIPES = "RECEIVE_RECIPES";
 export const RECEIVE_RECIPE = "RECEIVE_RECIPE";
 export const RECEIVE_USER_RECIPES = "RECEIVE_USER_RECIPES";
 export const RECEIVE_NEW_RECIPE = "RECEIVE_NEW_RECIPE";
+export const REMOVE_RECIPE = "REMOVE_RECIPE";
 
 export const receiveRecipes = (recipes) => ({
     type: RECEIVE_RECIPES,
     recipes
 });
+
+const removeRecipe = (recipeId) => ({
+    type: REMOVE_RECIPE,
+    recipeId
+})
 export const receiveRecipe = (res) => ({
     type: RECEIVE_RECIPE,
     recipe: res.recipe,
@@ -26,11 +32,13 @@ export const receiveNewRecipe = (recipe) => ({
     recipe,
 });
 
-export const fetchRecipes = () => (dispatch) =>
-    RecipeApiUtil.getRecipes()
+export const fetchRecipes = (searchString) => (dispatch) => {
+    console.log(searchString);
+    searchString = searchString ? searchString : "";
+    return RecipeApiUtil.getRecipes(searchString)
         .then((recipes) => dispatch(receiveRecipes(recipes.data)))
         .catch((err) => console.log(err));
-
+}
 export const fetchRecipe = (id) => (dispatch) =>
     RecipeApiUtil.getRecipe(id)
         .then((res) => dispatch(receiveRecipe(res.data)))
@@ -43,5 +51,15 @@ export const fetchUserRecipes = (id) => (dispatch) =>
 
 export const createRecipe = (data) => (dispatch) =>
     RecipeApiUtil.createRecipe(data)
-        .then((recipe) => dispatch(receiveNewRecipe(recipe)))
+        .then((recipe) => dispatch(receiveRecipe(recipe)))
         .catch((err) => {throw "err"});
+
+export const updateRecipe = (recipe) => (dispatch) => 
+    RecipeApiUtil.updateRecipe(recipe)
+        .then((recipe)=> dispatch(receiveRecipe(recipe)))
+        .catch(err=>{throw "err"});
+
+export const deleteRecipe = (recipeId) => dispatch =>
+    RecipeApiUtil.deleteRecipe(recipeId)
+        .then(()=>dispatch(removeRecipe(recipeId)))
+        .catch(err=>{throw "err"});

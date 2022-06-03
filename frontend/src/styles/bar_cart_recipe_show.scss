@@ -11,3 +11,13 @@
         color: red
     }
 }
+
+.review-graphic {
+  padding-top: 25px;
+  align-self: right;
+}
+
+.a-asym {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}

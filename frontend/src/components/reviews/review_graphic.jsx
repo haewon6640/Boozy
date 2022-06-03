@@ -27,13 +27,13 @@ export default function ReviewGraphic() {
   
   useEffect(()=>{
     const pieData = d3.pie().value(d=>d.count)(chartData)
-    const arc = d3.arc().innerRadius(0).outerRadius(150)
-    const colors = d3.scaleOrdinal(["DarkRed", "limegreen", "yellow", "blue", "orange", "violet"])
+    const arc = d3.arc().innerRadius(0).outerRadius(75)
+    const colors = d3.scaleOrdinal(["#fe4040", "#fd7e53", "#f8c77b", "#fe7f70", "#cd5d45", "#f6ac87"])
     const svg = d3.select(pieChart.current)
-        .attr('width', '300')
-        .attr('height', '300')
+        .attr('width', '150')
+        .attr('height', '150')
         .append('g')
-        .attr('transform', 'translate(150, 150)');
+        .attr('transform', 'translate(75, 75)');
 
     // const tooldiv = d3.select('#chart-area')
     //       .append('div')
@@ -53,7 +53,7 @@ export default function ReviewGraphic() {
         .text(function(d){return d.data.item})
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
         .style("text-anchor", "middle")
-        .style("font-size", 17)
+        .style("font-size", 13)
 
 
         // .on('mouseover', (e,d)=> {

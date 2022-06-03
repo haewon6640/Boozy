@@ -15,7 +15,7 @@ const Aws = require('aws-sdk');  // aws-sdk lib used to upload images to s3 buck
 require("dotenv/config");
 
 router.get("/", (req, res) => {
-    Recipe.find()
+    Recipe.find({ "name": {"$regex": req.query.search, "$options": "i"}})
         .sort({ date: -1 })
         .then((recipes) => {
             let response = {};
@@ -31,7 +31,13 @@ router.get("/", (req, res) => {
 
 router.get('/user/:user_id', (req, res) => {
     Recipe.find({user: req.params.user_id})
-        .then(recipes => res.json(recipes))
+        .then(recipes => {
+            let response = {};
+            for (var i = 0; i < recipes.length; i++) {
+                response[recipes[i].id] = recipes[i]
+            }
+            return res.json(response);
+        })
         .catch(err =>
             res.status(404).json({ norecipesfound: 'No recipes found from that user' }
         )
@@ -117,7 +123,7 @@ router.post('/',
                 additionalInfo: req.body.recipe.additionalInfo
             })
             newRecipe.save()
-            .then(recipe => res.json(recipe))
+            .then(recipe => res.json({[recipe.id]:recipe}))
             .catch(err=> console.log(err));
             
         })
@@ -152,4 +158,19 @@ router.post('/:id/review',
         }
     });
 
+router.post('/:id/update',
+    passport.authenticate('jwt', { session: false }),
+    async (req,res) => {
+        Recipe.findByIdAndUpdate(req.params.id, req.body.recipe, {new:true})
+            .then(recipe=> res.json({[recipe.id]: recipe}))
+            .catch(err=>res.status(400).send({message: err.message}))
+    })
+
+router.post('/:id/delete',
+    passport.authenticate('jwt', { session: false }),
+    async (req,res) => {
+        Review.findByIdAndDelete(req.params.id, {new:true})
+            .then(review => res.json({[recipe.id]: recipe}))
+            .catch(err=>res.status(400).send({message: err.message})) 
+    });
 module.exports = router;

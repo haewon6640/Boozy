@@ -27,6 +27,7 @@ $light-black: #252525;
 $cream: #f9f7ea;
 $warm-pink: #f99fc9ff;
 $serif-font: 'Merriweather';
+$dark-coral: #EF6079FF;
 
 // some all around classes
 .webpage {
@@ -34,6 +35,11 @@ $serif-font: 'Merriweather';
   margin: auto;
   padding-top: 16px;
   font-family: $reg-font;
+}
+
+.in-line{
+  display: flex;
+  flex-direction: row;
 }
 
 .two-col {

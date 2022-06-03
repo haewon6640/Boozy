@@ -14,6 +14,7 @@ class RecipeShow extends React.Component {
             ingredients: [],
             reviews: []
         }
+        console.log('recipe show props:', this.props)
     }
     componentDidMount() {
         this.props.fetchRecipe()
@@ -70,7 +71,7 @@ class RecipeShow extends React.Component {
                         </ol>
                     </div>
                     <div className="review-form-container">
-				              <ReviewForm reviews={this.state.reviews} />
+				              <ReviewForm props={this.props} />
 			              </div>
 				</div>
 			</div>
