@@ -10,21 +10,26 @@
         color: $title-color;
         display:flex;
         justify-content: center;
-        margin-bottom: 20px;
+        margin-top: 20px;
         span {
             margin-left: 20px;
             font-weight: 500;
-            color: $warm-pink;
+            color: $dark-grey;
+            font-family: $recipe-font;
             &:hover {
                 font-weight: 700
             }
         }
     }
     .dotd-img {
-        width: 500px;
-        border: 1px solid $light-grey-border;
+        width: 70%;
+        border: 10px solid $title-color;
         border-radius: 5px;
-        margin-bottom: 20px;
+        margin: auto;
+        margin-top: 65px;
+        padding: 20px;
+        border-style: inset;
+
         &:hover {
             box-shadow: $warm-pink 0px 0px 0px 4px;
         }

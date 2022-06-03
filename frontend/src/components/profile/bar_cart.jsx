@@ -86,6 +86,7 @@ class BarCart extends React.Component {
         //         </button>
         //     )
         // } else {
+          console.log(this.props)
             barcart = (
                 <div className="cart-box">
 					<div className="in-line" onClick={()=>this.toggleBarCart("barcart_open")}>
