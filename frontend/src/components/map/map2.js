@@ -55,11 +55,6 @@ class BoozyMap2 extends React.Component {
     componentDidUpdate() {
         this.map.setCenter(this.state.center)
 
-        if (this.markers[0]) {
-            this.markers[0].setMap(null);
-            delete this.markers[0];
-        }
-
         
         let coords= []
         let request = {
