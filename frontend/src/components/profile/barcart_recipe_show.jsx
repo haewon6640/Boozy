@@ -6,8 +6,8 @@ import ReviewGraphic from "../reviews/review_graphic";
 export default function BarCartRecipeShow(props) {
   const recipe = props.recipe;
   useEffect(()=> props.handleSelection('curr_recipe', recipe), [props.shelf])
-
-  const[selectedMissing, setSelectedMissing] = useState("");
+  const[selectedMissing, setSelectedMissing] = useState();
+  
   if (Object.values(recipe).length === 0) {
     return null;
   }
@@ -52,7 +52,10 @@ export default function BarCartRecipeShow(props) {
               {missingIngredients.length > 0 && <div>
                   <p className="missing-title">--missing--</p>
                   {missingIngredients.map((ingredient)=>(
-                    <li className="missing-ingredient" key={ingredient._id} onClick={setSelectedMissing(ingredient)}>
+                    <li className="missing-ingredient" 
+                      key={ingredient._id} 
+                      onClick={()=>setSelectedMissing(ingredient)}
+                      >
                         <GiOrangeSlice className="orange"/> 
                         <p>{ingredient.name}</p>
                     </li>

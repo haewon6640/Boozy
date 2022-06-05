@@ -17,16 +17,12 @@ class BarCart extends React.Component {
             cant_open: true,
 			// to controle what is seen in recipe show
             curr_recipe: {},
-            // curr_ingredients: [],
-            // missing: [],
             user: {},
 			filter_choice:"",
 			can_make:[]
         };
         this.addItem = this.addItem.bind(this);
-        // this.showRecipe = this.showRecipe.bind(this);
         this.toggleBarCart = this.toggleBarCart.bind(this);
-        // this.getNeededIngredients = this.getNeededIngredients.bind(this);
         this.handleSelection = this.handleSelection.bind(this);
         this.autoPopulate = this.autoPopulate.bind(this)
 		this.findCanDrinks = this.findCanDrinks.bind(this)
@@ -36,29 +32,13 @@ class BarCart extends React.Component {
         this.props.fetchRecipes();
         this.props.fetchUser()
             .then(()=>this.setState({user: this.props.user}));
+		console.log()
 		this.findCanDrinks()
 		this.autoPopulate()
     }
-    // getNeededIngredients(ingredientList) {
-    // 	// if (ingredientList) {
-    //     // 	return Object.values(this.props.ingredients).filter(ing=>
-    //     //   	ingredientList.includes(ing._id))
-    // 	// }
-	// }
-
-	componentDidUpdate(prevProps){
-		console.log(prevProps)
-		// if(!prevProps.user) {
-		// 	this.props.fetchIngredients();
-		// 	this.props.fetchRecipes();
-		// 	this.props.fetchUser()
-		// 		.then(()=>this.setState({user: this.props.user}));
-		// 	this.findCanDrinks()
-		// 	this.autoPopulate()
-		// }
-	}
 
 	findCanDrinks = ()=>{   
+		console.log()
 		let canMake = Object.values(this.props.recipes.all).filter(recipe=>(
 			recipe.ingredients.every(ingredient=>(
 				this.props.user.shelf.includes(ingredient)|| ingredient === null))) &&
@@ -79,14 +59,6 @@ class BarCart extends React.Component {
 			})
 		}
     }
-
-    // showRecipe(recipe, missing, ingredients) {
-    //     this.setState({ 
-	// 		curr_recipe: recipe, 
-	// 		missing: this.getNeededIngredients(missing, missing), 
-	// 		curr_ingredients: this.getNeededIngredients(ingredients, missing) 
-	// 	});
-    // }
 
 	handleSelection(type, value){
 		this.setState({[type]:value})
