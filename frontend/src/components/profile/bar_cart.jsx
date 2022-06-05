@@ -1,65 +1,95 @@
 import React from "react";
 import Autocomplete from "./auto_complete";
 import CanMake from "./can_make";
-import CanMaybeMake from "./can_mayby_make";
-import {AiOutlineCloseCircle} from 'react-icons/ai'; 
+import CanMaybeMake from "./can_maybe_make";
 import { IoIosArrowBack, IoIosArrowDown } from 'react-icons/io';
 import BarCartRecipeShow from "./barcart_recipe_show";
 import FilterChoice from "./filter_choice";
-import { fetchUser } from "../../actions/user_actions";
+import Shelf from "./shelf";
 class BarCart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            missing: [],
-            barcart_open: true,
+			// booleans to control accordian
+			barcart_open: true,
             filter_open: false,
             can_open: true,
             cant_open: true,
+			// to controle what is seen in recipe show
             curr_recipe: {},
-            curr_ingredients: [],
+            // curr_ingredients: [],
+            // missing: [],
             user: {},
-            first:true,
-			      filter_choice:""
+			filter_choice:"",
+			can_make:[]
         };
         this.addItem = this.addItem.bind(this);
-        this.handleHover = this.handleHover.bind(this);
+        // this.showRecipe = this.showRecipe.bind(this);
         this.toggleBarCart = this.toggleBarCart.bind(this);
-        this.getNeededIngredients = this.getNeededIngredients.bind(this);
-		this.handleSelection = this.handleSelection.bind(this);
-		this.autoPopulate = this.autoPopulate.bind(this)
+        // this.getNeededIngredients = this.getNeededIngredients.bind(this);
+        this.handleSelection = this.handleSelection.bind(this);
+        this.autoPopulate = this.autoPopulate.bind(this)
+		this.findCanDrinks = this.findCanDrinks.bind(this)
     }
     componentDidMount() {
         this.props.fetchIngredients();
         this.props.fetchRecipes();
         this.props.fetchUser()
             .then(()=>this.setState({user: this.props.user}));
+		this.findCanDrinks()
+		this.autoPopulate()
     }
-    getNeededIngredients(ingredientList) {
-		if (ingredientList) {
-			return Object.values(this.props.ingredients).filter(ing=>
-				ingredientList.includes(ing._id))
-		}
+    // getNeededIngredients(ingredientList) {
+    // 	// if (ingredientList) {
+    //     // 	return Object.values(this.props.ingredients).filter(ing=>
+    //     //   	ingredientList.includes(ing._id))
+    // 	// }
+	// }
 
-		}
+	componentDidUpdate(prevProps){
+		console.log(prevProps)
+		// if(!prevProps.user) {
+		// 	this.props.fetchIngredients();
+		// 	this.props.fetchRecipes();
+		// 	this.props.fetchUser()
+		// 		.then(()=>this.setState({user: this.props.user}));
+		// 	this.findCanDrinks()
+		// 	this.autoPopulate()
+		// }
+	}
 
-    autoPopulate(data){
-		if (data && this.state.first && Object.values(this.state.curr_recipe).length === 0){
-			this.handleHover(data.recipe, [], data.ingredients)
-		}
+	findCanDrinks = ()=>{   
+		let canMake = Object.values(this.props.recipes.all).filter(recipe=>(
+			recipe.ingredients.every(ingredient=>(
+				this.props.user.shelf.includes(ingredient)|| ingredient === null))) &&
+				(recipe.avg_rating[this.state.filter_choice] >= 3 || this.state.filter_choice === "")
+		)
+		this.setState({can_make:canMake})
+		console.log() // don't delete this
+	}
 
+    autoPopulate(){
+		if (
+			this.state.can_make.length > 0 && 
+			Object.values(this.state.curr_recipe).length === 0
+		){
+			this.setState({
+				first:false, 
+				curr_recipe:this.state.can_make[0]
+			})
+		}
     }
 
-    handleHover(recipe, missing, ingredients) {
-        this.setState({ 
-			curr_recipe: recipe, 
-			missing: this.getNeededIngredients(missing, missing), 
-			curr_ingredients: this.getNeededIngredients(ingredients, missing) 
-		});
-    }
+    // showRecipe(recipe, missing, ingredients) {
+    //     this.setState({ 
+	// 		curr_recipe: recipe, 
+	// 		missing: this.getNeededIngredients(missing, missing), 
+	// 		curr_ingredients: this.getNeededIngredients(ingredients, missing) 
+	// 	});
+    // }
 
-	handleSelection(value){
-		this.setState({filter_choice:value})
+	handleSelection(type, value){
+		this.setState({[type]:value})
 	}
 
     addItem(item) {
@@ -79,44 +109,32 @@ class BarCart extends React.Component {
         }
         let barcart = "";
         const dictionary = Object.values(this.props.ingredients);
-        // if (!this.state.barcart_open) {
-        //     barcart = (
-        //         <button onClick={()=>this.toggleBarCart("barcart_open")} className="btn btn-barcart">
-        //             Open Barcart
-        //         </button>
-        //     )
-        // } else {
-          console.log(this.props)
-            barcart = (
-                <div className="cart-box">
-					<div className="in-line" onClick={()=>this.toggleBarCart("barcart_open")}>
-						<h2> Your Bar Cart</h2>
-						{!this.state.barcart_open && <IoIosArrowBack className='arrow'/>}
-            			{this.state.barcart_open && <IoIosArrowDown className='arrow'/>}
-					</div>
-					{ this.state.barcart_open && <div>
-						<Autocomplete
-							className="search-input-web"
-							dictionary={dictionary}
-							addItem={this.addItem}
-						/>
-						<ul>
-							{this.props.user.shelf !== [] &&
-								this.props.user.shelf.map((item) => (
-									<li className="bar-items" key={item}>
-										{<h3>{this.props.ingredients[item].name}</h3>}
-										<AiOutlineCloseCircle 
-											onClick={()=>this.props.deleteFromShelf(item, this.props.user.id)
-												.then(()=>this.props.fetchUser())}
-											className="remove"
-										/>
-									</li>
-								))}
-						</ul>
-					</div>}
+        barcart = (
+            <div className="cart-box">
+                <div className="in-line" onClick={()=>this.toggleBarCart("barcart_open")}>
+                    <h2> Your Bar Cart</h2>
+                    {!this.state.barcart_open && <IoIosArrowBack className='arrow'/>}
+                    {this.state.barcart_open && <IoIosArrowDown className='arrow'/>}
                 </div>
-            )
-        // }
+                {this.state.barcart_open && <div>
+                    <Autocomplete
+                        className="search-input-web"
+                        dictionary={dictionary}
+                        addItem={this.addItem}
+					/>
+					{this.props.user.shelf !== [] && 
+					<Shelf
+						user={this.props.user}
+						ingredients={this.props.ingredients}
+						remove={this.props.deleteFromShelf}
+						fetchUser={this.props.fetchUser}
+						findCanDrinks={this.findCanDrinks}
+					/>}
+
+                </div>}
+            </div>
+        )
+
         return (
             <div className="webpage">
                 <div className="two-col asym">
@@ -129,30 +147,29 @@ class BarCart extends React.Component {
 								filter_open={this.state.filter_open}
 							/>
                             <CanMake
-								filter_choice={this.state.filter_choice}
-                                recipes={this.props.recipes.all}
-                                shelf={this.props.user.shelf}
-                                handleHover={this.handleHover}
-								toggleBarCart={this.toggleBarCart}
+								handleSelection={this.handleSelection}
 								open={this.state.can_open}
 								autoPopulate={this.autoPopulate}
+								drinks={this.state.can_make}
+								toggleBarCart={this.toggleBarCart}
                             />
                             <CanMaybeMake
 								filter_choice={this.state.filter_choice}
                                 recipes={this.props.recipes.all}
                                 shelf={this.props.user.shelf}
-                                handleHover={this.handleHover}
 								toggleBarCart={this.toggleBarCart}
 								open={this.state.cant_open}
+								handleSelection={this.handleSelection}
                             />
                         </div>
                     </div>
                     <div className="bar-right">
-                        {/* {console.log(this.state.curr_recipe)} */}
                         <BarCartRecipeShow 
 							recipe={this.state.curr_recipe}
-                            ingredients={this.state.curr_ingredients}
-                            missing={this.state.missing} 
+							shelf={this.state.user.shelf}
+							showRecipe={this.showRecipe}
+							ingredients={this.props.ingredients}
+							handleSelection={this.handleSelection}
 						/>
                     </div>
                 </div>
