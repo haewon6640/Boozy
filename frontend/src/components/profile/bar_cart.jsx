@@ -15,7 +15,7 @@ class BarCart extends React.Component {
             filter_open: false,
             can_open: true,
             cant_open: true,
-			// to controle what is seen in recipe show
+			// to control what is seen in recipe show
             curr_recipe: {},
             user: {},
 			filter_choice:"",
@@ -138,7 +138,7 @@ class BarCart extends React.Component {
                     <div className="bar-right">
                         <BarCartRecipeShow 
 							recipe={this.state.curr_recipe}
-							shelf={this.state.user.shelf}
+							shelf={this.props.user.shelf}
 							showRecipe={this.showRecipe}
 							ingredients={this.props.ingredients}
 							handleSelection={this.handleSelection}

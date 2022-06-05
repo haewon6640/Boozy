@@ -11,6 +11,7 @@ export default function BarCartRecipeShow(props) {
   if (Object.values(recipe).length === 0) {
     return null;
   }
+
   let ingredients_we_have=[];
   let missingIngredients=[];
   recipe.ingredients.forEach((el)=> {
@@ -24,9 +25,6 @@ export default function BarCartRecipeShow(props) {
   if (ingredients_we_have.length === 0){
     return null;
   }
-
-  console.log("lookie lookie")
-  console.log(props.shelf.length)
 
   return (
     <div className="barcart-recipe-show">
