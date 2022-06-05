@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { GiOrangeSlice } from 'react-icons/gi';
+import { GiOrangeSlice, GiShoppingCart } from 'react-icons/gi';
 import BoozyMap2 from '../map/map2'
 import ReviewGraphic from "../reviews/review_graphic";
 
@@ -9,7 +9,11 @@ export default function BarCartRecipeShow(props) {
   const[selectedMissing, setSelectedMissing] = useState();
   
   if (Object.values(recipe).length === 0) {
-    return null;
+    return <div className="go-shopping">
+      <GiShoppingCart className="shopping-cart"/>
+      <h1>Looks like you need to go shopping! <br/>
+      Checkout the drinks you can nearly make to get some ideas.</h1>
+      </div>;
   }
 
   let ingredients_we_have=[];
@@ -32,7 +36,7 @@ export default function BarCartRecipeShow(props) {
       <div className="recipe-left">
         <h1 className="recipe-title">{recipe.name}</h1>
         <div className="show-photo">
-          {/* <img src={recipe.imgUrl} alt="" /> */}
+          <img src={recipe.imgUrl} alt="" />
         </div>					
       </div>
 
@@ -64,8 +68,8 @@ export default function BarCartRecipeShow(props) {
         <ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/>
       </div>
         <div className="recipe-bottom-left">
-          <p className="recipe-description">This is 150 characters. This is how long it is. Look! Isn't it cool! Cocktails and puppies and clean the house. Cocktails and puppies and clean house!.</p>
-          {/* <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p> */}
+          {/* <p className="recipe-description">This is 150 characters. This is how long it is. Look! Isn't it cool! Cocktails and puppies and clean the house. Cocktails and puppies and clean house!.</p> */}
+          <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p>
         </div>	
         <div className="recipe-steps">
           <h2>Steps</h2>

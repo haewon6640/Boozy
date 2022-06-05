@@ -21,3 +21,11 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
+
+.go-shopping {
+    font-size: 24px;
+    text-align: center;
+    .shopping-cart {
+      font-size: 50px;
+    }
+}

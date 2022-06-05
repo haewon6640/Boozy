@@ -11,7 +11,7 @@ class BarCart extends React.Component {
         super(props);
         this.state = {
 			// booleans to control accordian
-			barcart_open: true,
+			shelf_open: true,
             filter_open: false,
             can_open: true,
             cant_open: true,
@@ -32,13 +32,15 @@ class BarCart extends React.Component {
         this.props.fetchRecipes();
         this.props.fetchUser()
             .then(()=>this.setState({user: this.props.user}));
-		console.log()
-		this.findCanDrinks()
+        // this.getStarted()
+    }
+
+    getStarted(){
+        this.findCanDrinks()
 		this.autoPopulate()
     }
 
 	findCanDrinks = ()=>{   
-		console.log()
 		let canMake = Object.values(this.props.recipes.all).filter(recipe=>(
 			recipe.ingredients.every(ingredient=>(
 				this.props.user.shelf.includes(ingredient)|| ingredient === null))) &&
@@ -79,16 +81,16 @@ class BarCart extends React.Component {
         if (Object.values(this.props.ingredients).length === 0) {
             return null;
         }
-        let barcart = "";
+        let shelf = "";
         const dictionary = Object.values(this.props.ingredients);
-        barcart = (
+        shelf = (
             <div className="cart-box">
-                <div className="in-line" onClick={()=>this.toggleBarCart("barcart_open")}>
-                    <h2> Your Bar Cart</h2>
-                    {!this.state.barcart_open && <IoIosArrowBack className='arrow'/>}
-                    {this.state.barcart_open && <IoIosArrowDown className='arrow'/>}
+                <div className="in-line" onClick={()=>this.toggleBarCart("shelf_open")}>
+                    <h2>Your Shelf</h2>
+                    {!this.state.shelf_open && <IoIosArrowBack className='arrow'/>}
+                    {this.state.shelf_open && <IoIosArrowDown className='arrow'/>}
                 </div>
-                {this.state.barcart_open && <div>
+                {this.state.shelf_open && <div>
                     <Autocomplete
                         className="search-input-web"
                         dictionary={dictionary}
@@ -112,19 +114,18 @@ class BarCart extends React.Component {
                 <div className="two-col asym">
                     <div className="bar-left">
                         <div className="recipes-possible sticky ">
-                        	{barcart}
 							<FilterChoice
 								handleSelection={this.handleSelection}
 								toggleBarCart={this.toggleBarCart}
 								filter_open={this.state.filter_open}
-							/>
+                                />
                             <CanMake
 								handleSelection={this.handleSelection}
 								open={this.state.can_open}
 								autoPopulate={this.autoPopulate}
 								drinks={this.state.can_make}
 								toggleBarCart={this.toggleBarCart}
-                            />
+                                />
                             <CanMaybeMake
 								filter_choice={this.state.filter_choice}
                                 recipes={this.props.recipes.all}
@@ -133,6 +134,7 @@ class BarCart extends React.Component {
 								open={this.state.cant_open}
 								handleSelection={this.handleSelection}
                             />
+                            {shelf}
                         </div>
                     </div>
                     <div className="bar-right">

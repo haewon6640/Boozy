@@ -63,6 +63,7 @@ $light-grey-border: rgb(221, 221, 221);
   border: none!important;
   background-color: $light-button-color;
   color: $dark-grey;
+  align-self: center;
   &:hover {
     background-color: $less-light-main-color;
   }

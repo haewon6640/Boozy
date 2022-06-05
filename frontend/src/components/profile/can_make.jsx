@@ -26,8 +26,8 @@ export default function CanMake(props) {
         onClick={()=>props.handleSelection("curr_recipe", recipe)} 
         key={"canMake" + i}>{recipe.name}</li>))}
           </ul>
-          {props.drinks.length > 5 && limit === 5 && <button onClick={toggleList}>(Show More)</button>}
-          {props.drinks.length > 5 && limit === 20 && <button onClick={toggleList}>(Show Less)</button>}
+          {props.drinks.length > 5 && limit === 5 && <button onClick={toggleList} className="btn">(Show More)</button>}
+          {props.drinks.length > 5 && limit === 20 && <button onClick={toggleList}  className="btn">(Show Less)</button>}
         </div>}
     </div>
   )
