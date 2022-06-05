@@ -55,7 +55,7 @@ export default class CanMaybeMake extends Component {
           { this.props.open && <div>
             <ul>
               {canMaybeMake.map((dataObj, i)=> ( i < this.state.limit && <li
-                onClick={()=>this.props.handleHover(dataObj.recipe, dataObj.missing_ing, dataObj.recipe.ingredients)} 
+                onClick={()=>this.props.handleSelection("curr_recipe",dataObj.recipe)} 
                 key={i + "canMaybe"} 
               >{dataObj.recipe.name}</li>))}
             </ul>
