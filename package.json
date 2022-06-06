@@ -40,11 +40,11 @@
     "passport-jwt": "^4.0.0",
     "stream": "^0.0.2",
     "validator": "^13.7.0",
-    "webpack-dotenv": "^0.0.2"
+    "webpack-dotenv": "^0.0.2",
+    "sass": "^1.52.2"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.1.0",
-    "nodemon": "^2.0.16",
-    "sass": "^1.52.2"
+    "nodemon": "^2.0.16"
   }
 }
