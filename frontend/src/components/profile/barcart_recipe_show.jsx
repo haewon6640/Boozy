@@ -79,7 +79,7 @@ export default function BarCartRecipeShow(props) {
         </div>
       </div>
     </div>
-          {missingIngredients.length > 0 && <BoozyMap2 query={selectedMissing}/>}
+          {missingIngredients.length > 0 && <BoozyMap2 query={selectedMissing = ""}/>}
   </div>
   )
 }

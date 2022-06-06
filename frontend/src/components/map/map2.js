@@ -10,6 +10,8 @@ class BoozyMap2 extends React.Component {
     }
 
     }
+
+   
   
     componentDidMount() {
         
