@@ -1,6 +1,8 @@
 import React from "react";
 import RecipeIndexItem from "./recipe_index_item";
 import {Link} from "react-router-dom";
+import { AiOutlinePlusCircle } from 'react-icons/ai';
+
 class RecipeIndex extends React.Component {
     constructor(props) {
         super(props);
@@ -27,7 +29,7 @@ class RecipeIndex extends React.Component {
         } else {
             return (
             <div className="webpage">
-                <Link className='btn' to="/recipes/new"><span className="">New Recipe</span></Link>
+                <Link  to="/recipes/new"><AiOutlinePlusCircle className='add-recipe'/></Link>
                 <ul className="recipe-index-container">
                     {this.state.recipes.map((recipe, idx)=> (
                         <RecipeIndexItem

@@ -1,6 +1,5 @@
 .dropdown-ing {
-    //   position:
-    width: 180.4px;
+    width: 176px;
     background-color: white;
     border: 1px solid $light-grey;
     border-radius: 4px;
@@ -10,4 +9,7 @@
         width: 100%;
         cursor: pointer;
     }
+}
+#hidden {
+    display: none;
 }
