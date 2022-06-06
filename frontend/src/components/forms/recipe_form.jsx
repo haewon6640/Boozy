@@ -38,7 +38,6 @@ export default class RecipeForm extends React.Component {
 
     handleFormData(state){
         let formData = new FormData();
-        console.log(state)
         formData.append("recipe[name]", state.name)
         formData.append("recipe[ingredients]", JSON.stringify(state.ingredients))
         formData.append("recipe[instructions]", state.instructions)
@@ -72,7 +71,6 @@ export default class RecipeForm extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state.ingredients)
         this.props.action(this.handleFormData(this.state))
             .then(()=>this.props.history.push("/recipes"))
     }

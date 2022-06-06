@@ -132,6 +132,8 @@ router.post('/',
     passport.authenticate('jwt', { session: false }),
     upload.single('recipe[photo]'),
     (req, res) => { 
+        console.log("hi")
+        console.log(req.body)
       const { errors, isValid } = validateRecipeInput(req.body);
   
       if (!isValid) {
@@ -159,6 +161,7 @@ router.post('/',
                 instructions: req.body.recipe.instructions,
                 additionalInfo: req.body.recipe.additionalInfo
             })
+            console.log(newRecipe)
             newRecipe.save()
             .then(recipe => res.json({[recipe.id]:recipe}))
             .catch(err=> console.log(err));
