@@ -16,7 +16,7 @@ mongoose
 // string of ingredient names
 // use dashes to prevent multi-word names from messing up the category
 let ingredientArr = [
-  'rum Alcohol','vodka Alcohol','gin Alcohol',
+  'dark-rum Alcohol','vodka Alcohol','gin Alcohol',
   'tequila Alcohol','rum Alcohol','whiskey Alcohol',
   'brandy Alcohol','amaretto Alcohol','coffee-liquer Alcohol',
   'vermouth Alcohol','irish-cream-liqueur Alcohol',
@@ -26,7 +26,7 @@ let ingredientArr = [
   'sour-mix Mixer', 'grenadine Alcohol','cream Mixer',
   'club-soda Mixer', 'tonic-water Alochol', 'ginger-ale Mixer',
   'cola Mixer','lemon Produce','lime Produce',
-  'maraschino-cherries Produce', 'oranges Produce','olives Produce',
+  'maraschino-cherries Produce', 'olives Produce',
   'salt Garnish', 'sugar Garnish','mint Garnish',
   'orange Produce', 'campari-bitters Alcohol','pickle-juice Mixer',
   'horse-radish Produce','worcestershire-sauce Produce', 'pepper Garnish',
@@ -38,7 +38,7 @@ let ingredientArr = [
   `rhubarb Garnish`, 'ginger-syrup Garnish', 'whipped-cream Garnish',
   'coffee Produce', 'mango Produce', 'ginger Produce',
   'raspberries Produce', 'champagne Alcohol', 'aperol Alcohol',
-  'prosecco Alcohol'
+  'prosecco Alcohol', 'orange-juice Mixer'
 
 ]
 
@@ -235,11 +235,14 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'allspice berries'}),
       await Ingredient.findOne({name: 'black peppercorns'}),
       await Ingredient.findOne({name: 'lime juice'}),
-      await Ingredient.findOne({name: 'orange'})
+      await Ingredient.findOne({name: 'orange'}),
+      await Ingredient.findOne({name: 'dark rum'}),
+      await Ingredient.findOne({name: 'ginger beer'}),
+      await Ingredient.findOne({name: 'lime'})
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'The longer the spices infuse in the rum, the more flavorful this dark and stormy will be.',
     additionalInfo: ''
   },
   {
@@ -389,6 +392,23 @@ const seedDB = async () => {
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
+    name: `Screw Driver`,
+    imgUrl: 'https://www.liquor.com/thmb/xQdUxz4hELJFJT7L5MimYSFSqM4=/720x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__liquor__2017__11__06162348__screwdrvier-720x720-recipe-23e0c0ac47334f108e4fa00b34b7f5bf.jpg',
+    ingredients: [
+      await Ingredient.findOne({name: 'vodka'}),
+      await Ingredient.findOne({name: 'orange juice'})
+
+    ],
+    reviews: [],
+    instructions: `1) Combine vodka, cranberry juice, lime juice, and triple sec in a cocktail shaker. Fill shaker with ice, \n
+    cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. \n
+    2) Strain cocktail through a Hawthorne strainer or a slotted spoon into a martini glass. Garnish with \n
+    orange twist.`,
+    description: faker.lorem.paragraph(),
+    additionalInfo: ''
+  },
+  {
+    user: getRandomSubarray(userSeeds,1)[0],
     name: `Pour Over Irish Coffee`,
     imgUrl: 'https://assets.bonappetit.com/photos/57ad518553e63daf11a4ddec/1:1/w_1920%2Cc_limit/irishcoffee_backbar.jpg',
     ingredients: [
@@ -465,8 +485,6 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'prosecco'}),
       await Ingredient.findOne({name: 'club soda'}),
       await Ingredient.findOne({name: 'ice'}),
-
-
     ],
     reviews: [],
     instructions: `1) Thread olives onto a swizzle stick. Pour Aperol and Prosecco into a rocks glass filled with ice. \n 
