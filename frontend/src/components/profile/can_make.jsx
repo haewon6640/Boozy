@@ -6,7 +6,7 @@ export default function CanMake(props) {
   useEffect(()=>props.autoPopulate())
 
   const toggleList=()=>{
-    if (limit === 5) {
+    if (limit === 5) { 
       setLimit(20)
     } else {
       setLimit(5)

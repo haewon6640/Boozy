@@ -26,10 +26,6 @@ export default function BarCartRecipeShow(props) {
     }
   })
 
-  if (ingredients_we_have.length === 0){
-    return null;
-  }
-
   return (
     <div className="barcart-recipe-show">
     <div className="two-col">
