@@ -3,6 +3,7 @@ import {AiOutlineCloseCircle} from 'react-icons/ai';
 
 export default function Shelf(props) {
   useEffect(()=> props.findCanDrinks(), [props.user.shelf.length])
+  console.log(props)
   return (
     <ul>
       {props.user.shelf.map((item) => (

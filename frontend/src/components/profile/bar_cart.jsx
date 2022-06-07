@@ -19,7 +19,8 @@ class BarCart extends React.Component {
             curr_recipe: {},
             user: {},
 			filter_choice:"",
-			can_make:[]
+			can_make:[],
+			loading: true
         };
         this.addItem = this.addItem.bind(this);
         this.toggleBarCart = this.toggleBarCart.bind(this);
@@ -28,11 +29,11 @@ class BarCart extends React.Component {
 		this.findCanDrinks = this.findCanDrinks.bind(this)
     }
     componentDidMount() {
-        this.props.fetchIngredients();
-        this.props.fetchRecipes();
-        this.props.fetchUser()
-            .then(()=>this.setState({user: this.props.user}));
-        // this.getStarted()
+		console.log("the component mounted")
+		this.props.fetchUser().then(() => {
+        this.props.fetchIngredients().then(()=>this.setState({loading:false}));
+        this.props.fetchRecipes().then(this.findCanDrinks);
+      })
     }
 
     getStarted(){
@@ -50,7 +51,7 @@ class BarCart extends React.Component {
 		console.log() // don't delete this
 	}
 
-    autoPopulate(){
+  autoPopulate(){
 		if (
 			this.state.can_make.length > 0 && 
 			Object.values(this.state.curr_recipe).length === 0
@@ -60,7 +61,7 @@ class BarCart extends React.Component {
 				curr_recipe:this.state.can_make[0]
 			})
 		}
-    }
+  }
 
 	handleSelection(type, value){
 		this.setState({[type]:value})
@@ -75,10 +76,7 @@ class BarCart extends React.Component {
     }
 
     render() {
-        if (Object.values(this.state.user).length === 0) {
-            return null;
-        }
-        if (Object.values(this.props.ingredients).length === 0) {
+        if (this.state.loading) {
             return null;
         }
         let shelf = "";

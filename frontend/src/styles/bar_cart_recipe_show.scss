@@ -50,6 +50,7 @@
 
 .show-top-left, .show-top-middle, 
 .show-top-right, .show-btm-right, .show-btm-left{
+  box-shadow: $standard-shadow;
   height: 39vh;
   margin: 5px;
   border: 10px solid white;
