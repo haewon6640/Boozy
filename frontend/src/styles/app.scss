@@ -45,6 +45,15 @@ $standard-shadow: rgba(0, 0, 0, 0.06) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 2
   flex-direction: row;
 }
 
+.centered-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -128,7 +137,7 @@ a {
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 4%;
   }  
-  .two-col {
+  .two-col, .three-col {
     grid-template-columns: 1fr;
   }  
   .navbar-inner-container {
