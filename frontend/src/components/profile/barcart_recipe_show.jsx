@@ -15,6 +15,10 @@ export default function BarCartRecipeShow(props) {
       Checkout the drinks you can nearly make to get some ideas.</h1>
       </div>;
   }
+  // boolean to determine word wrap on ingredients
+  let longIng;
+  recipe.ingredients.length > 9 ? longIng = true : longIng = false;
+
 
   let ingredients_we_have=[];
   let missingIngredients=[];
@@ -25,63 +29,64 @@ export default function BarCartRecipeShow(props) {
       missingIngredients.push(props.ingredients[el])
     }
   })
-
+  
   return (
     <div className="barcart-recipe-show">
-    <div className="two-col">
-      <div className="recipe-left">
-        <h1 className="recipe-title">{recipe.name}</h1>
-        <div className="show-photo">
-          <img src={recipe.imgUrl} alt="" />
-        </div>					
-      </div>
-
-      <div className="recipe-right">
-        <div className="two-col a-asym">
+      <div className="three-col">
+        <div className="show-top-left centered-col">
+          <h2 className="recipe-title">{recipe.name}</h2>
+          <div className="show-photo">
+            <img src={recipe.imgUrl} alt="" />
+          </div>
+      <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p>
+        </div>
+        <div className="show-top-middle">
           <div className="recipe-ingredients">
+            <div className="triangle"></div>
             <h2>Ingredients</h2>
-            <ul>
+            <ul
+            className={ longIng ? "long-list": ''}
+            >
               {ingredients_we_have.map((ingredient)=>(
-                <li key={ingredient._id}>
-                <GiOrangeSlice className="orange"/> 
+                <li key={ingredient._id} className='in-line'>
+                <GiOrangeSlice className="orange ico"/> 
                 <p>{ingredient.name}</p>
                 </li>
               ))}
               {missingIngredients.length > 0 && <div>
-                  <p className="missing-title">--missing--</p>
+                  <span className="missing-title">--missing--</span>
                   {missingIngredients.map((ingredient)=>(
-                    <li className="missing-ingredient" 
+                    <li className="missing-ingredient in-line" 
                       key={ingredient._id} 
                       onClick={()=>setSelectedMissing(ingredient)}
                       >
-                        <GiOrangeSlice className="orange"/> 
+                        <GiOrangeSlice className="orange ico"/> 
                         <p>{ingredient.name}</p>
                     </li>
                   ))}
               </div>}
           </ul>
         </div>
-        <ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/>
+        </div>
+        <div className="show-top-right centered-col">
+          <h2>Flavor Profile</h2>
+          <ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/>
+        </div>
       </div>
-        <div className="recipe-bottom-left">
-          {/* <p className="recipe-description">This is 150 characters. This is how long it is. Look! Isn't it cool! Cocktails and puppies and clean the house. Cocktails and puppies and clean house!.</p> */}
-          <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p>
-        </div>	
-        <div className="recipe-steps">
-          <h2>Steps</h2>
+      <div className="two-col">
+        <div className="show-btm-left">
+          <h3>(Click on ingredients to search)</h3>
+           <BoozyMap2 query={selectedMissing}/>
+        </div>
+        <div className="show-btm-right">
+          <h2>How to Make It</h2>
           <ol>
             {props.recipe.instructions.split("\n").map((step,idx)=> (<li key={idx}>{step}</li>))}
           </ol>
         </div>
       </div>
-    </div>
-          {missingIngredients.length > 0 && <BoozyMap2 query={selectedMissing}/>}
+        <div className="recipe-bottom-left">
+      </div>	
   </div>
   )
 }
-// setMissing(missingIngredient) {
-//   return e => this.setState({
-//       selectedMissing: missingIngredient
-//   });
-  
-// }

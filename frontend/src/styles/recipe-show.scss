@@ -84,20 +84,8 @@
     border-top: 2px solid $title-color;
 }
 
-
-.map-container {
-  padding: 10px 40px;
-  width: 90%;
-  height: 500px;
-  .map-component {
-      height: 100%;
-      width: 100%;
-  }
-}
-
 .graphic-title-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
 }
