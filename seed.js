@@ -113,7 +113,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'The Negroni’s bitter intensity and easy equal-parts formula have helped make it a favorite',
     additionalInfo: '',
 
   },
@@ -129,7 +129,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'This drink is precisely what the word cocktail referred to 200 years ago.',
     additionalInfo: ''
   },
   {
@@ -148,7 +148,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'It’s a hangover cure, a nutritious breakfast, an airport bar staple. This tomato- and vodka-based classic, created in Paris in the 1920s.',
     additionalInfo: ''
   },
   {
@@ -164,7 +164,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'when this zesty classic is made correctly—with quality tequila, orange liqueur, and lime juice—the drink carries itself upright',
     additionalInfo: ''
   },
   {
@@ -180,7 +180,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'the citrus-and-mint combination the perfect cocktail for those who say they’ll never drink whiskey. ',
     additionalInfo: ''
   },
   {
@@ -195,7 +195,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: "This classic cocktail is just Plymouth sloe gin, a dash of orange bitters, and ice.",
     additionalInfo: ''
   },
   {
@@ -210,7 +210,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'The boulevardier cocktail is an alcoholic drink composed of whiskey, sweet vermouth, and Campari.',
     additionalInfo: ''
   },
   {
@@ -224,7 +224,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: "A gin and tonic is a highball cocktail made with gin and tonic water poured over a large amount of ice. The ratio of gin to tonic varies according to taste, strength of the gin, other drink mixers being added, etc., with most recipes calling for a ratio between 1:1 and 1:3.",
     additionalInfo: ''
   },
   {
@@ -257,10 +257,8 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'lemon'}),
     ],
     reviews: [],
-    instructions: `1) Shake sugar and 1/3 cup hot water in a jar until sugar dissolves; chill until ready to use. \n 
-                   2) Combine whiskey, absinthe, bitters, 1/3 cup simple syrup, and ¾ cup ice water in a large pitcher; chill \n
-                      until very cold, at least 2 hours and uprosemary`,
-    description: faker.lorem.paragraph(),
+    instructions: `Shake sugar and 1/3 cup hot water in a jar until sugar dissolves; chill until ready to use.Combine whiskey, absinthe, bitters, 1/3 cup simple syrup, and ¾ cup ice water in a large pitcher; chill until very cold, at least 2 hours and uprosemary`,
+    description: 'The Sazerac is a local variation of a cognac or whiskey cocktail originally from New Orleans, named for the Sazerac de Forge et Fils brand of cognac brandy.',
     additionalInfo: ''
   },
   {
@@ -275,11 +273,8 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'lime juice'}),
     ],
     reviews: [],
-    instructions: `1) Shake 1 large egg white*, pisco, lime juice, and simple syrup in a cocktail shaker until frothy, about 1 minute. \n
-                      Fill with ice; shake until outside is frosty, about 30 seconds. Strain into a coupe glass. \n
-                      Top with Angostura bitters. \n
-                   2) *Raw egg is not recommended for the elderly, people with weakened immune systems...or people who don’t like raw egg.`,
-    description: faker.lorem.paragraph(),
+    instructions: `Shake 1 large egg white*, pisco, lime juice, and simple syrup in a cocktail shaker until frothy, about 1 minute. Fill with ice; shake until outside is frosty, about 30 seconds. Strain into a coupe glass. Top with Angostura bitters. *Raw egg is not recommended for the elderly, people with weakened immune systems...or people who don’t like raw egg.`,
+    description: "A pisco sour is an alcoholic cocktail of Peruvian origin that is typical of the cuisines from Peru and Chile.",
     additionalInfo: ''
   },
   {
@@ -302,11 +297,7 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Place 1/2-inch-thick cucumber slices in cocktail shaker. Using muddler or handle of wooden spoon, \n 
-    mash well. Add Pimm's, lemon juice, and sugar. Fill 2 pilsner glasses with ice; set aside. Add ice \n 
-    to Pimm's mixture, cover, and shake vigorously 20 times. Strain into glasses. Push 1 rosemary sprig, 1 \n
-    thyme sprig, 1 mint sprig, 1 lemon slice, and 2 strawberry halves down into each glass. Fill glasses with \n 
-    ginger beer. Garnish with cucumber spears and rhubarb stalks.`,
+    instructions: `1) Place 1/2-inch-thick cucumber slices in cocktail shaker. Using muddler or handle of wooden spoon, mash well. Add Pimm's, lemon juice, and sugar. Fill 2 pilsner glasses with ice; set aside. Add ice to Pimm's mixture, cover, and shake vigorously 20 times. Strain into glasses. Push 1 rosemary sprig, 1 thyme sprig, 1 mint sprig, 1 lemon slice, and 2 strawberry halves down into each glass. Fill glasses with ginger beer. Garnish with cucumber spears and rhubarb stalks.`,
     description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
@@ -322,9 +313,8 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Pour club soda, vodka, and ginger syrup into a Moscow Mule mug filled with ice; stir gently to combine. \n
-    Garnish with lime wedges.`,
-    description: faker.lorem.paragraph(),
+    instructions: `1) Pour club soda, vodka, and ginger syrup into a Moscow Mule mug filled with ice; stir gently to combine. Garnish with lime wedges.`,
+    description: 'A Moscow mule is a cocktail made with vodka, ginger beer and lime juice, garnished with a slice or wedge of lime',
     additionalInfo: ''
   },
   {
@@ -340,14 +330,8 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Combine sugar, rum, lime juice, and simple syrup in a cocktail shaker; stir until sugar dissolves, about \n 
-    20 seconds. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about \n 
-    20 seconds. Place a large ice cube in a coupe glass; strain cocktail through a Hawthorne strainer or a \n
-    slotted spoon into glass. \n    
-    2) Using a small serrated knife, remove a 1" strip of peel from lime (some white pith is okay); it should be \n
-    stiff enough to provide some resistance when bent. Twist over drink to express oils; discard. Garnish \n 
-    with a lime twist. \n`,
-    description: faker.lorem.paragraph(),
+    instructions: `1) Combine sugar, rum, lime juice, and simple syrup in a cocktail shaker; stir until sugar dissolves, about 20 seconds. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Place a large ice cube in a coupe glass; strain cocktail through a Hawthorne strainer or a slotted spoon into glass. Using a small serrated knife, remove a 1" strip of peel from lime (some white pith is okay); it should be stiff enough to provide some resistance when bent. Twist over drink to express oils; discard. Garnish with a lime twist. \n`,
+    description: faker.lorem.sentence,
     additionalInfo: ''
   },
   {
