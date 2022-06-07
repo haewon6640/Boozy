@@ -1,5 +1,19 @@
 .barcart-recipe-show {
     margin-left: 10px;
+    margin-top: 8px;
+    box-shadow: $standard-shadow;
+    border: 1px solid $light-grey;
+    border-radius: 5px;
+    color: $dark-grey;
+    h2 {
+      font-size: 36px;
+      font-family: $readible-fancy-font, cursive;
+      color: $title-color;
+      font-weight: 700;
+      padding: 0px 7px 2px 7px;
+      padding-bottom: 2px;
+      margin-bottom: 10px;
+    }
 }
 .missing-title {
     color: $title-color;
@@ -28,4 +42,43 @@
     .shopping-cart {
       font-size: 50px;
     }
+}
+
+
+.show-top-left {
+  height: 40vh;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .show-photo {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    margin-bottom: 10px;
+    img {
+        border-radius: 7px;
+    }
+  }
+}
+
+.show-top-right {
+  height: 40vh;
+  margin: 5px;
+  padding: 20px;
+  font-family: $recipe-font;
+  background-image: url('https://img.freepik.com/free-photo/white-paper-texture-background-cardboard-surface-from-paper-box-packing-s-decoration-nature-background_174431-9.jpg?w=2000');
+  
+}
+.show-btm-left {
+  background-color: teal;
+  height: 40vh;
+  margin: 5px;
+}
+
+.show-btm-right {
+  background-color: navy;
+  height: 40vh;
+  margin: 5px;
 }

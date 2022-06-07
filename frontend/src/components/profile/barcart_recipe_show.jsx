@@ -28,54 +28,62 @@ export default function BarCartRecipeShow(props) {
 
   return (
     <div className="barcart-recipe-show">
-    <div className="two-col">
-      <div className="recipe-left">
-        <h1 className="recipe-title">{recipe.name}</h1>
-        <div className="show-photo">
-          <img src={recipe.imgUrl} alt="" />
-        </div>					
-      </div>
-
-      <div className="recipe-right">
-        <div className="two-col a-asym">
+      <div className="two-col">
+        <div className="show-top-left">
+          <h2 className="recipe-title">{recipe.name}</h2>
+          <div className="show-photo">
+            <img src={recipe.imgUrl} alt="" />
+          </div>
+        </div>
+        <div className="show-top-right">
           <div className="recipe-ingredients">
             <h2>Ingredients</h2>
             <ul>
               {ingredients_we_have.map((ingredient)=>(
-                <li key={ingredient._id}>
-                <GiOrangeSlice className="orange"/> 
+                <li key={ingredient._id} className='in-line'>
+                <GiOrangeSlice className="orange ico"/> 
                 <p>{ingredient.name}</p>
                 </li>
               ))}
               {missingIngredients.length > 0 && <div>
-                  <p className="missing-title">--missing--</p>
+                  <p className="missing-title">--click to find missing ingredients--</p>
                   {missingIngredients.map((ingredient)=>(
-                    <li className="missing-ingredient" 
+                    <li className="missing-ingredient in-line" 
                       key={ingredient._id} 
                       onClick={()=>setSelectedMissing(ingredient)}
                       >
-                        <GiOrangeSlice className="orange"/> 
+                        <GiOrangeSlice className="orange ico"/> 
                         <p>{ingredient.name}</p>
                     </li>
                   ))}
               </div>}
           </ul>
         </div>
-        <ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/>
+
+        </div>
       </div>
-        <div className="recipe-bottom-left">
-          {/* <p className="recipe-description">This is 150 characters. This is how long it is. Look! Isn't it cool! Cocktails and puppies and clean the house. Cocktails and puppies and clean house!.</p> */}
+      <div className="two-col">
+        <div className="show-btm-left"></div>
+        <div className="show-btm-right"></div>
+      </div>
+
+
+
+
+
+
+
+        {/* <ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/> */}
+        {/* <div className="recipe-bottom-left">
           <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p>
-        </div>	
-        <div className="recipe-steps">
+        </div>	 */}
+        {/* <div className="recipe-steps">
           <h2>Steps</h2>
           <ol>
             {props.recipe.instructions.split("\n").map((step,idx)=> (<li key={idx}>{step}</li>))}
           </ol>
-        </div>
-      </div>
-    </div>
-          {missingIngredients.length > 0 && <BoozyMap2 query={selectedMissing}/>}
+        </div> */}
+          {/* {missingIngredients.length > 0 && <BoozyMap2 query={selectedMissing}/>} */}
   </div>
   )
 }
