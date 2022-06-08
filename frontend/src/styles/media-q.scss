@@ -62,10 +62,12 @@
     height: auto;
   }
   .review-form, .recipe-ingredients, .graphic-title-box, .recipe-steps {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    margin-left: 30px;
+    margin-bottom: 15px;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // text-align: center;
   }
 
   .inner-create-recipe-form {
