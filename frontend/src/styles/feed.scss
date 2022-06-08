@@ -23,7 +23,7 @@
 }
 .feed-index-container {
     overflow-y:scroll;
-    height: 800px;
+    height: 70vh;
 
 }
 .feed-index {
@@ -68,4 +68,7 @@
     margin-top: 20px;
     margin: 20px -16px 0px -16px;
     border-top: 1px solid $light-grey-border;
+}
+.phone {
+  display: none;
 }

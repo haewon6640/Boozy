@@ -31,8 +31,8 @@ class BarCart extends React.Component {
     componentDidMount() {
 		console.log("the component mounted")
 		this.props.fetchUser().then(() => {
-        this.props.fetchIngredients().then(()=>this.setState({loading:false}));
-        this.props.fetchRecipes().then(this.findCanDrinks);
+			this.props.fetchIngredients().then(()=>this.setState({loading:false}));
+			this.props.fetchRecipes().then(this.findCanDrinks);
       })
     }
 

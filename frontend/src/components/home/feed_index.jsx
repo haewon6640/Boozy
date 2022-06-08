@@ -3,8 +3,9 @@ import FeedIndexItem from "./feed_index_item";
 const FeedIndex = (props) => {
     return (
         <div className="feed-container-bottom">
-            <div className="feed-title">Drinks Drank</div>
+            <div className="feed-title web">Drinks Drank</div>
             <div className="feed-index-top">
+            <div className="feed-title phone">Drinks Drank</div>
                 <div className="feed-filter"></div>
             </div>
             <div className="feed-index-container">
