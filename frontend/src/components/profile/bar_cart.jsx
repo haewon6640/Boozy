@@ -77,7 +77,7 @@ class BarCart extends React.Component {
 
     render() {
         if (this.state.loading) {
-            return null;
+          return <div className="loading"></div>;
         }
         let shelf = "";
         const dictionary = Object.values(this.props.ingredients);

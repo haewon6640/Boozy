@@ -23,7 +23,7 @@ class HomePage extends React.Component {
 
 	render() {
         if (Object.values(this.state.dotd).length === 0) {
-            return null;
+            return <div className="loading"></div>;
         }
 		return (
             <div className="homepage">

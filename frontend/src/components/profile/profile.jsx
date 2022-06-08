@@ -20,7 +20,7 @@ class Profile extends React.Component {
     }
     render() {
         if (!this.props.user) {
-            return null;
+          return <div className="loading"></div>;
         }
         return (
             <div>

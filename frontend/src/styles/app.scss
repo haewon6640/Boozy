@@ -58,6 +58,9 @@ $standard-shadow: rgba(0, 0, 0, 0.06) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 2
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+.loading {
+  height: 100vh;
+}
 
 .btn {
   font-family: $reg-font;
