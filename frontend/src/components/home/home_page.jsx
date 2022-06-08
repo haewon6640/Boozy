@@ -25,12 +25,10 @@ class HomePage extends React.Component {
         if (Object.values(this.state.dotd).length === 0) {
             return null;
         }
-        // title, body
-        const review = {}
 		return (
             <div className="homepage">
                 <div className='webpage '>
-                    <div className='two-col feed-two-col'>
+                    <div className='two-col feed-two-col hp-reverse'>
                         <div className="feed-container-top">                            
                             <FeedIndex feed={this.state.feed} />
                         </div>

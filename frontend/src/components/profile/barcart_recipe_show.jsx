@@ -41,7 +41,7 @@ export default function BarCartRecipeShow(props) {
       <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p>
         </div>
         <div className="show-top-middle">
-          <div className="recipe-ingredients">
+          <div>
             <div className="triangle"></div>
             <h2>Ingredients</h2>
             <ul

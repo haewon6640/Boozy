@@ -122,34 +122,8 @@ a {
 @import './review-form.scss';
 @import './feed.scss';
 @import './footer.scss';
+
+
+
 // @media phone flip goes here
-@media screen and (max-width: 420px) {
-  .webpage {
-    width: 100%;
-    padding: 0;
-  }  
-  .nav-right {
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-  }  
-  .recipe-index-container {
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 4%;
-  }  
-  .two-col, .three-col {
-    grid-template-columns: 1fr;
-  }  
-  .navbar-inner-container {
-    height: 120px;
-  }  
-  .search-input-phone {
-    display: block;
-  }  
-  .search-input-web {
-    display: none;
-  }  
-  .search-icon-container {
-      display:none;
-  }
-}  
+@import './media-q.scss';

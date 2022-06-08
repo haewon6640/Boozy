@@ -25,9 +25,10 @@
   border-radius: 10px;
   box-shadow: 0 0 4px 0 $lighter-main-color;
   border: solid $less-light-main-color;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  gap: 40px;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-around;
 }
 .ratings-container{
   padding: 3px;
