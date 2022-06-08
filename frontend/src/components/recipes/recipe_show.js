@@ -44,7 +44,7 @@ class RecipeShow extends React.Component {
 	}
     render() {
         if ( Object.keys(this.state.recipe).length === 0) {
-            return null;
+          return <div className="loading"></div>;
         }
 
         const recipe = this.state.recipe;
