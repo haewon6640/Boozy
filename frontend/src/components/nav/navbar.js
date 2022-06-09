@@ -66,7 +66,7 @@ class NavBar extends React.Component {
           this.props.history.push(`/recipes/search/search?${this.state.searchString}`)
       }
   }
-
+ 
   render() {
       return (
         <div className='nav-outer-container'>
