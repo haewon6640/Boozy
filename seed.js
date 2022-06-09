@@ -562,20 +562,7 @@ const seedDB = async () => {
   for (let i = 0; i < recipeSeeds.length * 2; i++) {
     // create 2 times as many reviews as posts
     // create 2 reviews that emphasize each flavor category
-   if (count > 1) {
-       count = 0
-       if (j+1 < recipeSeeds.length) {
-           j++
-       }
-   }
-    console.log(`The receipe ${recipeSeeds[j].name} contains: `, 
-        recipeSeeds[j]
-            .ingredients.map(
-                ingredientId => Ingredient
-                    .findOne({_id: ingredientId})
-                        .then(res => console.log(res.name)) )
-                    )
-
+  
     reviewSeeds[i] = {
       // assign a random user a review
       reviewer: getRandomSubarray(userSeeds,1)[0],
@@ -596,6 +583,22 @@ const seedDB = async () => {
   };
   //delete all the existing reviews then insert all the reviews into the database
 //   await Review.deleteMany();
+
+for (let i = 0; i < reviewSeeds.length; i++){
+    if (count > 1) {
+        count = 0
+        if (j+1 < recipeSeeds.length) {
+            j++
+        }
+    }
+    console.log(`The receipe ${recipeSeeds[j].name} contains: `, 
+    recipeSeeds[j]
+        .ingredients.map(
+            ingredientId => Ingredient
+                .findOne({_id: ingredientId})
+                    .then(res => console.log(res.name)) )
+                )
+}
 //   await Review.insertMany(reviewSeeds)
 
   // assign the reviews made, to the recipes that they belong to
@@ -604,8 +607,9 @@ const seedDB = async () => {
   for (let i = 0; i < reviewSeeds.length; i++) {
     let review = reviewSeeds[i]
     // console.log(review.recipe , i )
- 
+   
    let recipe =  await Recipe.findByIdAndUpdate(review.recipe, {$addToSet: {reviews: review}}, {new:true});
+   
     // console.log(recipe)
     
   }
