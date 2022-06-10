@@ -14,40 +14,13 @@ const multer = require('multer');  // multer used to handle form data
 const Aws = require('aws-sdk');  // aws-sdk lib used to upload images to s3 bucket
 require("dotenv/config");
 
-
-function getAverageRating(recipe) {
-    let rate = {boozy:0, sweet: 0, sour: 0, bitter: 0, salty: 0, umami: 0};
-    if (recipe.reviews.length === 0) {
-        return rate;
-    }
-    let reviews = recipe.reviews;
-    let count = 0;
-    for (var j = 0; j < reviews.length; j++) {
-        count+=1;
-        rate["boozy"] += reviews[j]["rating"]["boozy"]
-        rate["sweet"] += reviews[j]["rating"]["sweet"]
-        rate["sour"] += reviews[j]["rating"]["sour"]
-        rate["bitter"] += reviews[j]["rating"]["bitter"]
-        rate["salty"] += reviews[j]["rating"]["salty"]
-        rate["umami"] += reviews[j]["rating"]["umami"]
-    }
-    rate["boozy"] = Math.floor(rate["boozy"]/count)
-    rate["sweet"] = Math.floor(rate["sweet"]/count)
-    rate["sour"] = Math.floor(rate["sour"]/count)
-    rate["bitter"] = Math.floor(rate["bitter"]/count)
-    rate["salty"] = Math.floor(rate["salty"]/count)
-    rate["umami"] = Math.floor(rate["umami"]/count)
-    return rate;
-}
 router.get("/", (req, res) => {
     Recipe.find({ "name": {"$regex": req.query.search, "$options": "i"}})
-        .populate('reviews')
         .sort({ date: -1 })
         .then((recipes) => {
             let response = {};
             for (var i = 0; i < recipes.length; i++) {
-                let recipe = Object.assign({},recipes[i]._doc,{avg_rating: getAverageRating(recipes[i])});
-                response[recipes[i].id] = recipe
+                response[recipes[i].id] = recipes[i]
             }
             return res.json(response);
         })
@@ -71,21 +44,10 @@ router.get('/user/:user_id', (req, res) => {
     );
 });
 
-router.get('/random',async (req,res) => {
-    let today = new Date().getDay();
-    let count = await Recipe.count().exec();
-    var random = today % count;
-    console.log(random);
-    let recipe = await Recipe.findOne().skip(random).exec();
-    res.json({[recipe.id]: recipe});
-})
-
 router.get('/:id', (req, res) => {
     Recipe.findById(req.params.id)
-        .populate('reviews')
         .then(async recipe => {
-            let rec = Object.assign({},recipe._doc,{avg_rating: getAverageRating(recipe)});
-            let recipeState = {recipe: {[recipe.id] : rec}};
+            let recipeState = {recipe: {[recipe.id] : recipe}};
             let ingredients = await Ingredient.find({'_id': {$in: recipe.ingredients}});
             let reviews = await Review.find({'_id': {$in: recipe.reviews}})
                 .populate('reviewer');
@@ -105,6 +67,7 @@ router.get('/:id', (req, res) => {
             res.status(404).json({err})
         );
 });
+
 // AWS
 
 const storage = multer.memoryStorage({
@@ -132,19 +95,22 @@ router.post('/',
     passport.authenticate('jwt', { session: false }),
     upload.single('recipe[photo]'),
     (req, res) => { 
-        const { errors, isValid } = validateRecipeInput(req.body);
-
-        if (!isValid) {
+        console.log(req.file);
+      const { errors, isValid } = validateRecipeInput(req.body);
+  
+      if (!isValid) {
         return res.status(400).json(errors);
-        }
-        const params = {
-            Bucket:process.env.AWS_BUCKET_NAME,      // bucket that we made earlier
-            Key:req.file.originalname,               // Name of the image
-            Body:req.file.buffer,                    // Body which will contain the image in buffer format
-            // ACL:"public-read-write",                 // defining the permissions to get the public link
-            ContentType:"image/jpeg"                 // Necessary to define the image content-type to view the photo in the browser with the link
-        }
-        s3.upload(params, (error,data) =>{
+      }
+    const params = {
+        
+        Bucket:process.env.AWS_BUCKET_NAME,      // bucket that we made earlier
+        Key:req.file.originalname,               // Name of the image
+        Body:req.file.buffer,                    // Body which will contain the image in buffer format
+        // ACL:"public-read-write",                 // defining the permissions to get the public link
+        ContentType:"image/jpeg"                 // Necessary to define the image content-type to view the photo in the browser with the link
+    }
+    console.log(params)
+      s3.upload(params, (error,data) =>{
           if(error){
               res.status(500).send({"err":error})
           }
@@ -158,28 +124,12 @@ router.post('/',
                 additionalInfo: req.body.recipe.additionalInfo
             })
             newRecipe.save()
-            .then(recipe => res.json({[recipe.id]:recipe}))
+            .then(recipe => res.json(recipe))
             .catch(err=> console.log(err));
             
         })
     }
   );
-
-// router.post("/",
-//     passport.authenticate('jwt', { session: false }),
-//     (req,res) => {
-//         const newRecipe = new Recipe({
-//             name: req.body.recipe.name,
-//             user: req.user.id,
-//             ingredients: JSON.parse(req.body.recipe.ingredients),
-//             description: req.body.recipe.description, 
-//             instructions: req.body.recipe.instructions,
-//             additionalInfo: req.body.recipe.additionalInfo
-//         })
-//         newRecipe.save()
-//         .then(recipe => res.json({[recipe.id]:recipe}))
-//         .catch(err=> console.log(err));
-//     });
 
 router.post('/:id/review',
     passport.authenticate('jwt', {session: false}),
