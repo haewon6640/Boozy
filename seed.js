@@ -16,7 +16,7 @@ mongoose
 // string of ingredient names
 // use dashes to prevent multi-word names from messing up the category
 let ingredientArr = [
-  'rum Alcohol','vodka Alcohol','gin Alcohol',
+  'dark-rum Alcohol boozy','vodka Alcohol boozy','gin Alcohol',
   'tequila Alcohol','rum Alcohol','whiskey Alcohol',
   'brandy Alcohol','amaretto Alcohol','coffee-liquer Alcohol',
   'vermouth Alcohol','irish-cream-liqueur Alcohol',
@@ -26,7 +26,7 @@ let ingredientArr = [
   'sour-mix Mixer', 'grenadine Alcohol','cream Mixer',
   'club-soda Mixer', 'tonic-water Alochol', 'ginger-ale Mixer',
   'cola Mixer','lemon Produce','lime Produce',
-  'maraschino-cherries Produce', 'oranges Produce','olives Produce',
+  'maraschino-cherries Produce', 'olives Produce',
   'salt Garnish', 'sugar Garnish','mint Garnish',
   'orange Produce', 'campari-bitters Alcohol','pickle-juice Mixer',
   'horse-radish Produce','worcestershire-sauce Produce', 'pepper Garnish',
@@ -38,7 +38,8 @@ let ingredientArr = [
   `rhubarb Garnish`, 'ginger-syrup Garnish', 'whipped-cream Garnish',
   'coffee Produce', 'mango Produce', 'ginger Produce',
   'raspberries Produce', 'champagne Alcohol', 'aperol Alcohol',
-  'prosecco Alcohol'
+  'prosecco Alcohol', 'orange-juice Mixer', 'drambuie-liqueur Alcohol',
+  `peach-juice Produce`
 
 ]
 
@@ -113,7 +114,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'The Negroni’s bitter intensity and easy equal-parts formula have helped make it a favorite',
     additionalInfo: '',
 
   },
@@ -129,7 +130,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'This drink is precisely what the word cocktail referred to 200 years ago.',
     additionalInfo: ''
   },
   {
@@ -148,7 +149,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'It’s a hangover cure, a nutritious breakfast, an airport bar staple. This tomato- and vodka-based classic, created in Paris in the 1920s.',
     additionalInfo: ''
   },
   {
@@ -164,7 +165,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'when this zesty classic is made correctly—with quality tequila, orange liqueur, and lime juice—the drink carries itself upright',
     additionalInfo: ''
   },
   {
@@ -180,7 +181,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'the citrus-and-mint combination the perfect cocktail for those who say they’ll never drink whiskey. ',
     additionalInfo: ''
   },
   {
@@ -195,7 +196,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: "This classic cocktail is just Plymouth sloe gin, a dash of orange bitters, and ice.",
     additionalInfo: ''
   },
   {
@@ -210,7 +211,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'The boulevardier cocktail is an alcoholic drink composed of whiskey, sweet vermouth, and Campari.',
     additionalInfo: ''
   },
   {
@@ -224,7 +225,7 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: "A gin and tonic is a highball cocktail made with gin and tonic water poured over a large amount of ice. The ratio of gin to tonic varies according to taste, strength of the gin, other drink mixers being added, etc., with most recipes calling for a ratio between 1:1 and 1:3.",
     additionalInfo: ''
   },
   {
@@ -235,11 +236,14 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'allspice berries'}),
       await Ingredient.findOne({name: 'black peppercorns'}),
       await Ingredient.findOne({name: 'lime juice'}),
-      await Ingredient.findOne({name: 'orange'})
+      await Ingredient.findOne({name: 'orange'}),
+      await Ingredient.findOne({name: 'dark rum'}),
+      await Ingredient.findOne({name: 'ginger beer'}),
+      await Ingredient.findOne({name: 'lime'})
     ],
     reviews: [],
     instructions: faker.hacker.phrase(),
-    description: faker.lorem.paragraph(),
+    description: 'The longer the spices infuse in the rum, the more flavorful this dark and stormy will be.',
     additionalInfo: ''
   },
   {
@@ -254,10 +258,8 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'lemon'}),
     ],
     reviews: [],
-    instructions: `1) Shake sugar and 1/3 cup hot water in a jar until sugar dissolves; chill until ready to use. \n 
-                   2) Combine whiskey, absinthe, bitters, 1/3 cup simple syrup, and ¾ cup ice water in a large pitcher; chill \n
-                      until very cold, at least 2 hours and uprosemary`,
-    description: faker.lorem.paragraph(),
+    instructions: `Shake sugar and 1/3 cup hot water in a jar until sugar dissolves; chill until ready to use.Combine whiskey, absinthe, bitters, 1/3 cup simple syrup, and ¾ cup ice water in a large pitcher; chill until very cold, at least 2 hours and uprosemary`,
+    description: 'The Sazerac is a local variation of a cognac or whiskey cocktail originally from New Orleans, named for the Sazerac de Forge et Fils brand of cognac brandy.',
     additionalInfo: ''
   },
   {
@@ -272,11 +274,8 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'lime juice'}),
     ],
     reviews: [],
-    instructions: `1) Shake 1 large egg white*, pisco, lime juice, and simple syrup in a cocktail shaker until frothy, about 1 minute. \n
-                      Fill with ice; shake until outside is frosty, about 30 seconds. Strain into a coupe glass. \n
-                      Top with Angostura bitters. \n
-                   2) *Raw egg is not recommended for the elderly, people with weakened immune systems...or people who don’t like raw egg.`,
-    description: faker.lorem.paragraph(),
+    instructions: `Shake 1 large egg white*, pisco, lime juice, and simple syrup in a cocktail shaker until frothy, about 1 minute. Fill with ice; shake until outside is frosty, about 30 seconds. Strain into a coupe glass. Top with Angostura bitters. *Raw egg is not recommended for the elderly, people with weakened immune systems...or people who don’t like raw egg.`,
+    description: "A pisco sour is an alcoholic cocktail of Peruvian origin that is typical of the cuisines from Peru and Chile.",
     additionalInfo: ''
   },
   {
@@ -299,11 +298,7 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Place 1/2-inch-thick cucumber slices in cocktail shaker. Using muddler or handle of wooden spoon, \n 
-    mash well. Add Pimm's, lemon juice, and sugar. Fill 2 pilsner glasses with ice; set aside. Add ice \n 
-    to Pimm's mixture, cover, and shake vigorously 20 times. Strain into glasses. Push 1 rosemary sprig, 1 \n
-    thyme sprig, 1 mint sprig, 1 lemon slice, and 2 strawberry halves down into each glass. Fill glasses with \n 
-    ginger beer. Garnish with cucumber spears and rhubarb stalks.`,
+    instructions: `1) Place 1/2-inch-thick cucumber slices in cocktail shaker. Using muddler or handle of wooden spoon, mash well. Add Pimm's, lemon juice, and sugar. Fill 2 pilsner glasses with ice; set aside. Add ice to Pimm's mixture, cover, and shake vigorously 20 times. Strain into glasses. Push 1 rosemary sprig, 1 thyme sprig, 1 mint sprig, 1 lemon slice, and 2 strawberry halves down into each glass. Fill glasses with ginger beer. Garnish with cucumber spears and rhubarb stalks.`,
     description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
@@ -319,9 +314,8 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Pour club soda, vodka, and ginger syrup into a Moscow Mule mug filled with ice; stir gently to combine. \n
-    Garnish with lime wedges.`,
-    description: faker.lorem.paragraph(),
+    instructions: `1) Pour club soda, vodka, and ginger syrup into a Moscow Mule mug filled with ice; stir gently to combine. Garnish with lime wedges.`,
+    description: 'A Moscow mule is a cocktail made with vodka, ginger beer and lime juice, garnished with a slice or wedge of lime',
     additionalInfo: ''
   },
   {
@@ -337,14 +331,8 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Combine sugar, rum, lime juice, and simple syrup in a cocktail shaker; stir until sugar dissolves, about \n 
-    20 seconds. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about \n 
-    20 seconds. Place a large ice cube in a coupe glass; strain cocktail through a Hawthorne strainer or a \n
-    slotted spoon into glass. \n    
-    2) Using a small serrated knife, remove a 1" strip of peel from lime (some white pith is okay); it should be \n
-    stiff enough to provide some resistance when bent. Twist over drink to express oils; discard. Garnish \n 
-    with a lime twist. \n`,
-    description: faker.lorem.paragraph(),
+    instructions: `1) Combine sugar, rum, lime juice, and simple syrup in a cocktail shaker; stir until sugar dissolves, about 20 seconds. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Place a large ice cube in a coupe glass; strain cocktail through a Hawthorne strainer or a slotted spoon into glass. Using a small serrated knife, remove a 1" strip of peel from lime (some white pith is okay); it should be stiff enough to provide some resistance when bent. Twist over drink to express oils; discard. Garnish with a lime twist. \n`,
+    description: faker.lorem.sentence,
     additionalInfo: ''
   },
   {
@@ -360,11 +348,8 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Muddle simple syrup and 2 mint sprigs in a cocktail shaker. Add rum and lime juice. Fill shaker with \n
-    ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. \n    
-    2) Strain cocktail through a Hawthorne strainer or a slotted spoon into a tall Collins glass filled with ice. \n
-    Top off with club soda; garnish with more mint`,
-    description: faker.lorem.paragraph(),
+    instructions: `1) Muddle simple syrup and 2 mint sprigs in a cocktail shaker. Add rum and lime juice. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Strain cocktail through a Hawthorne strainer or a slotted spoon into a tall Collins glass filled with ice. Top off with club soda; garnish with more mint`,
+    description: 'The combination of sweetness, citrus, and herbaceous mint flavors is intended to complement the rum, and has made the mojito a popular summer drink',
     additionalInfo: ''
   },
   {
@@ -384,6 +369,20 @@ const seedDB = async () => {
     cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. \n
     2) Strain cocktail through a Hawthorne strainer or a slotted spoon into a martini glass. Garnish with \n
     orange twist.`,
+    description:`A cosmopolitan, or informally a cosmo, is a cocktail made with vodka, triple sec, cranberry juice, and freshly squeezed or sweetened lime juice`,
+    additionalInfo: ''
+  },
+  {
+    user: getRandomSubarray(userSeeds,1)[0],
+    name: `Screw Driver`,
+    imgUrl: 'https://www.liquor.com/thmb/xQdUxz4hELJFJT7L5MimYSFSqM4=/720x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__liquor__2017__11__06162348__screwdrvier-720x720-recipe-23e0c0ac47334f108e4fa00b34b7f5bf.jpg',
+    ingredients: [
+      await Ingredient.findOne({name: 'vodka'}),
+      await Ingredient.findOne({name: 'orange juice'})
+
+    ],
+    reviews: [],
+    instructions: `Put some vodka in your orange juice. Alternatively, put some orange juice in your vodka`,
     description: faker.lorem.paragraph(),
     additionalInfo: ''
   },
@@ -402,7 +401,7 @@ const seedDB = async () => {
     reviews: [],
     instructions: `1) Place sugar cube in an Irish coffee mug. Add coffee and whiskey and stir to combine. Top with whipped \n
     cream and bitters, if using.`,
-    description: faker.lorem.paragraph(),
+    description: 'Irish coffee is a caffeinated alcoholic drink consisting of Irish whiskey, hot coffee, and sugar, stirred, and topped with cream',
     additionalInfo: ''
   },
   {
@@ -423,15 +422,9 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1)Combine gin, lemon juice, and sugar in a pitcher or large measuring glass and stir to dissolve sugar; \n
-    refrigerate gin mixture if not making drinks right away. \n
-    2) Do Ahead: Gin mixture can be made 1 day ahead. Cover and chill.\n    
-    3) When ready to serve, arrange lemon wedges, mango, cucumber, mint sprigs, ginger, raspberries, and \n 
-    strawberries on a platter or in separate bowls and set out alongside gin mixture, club soda, and a bucket \n
-    of ice. \n
-    4) For each cocktail, muddle ingredients of your choice (mix and match!) in a Collins glass. Fill with ice, \n 
-    then add ¼ cup gin mixture and top off with club soda.`,
-    description: faker.lorem.paragraph(),
+    instructions: `Combine gin, lemon juice, and sugar in a pitcher or large measuring glass and stir to dissolve sugar; refrigerate gin mixture if not making drinks right away. Do Ahead: Gin mixture can be made 1 day ahead. Cover and chill. When ready to serve, arrange lemon wedges, mango, cucumber, mint sprigs, ginger, raspberries, and strawberries on a platter or in separate bowls and set out alongside gin mixture, club soda, and a bucket \n
+    of ice. For each cocktail, muddle ingredients of your choice (mix and match!) in a Collins glass. Fill with ice, then add ¼ cup gin mixture and top off with club soda.`,
+    description: 'This "gin and sparkling lemonade" drink is typically served in a Collins glass over ice',
     additionalInfo: ''
   },
   {
@@ -448,11 +441,8 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Combine gin, lemon juice, and simple syrup in a cocktail shaker. Fill shaker with ice, cover, and shake \n 
-    vigorously until outside of shaker is very cold, about 20 seconds. \n
-    2) Strain cocktail through a Hawthorne strainer or a slotted spoon into a large flute. Top with \n 
-    Champagne; garnish with lemon twist. \n`,
-    description: faker.lorem.paragraph(),
+    instructions: ` Combine gin, lemon juice, and simple syrup in a cocktail shaker. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Strain cocktail through a Hawthorne strainer or a slotted spoon into a large flute. Top with Champagne; garnish with lemon twist.`,
+    description: `French 75 is a cocktail made from gin, champagne, lemon juice, and sugar. It is also called a 75 Cocktail, or in French simply a Soixante Quinze`,
     additionalInfo: "Hendrick's Gin is recommended"
   },
   {
@@ -465,60 +455,164 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'prosecco'}),
       await Ingredient.findOne({name: 'club soda'}),
       await Ingredient.findOne({name: 'ice'}),
-
+    ],
+    reviews: [],
+    instructions: `Thread olives onto a swizzle stick. Pour Aperol and Prosecco into a rocks glass filled with ice. Top off with soda and gently stir with swizzle stick with olives \n`,
+    description: `A Spritz Veneziano is an Italian wine-based cocktail, commonly served as an aperitif in Northeast Italy`,
+    additionalInfo: ""
+  },
+  {
+    user: getRandomSubarray(userSeeds,1)[0],
+    name: `Greyhound`,
+    imgUrl: 'https://www.tasteofhome.com/wp-content/uploads/2018/07/shutterstock_504770413.jpg?resize=700,700',
+    ingredients: [
+      await Ingredient.findOne({name: 'gin'}),
+      await Ingredient.findOne({name: 'grapefruit juice'})
 
     ],
     reviews: [],
-    instructions: `1) Thread olives onto a swizzle stick. Pour Aperol and Prosecco into a rocks glass filled with ice. \n 
-    Top off with soda and gently stir with swizzle stick with olives \n`,
-    description: faker.lorem.paragraph(),
-    additionalInfo: ""
-  }
- ]
+    instructions: `Pour two ounces of gin into a cocktail glass, and top with grapefruit juice to taste`,
+    description: `Grapefuit and gin for the win!`,
+    additionalInfo: ''
+    
+},
+{
+  user: getRandomSubarray(userSeeds,1)[0],
+  name: `Rusty Nail`,
+  imgUrl: 'https://www.tasteofhome.com/wp-content/uploads/2018/07/Rusty-nail.jpg?resize=700,700',
+  ingredients: [
+    await Ingredient.findOne({name: 'whiskey'}),
+    await Ingredient.findOne({name: 'drambuie liqueur'})
+
+  ],
+  reviews: [],
+  instructions: `Two parts whiskey, half part drambuie liqueur`,
+  description: `Frank Sinatra and the Rat Pack loved this drink!`,
+  additionalInfo: ''
+},
+{
+  user: getRandomSubarray(userSeeds,1)[0],
+  name: `Black Russian`,
+  imgUrl: 'https://www.tasteofhome.com/wp-content/uploads/2018/07/Rusty-nail.jpg?resize=700,700',
+  ingredients: [
+    await Ingredient.findOne({name: 'vodka'}),
+    await Ingredient.findOne({name: 'coffee liqueur'})
+
+  ],
+  reviews: [],
+  instructions: `Vodka and coffee-flavored liqueur`,
+  description: `The arch-nemesis of the White Russian!`,
+  additionalInfo: ''
+},
+{
+  user: getRandomSubarray(userSeeds,1)[0],
+  name: `Mimosa`,
+  imgUrl: 'https://www.tasteofhome.com/wp-content/uploads/2018/07/shutterstock_561512077.jpg?resize=700,700',
+  ingredients: [
+    await Ingredient.findOne({name: 'orange juice'}),
+    await Ingredient.findOne({name: 'champagne'})
+
+  ],
+  reviews: [],
+  instructions: `Orange juice with champagne`,
+  description: `The more sophisticated sibling of the screwdriver!`,
+  additionalInfo: ''
+},
+{
+  user: getRandomSubarray(userSeeds,1)[0],
+  name: `Bellini`,
+  imgUrl: 'https://www.tasteofhome.com/wp-content/uploads/2018/07/Bellini_1009292707.jpg?resize=700,700',
+  ingredients: [
+    await Ingredient.findOne({name: 'peach juice'}),
+    await Ingredient.findOne({name: 'champagne'})
+
+  ],
+  reviews: [],
+  instructions: `Peach juice with champagne`,
+  description: `A peachy mimosa`,
+  additionalInfo: ''
+},
+{
+  user: getRandomSubarray(userSeeds,1)[0],
+  name: `Vodka Cranberry`,
+  imgUrl: 'https://www.tasteofhome.com/wp-content/uploads/2018/07/Vodka-cranberry.jpg?resize=700,700',
+  ingredients: [
+    await Ingredient.findOne({name: 'cranberry juice'}),
+    await Ingredient.findOne({name: 'vodka'})
+
+  ],
+  reviews: [],
+  instructions: `Vodka with cranberry juice`,
+  description: `The name tells you how to make it!`,
+  additionalInfo: ''
+}
+]
 
 //  recipeSeeds.forEach((recipe => console.log(recipe.name, recipe.description)))
- await Recipe.deleteMany({});
+ await Recipe.deleteMany();
  await Recipe.insertMany(recipeSeeds)
 
  recipeSeeds = await Recipe.find()
  //create review seeds
 
-  let reviewSeeds = [];
-  for (let i = 0; i < recipeSeeds.length * 2; i++) {
-    // create 2 times as many reviews as posts
-    reviewSeeds[i] = {
-      // assign a random user a review
-      reviewer: getRandomSubarray(userSeeds,1)[0],
-      // assign that review to a random recipe object
-      recipe: getRandomSubarray(recipeSeeds,1)[0],
-      rating: 
-                  {boozy: Math.floor(Math.random()*5),
-                  sweet: Math.floor(Math.random()*5),
-                  sour: Math.floor(Math.random()*5),
-                  bitter: Math.floor(Math.random()*5),
-                  salty: Math.floor(Math.random()*5),
-                  umami: Math.floor(Math.random()*5),
-                  rating: Math.floor(Math.random()*5)},
-      title: faker.company.companyName(),
-      body: faker.lorem.paragraph(),
-    }
-    console.log(`Review seed ${i}:`, reviewSeeds[i].rating)
-  };
-  //delete all the existing reviews then insert all the reviews into the database
-  await Review.deleteMany();
-  await Review.insertMany(reviewSeeds)
+//   let reviewSeeds = [];
+//   let count = 0;
+//   let j = 0;
+//   let ratingObject;
+//   for (let i = 0; i < recipeSeeds.length * 2; i++) {
+//     // create 2 times as many reviews as posts
+//     // create 2 reviews that emphasize each flavor category
+  
+//     reviewSeeds[i] = {
+//       // assign a random user a review
+//       reviewer: getRandomSubarray(userSeeds,1)[0],
+//       // assign that review to a random recipe object
+//       recipe: recipeSeeds[j],
+//       rating: 
+//                   {boozy: Math.floor(Math.random()*5),
+//                   sweet: Math.floor(Math.random()*5),
+//                   sour: Math.floor(Math.random()*5),
+//                   bitter: Math.floor(Math.random()*5),
+//                   salty: Math.floor(Math.random()*5),
+//                   umami: Math.floor(Math.random()*5),
+//                   rating: Math.floor(Math.random()*5)},
+//       title: faker.company.companyName(),
+//       body: faker.lorem.paragraph(),
+//     }
+//     count ++
+// };
+//delete all the existing reviews then insert all the reviews into the database
+await Review.deleteMany();
+//   await Review.insertMany(reviewSeeds)
+
+// for (let i = 0; i < reviewSeeds.length; i++){
+//     if (count > 1) {
+//         count = 0
+//         if (j+1 < recipeSeeds.length) {
+//             j++
+//         }
+//     }
+//     console.log(`The receipe ${recipeSeeds[j].name} contains: `, 
+//     recipeSeeds[j]
+//         .ingredients.map(
+//             ingredientId => Ingredient
+//                 .findOne({_id: ingredientId})
+//                     .then(res => console.log(res.name)) )
+//                 )
+// }
 
   // assign the reviews made, to the recipes that they belong to
-  reviewSeeds = await Review.find()
+//   reviewSeeds = await Review.find()
 
-  for (let i = 0; i < reviewSeeds.length; i++) {
-    let review = reviewSeeds[i]
-    // console.log(review.recipe , i )
- 
-   let recipe =  await Recipe.findByIdAndUpdate(review.recipe, {$addToSet: {reviews: review}}, {new:true});
-    // console.log(recipe)
+//   for (let i = 0; i < reviewSeeds.length; i++) {
+//     let review = reviewSeeds[i]
+//     // console.log(review.recipe , i )
+   
+//    let recipe =  await Recipe.findByIdAndUpdate(review.recipe, {$addToSet: {reviews: review}}, {new:true});
+   
+//     // console.log(recipe)
     
-  }
+//   }
 
 // console.log(reviewSeeds)
 }
