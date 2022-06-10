@@ -4,4 +4,23 @@
 	text-align: center;
 	// border: 1px solid magenta;
 	justify-content: space-between;
+  margin-top: -50px;
+}
+
+.add-recipe {
+  opacity: 0.5;
+  position: sticky;
+  top: 90%;
+  left: 86%;
+  font-size: 50px;
+  align-items: right;
+  color: $dark-grey!important;
+  border-radius: 25px;
+  display: block;
+  // align-self: center;
+  background-color: $title-color;
+  &:hover {
+    opacity: 1;
+
+  }
 }

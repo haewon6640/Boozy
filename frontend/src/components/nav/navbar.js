@@ -66,7 +66,7 @@ class NavBar extends React.Component {
           this.props.history.push(`/recipes/search/search?${this.state.searchString}`)
       }
   }
-
+ 
   render() {
       return (
         <div className='nav-outer-container'>
@@ -79,7 +79,7 @@ class NavBar extends React.Component {
                     </a>
                 </div>
                 {/* <form> */}
-                    <div className='search-bar'>
+                    <div className='search-bar-web'>
                         <input type="text"
                             onChange={this.handleSearchType()}
                             value={this.state.searchString}
@@ -95,13 +95,19 @@ class NavBar extends React.Component {
                 {/* </form> */}
                 { this.getLinks() }
             </div>
-			<input type="text"
-						className='search-input-phone'
-                        onChange={this.handleSearchType()}
-                        value={this.state.searchString}
-                        onKeyDown={this.handleSearch}
-						placeholder="Find your next cocktail"
-						/>
+            <div className='search-bar-phone'>
+                        <input type="text"
+                            onChange={this.handleSearchType()}
+                            value={this.state.searchString}
+                            onKeyDown={this.handleSearch}
+                            className='search-input-web'
+                            placeholder="Find your next cocktail"
+                            />
+                        <div onClick={()=>this.props.history.push(`/recipes/search/search?${this.state.searchString}`)} 
+                            className="search-icon-container">
+                            <FaSearch className="search-icon"/>
+                        </div>
+                </div>
           </div>
         </div>
       );

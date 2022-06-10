@@ -4,12 +4,14 @@ class BoozyMap2 extends React.Component {
     constructor(props) {
         super(props)
     
-    this.state = {
-        center: { lat: 0, lng: 0},
-        coordsResult: [],
+        this.state = {
+            center: { lat: 0, lng: 0},
+            coordsResult: [],
+        }
+        this.setQuery = this.setQuery.bind(this)
     }
 
-    }
+   
   
     componentDidMount() {
         
@@ -52,13 +54,30 @@ class BoozyMap2 extends React.Component {
 
     }
 
+    setQuery() {
+        let query = this.props.query
+        let queryResult = "";
+
+        if (query) {
+            if (query.category === "Produce" || query.category === 'Garnish' || query.category === 'Mixer') {
+                queryResult = 'Grocery Store'
+            }
+            else {
+                queryResult = 'Liquor'
+            }
+        }
+
+        return queryResult
+
+    }
+
     componentDidUpdate() {
         this.map.setCenter(this.state.center)
 
         
         let coords= []
         let request = {
-          query: this.props.query,
+          query: this.setQuery(),
           fields: ["name", "geometry"]
         };
     
@@ -88,7 +107,7 @@ class BoozyMap2 extends React.Component {
             marker1.setMap(this.map);
     
             const infowindow = new window.google.maps.InfoWindow({
-                content: `<div> buy ${this.props.query} at ${this.state.coordsResult[0].name}</div>`
+                content: `<div> Buy ${this.props.query.name} at ${this.state.coordsResult[0].name}</div>`
             });
     
             marker1.addListener("click", () => {
@@ -106,6 +125,7 @@ class BoozyMap2 extends React.Component {
   
     render() {
         // console.log(this.props.query)
+        // debugger
       return (
           <div className="map-container">
             <div ref={ map => this.mapNode = map } className="map-component" > 

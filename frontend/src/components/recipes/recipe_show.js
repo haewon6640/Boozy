@@ -35,16 +35,18 @@ class RecipeShow extends React.Component {
             reviews: this.props.reviews
         }))
     }
+	parseSteps(){
+		if (this.state.recipe.instructions.includes('\n')) {		
+			return this.state.recipe.instructions.split("\n").map((step,idx)=> (<li key={idx}>{step}</li>))
+		} else {
+			return this.state.recipe.instructions.split(". ").map((step,idx)=> (<li key={idx}>{step}</li>))
+		}
+	}
     render() {
         if ( Object.keys(this.state.recipe).length === 0) {
-            return null;
+          return <div className="loading"></div>;
         }
-		// let recipe = {
-		// 	name:"dinkypoo",
-		//  	ingredients:["vodhah", "arange"],
-		// 	reviews:"this will be review summary",
-			// instructions:"take the vodkah \n drink it \n eat the orage  \n be done"
-		// }
+
         const recipe = this.state.recipe;
         console.log("recipe show:",this.props)
 		return (
@@ -57,33 +59,36 @@ class RecipeShow extends React.Component {
                     <h1 className="recipe-title">{recipe.name}</h1>
                     <div className="recipe-bottom-left">
                        <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p>
-                        {/* <div className="review-show">
-                            <div>{this.state.recipe.name}'s Flavor Profile</div>
-                            <ReviewGraphic/>
-                        </div> */}
                     </div>	
 				</div>
 				<div className="recipe-right">
-                    <div className="recipe-ingredients">
-                        <h2>Ingredients</h2>
-                        <ul>
-                            {this.state.ingredients.map((ingredient)=>(
-                                <li key={ingredient._id}>
-                                    <GiOrangeSlice className="orange"/> 
-                                    <p>{ingredient.name}</p>
-                                </li>
-                            ))}
-                        </ul>
+					<div className="two-col">
+						<div className="recipe-ingredients">
+							<h2>Ingredients</h2>
+							<ul>
+								{this.state.ingredients.map((ingredient)=>(
+									<li key={ingredient._id}>
+										<GiOrangeSlice className="orange"/> 
+										<p>{ingredient.name}</p>
+									</li>
+								))}
+							</ul>
+						</div>
+						<div className="graphic-title-box">
+							<h2>Flavor Profile</h2>
+							<ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/>
+						</div>
 					</div>
                     <div className="recipe-steps">
 						<h2>Steps</h2>
                         <ol>
-                            {this.state.recipe.instructions.split("\n").map((step,idx)=> (<li key={idx}>{step}</li>))}
+                            {/* {this.state.recipe.instructions.split("\n").map((step,idx)=> (<li key={idx}>{step}</li>))} */}
+							{this.parseSteps()}
                         </ol>
                     </div>
                     <div className="review-form-container">
-				              <ReviewForm fetchRecipe={this.rerenderPage} createReview={this.props.createReview} recipe={recipe}/>
-			              </div>
+				        <ReviewForm fetchRecipe={this.rerenderPage} createReview={this.props.createReview} recipe={recipe}/>
+			        </div>
 				</div>
 			</div>
             <div className="separator"></div>

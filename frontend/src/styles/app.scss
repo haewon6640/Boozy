@@ -19,7 +19,7 @@ $readible-fancy-font: 'Courgette';
 $title-font: 'Neonderthaw';
 $recipe-font: "Special Elite";
 $reg-font: 'Raleway';
-$webpage-width: 1200px;
+$webpage-width: 1250px;
 $phone-width: 400px;
 $light-button-color: #f1eff2;
 $light-green: #acb2a9;
@@ -30,6 +30,7 @@ $warm-pink: #f99fc9ff;
 $serif-font: 'Merriweather';
 $dark-coral: #EF6079FF;
 $light-grey-border: rgb(221, 221, 221);
+$standard-shadow: rgba(0, 0, 0, 0.06) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 2px 6px 0px, rgba(0, 0, 0, 0.09) 0px 3px 8px 0px;
 
 // some all around classes
 .webpage {
@@ -44,9 +45,21 @@ $light-grey-border: rgb(221, 221, 221);
   flex-direction: row;
 }
 
+.centered-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+.loading {
+  height: 100vh;
 }
 
 .btn {
@@ -63,6 +76,7 @@ $light-grey-border: rgb(221, 221, 221);
   border: none!important;
   background-color: $light-button-color;
   color: $dark-grey;
+  align-self: center;
   &:hover {
     background-color: $less-light-main-color;
   }
@@ -111,34 +125,8 @@ a {
 @import './review-form.scss';
 @import './feed.scss';
 @import './footer.scss';
+
+
+
 // @media phone flip goes here
-@media screen and (max-width: 420px) {
-  .webpage {
-    width: 100%;
-    padding: 0;
-  }  
-  .nav-right {
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-  }  
-  .recipe-index-container {
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 4%;
-  }  
-  .two-col {
-    grid-template-columns: 1fr;
-  }  
-  .navbar-inner-container {
-    height: 120px;
-  }  
-  .search-input-phone {
-    display: block;
-  }  
-  .search-input-web {
-    display: none;
-  }  
-  .search-icon-container {
-      display:none;
-  }
-}  
+@import './media-q.scss';

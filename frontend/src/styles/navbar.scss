@@ -24,7 +24,7 @@
     }
 }
 
-.search-bar {
+.search-bar-web, .search-bar-phone {
     position:relative;
     width: 30%;
     .search-input-web {
@@ -115,7 +115,7 @@ a:visited {
         box-shadow: $title-color 0px 0px 0px 4px;
     }
 }
-.search-input-phone{
+.search-bar-phone{
   display: none;
   width: 100%;
   margin-bottom: 8px;

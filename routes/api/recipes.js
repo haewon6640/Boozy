@@ -128,59 +128,58 @@ const s3 = new Aws.S3({
     secretAccessKey:process.env.AWS_ACCESS_KEY_SECRET
 })
 
-// router.post('/',
-//     passport.authenticate('jwt', { session: false }),
-//     upload.single('recipe[photo]'),
-//     (req, res) => { 
-//       const { errors, isValid } = validateRecipeInput(req.body);
-  
-//       if (!isValid) {
-//         return res.status(400).json(errors);
-//       }
-//     const params = {
-        
-//         Bucket:process.env.AWS_BUCKET_NAME,      // bucket that we made earlier
-//         Key:req.file.originalname,               // Name of the image
-//         Body:req.file.buffer,                    // Body which will contain the image in buffer format
-//         // ACL:"public-read-write",                 // defining the permissions to get the public link
-//         ContentType:"image/jpeg"                 // Necessary to define the image content-type to view the photo in the browser with the link
-//     }
-//       s3.upload(params, (error,data) =>{
-//           if(error){
-//               res.status(500).send({"err":error})
-//           }
-//           const newRecipe = new Recipe({
-//                 imgUrl: data.Location,
-//                 name: req.body.recipe.name,
-//                 user: req.user.id,
-//                 ingredients: JSON.parse(req.body.recipe.ingredients),
-//                 description: req.body.recipe.description, 
-//                 instructions: req.body.recipe.instructions,
-//                 additionalInfo: req.body.recipe.additionalInfo
-//             })
-//             newRecipe.save()
-//             .then(recipe => res.json({[recipe.id]:recipe}))
-//             .catch(err=> console.log(err));
-            
-//         })
-//     }
-//   );
-
-router.post("/",
+router.post('/',
     passport.authenticate('jwt', { session: false }),
-    (req,res) => {
-        const newRecipe = new Recipe({
-            name: req.body.recipe.name,
-            user: req.user.id,
-            ingredients: JSON.parse(req.body.recipe.ingredients),
-            description: req.body.recipe.description, 
-            instructions: req.body.recipe.instructions,
-            additionalInfo: req.body.recipe.additionalInfo
+    upload.single('recipe[photo]'),
+    (req, res) => { 
+        const { errors, isValid } = validateRecipeInput(req.body);
+
+        if (!isValid) {
+        return res.status(400).json(errors);
+        }
+        const params = {
+            Bucket:process.env.AWS_BUCKET_NAME,      // bucket that we made earlier
+            Key:req.file.originalname,               // Name of the image
+            Body:req.file.buffer,                    // Body which will contain the image in buffer format
+            // ACL:"public-read-write",                 // defining the permissions to get the public link
+            ContentType:"image/jpeg"                 // Necessary to define the image content-type to view the photo in the browser with the link
+        }
+        s3.upload(params, (error,data) =>{
+          if(error){
+              res.status(500).send({"err":error})
+          }
+          const newRecipe = new Recipe({
+                imgUrl: data.Location,
+                name: req.body.recipe.name,
+                user: req.user.id,
+                ingredients: JSON.parse(req.body.recipe.ingredients),
+                description: req.body.recipe.description, 
+                instructions: req.body.recipe.instructions,
+                additionalInfo: req.body.recipe.additionalInfo
+            })
+            newRecipe.save()
+            .then(recipe => res.json({[recipe.id]:recipe}))
+            .catch(err=> console.log(err));
+            
         })
-        newRecipe.save()
-        .then(recipe => res.json({[recipe.id]:recipe}))
-        .catch(err=> console.log(err));
-    });
+    }
+  );
+
+// router.post("/",
+//     passport.authenticate('jwt', { session: false }),
+//     (req,res) => {
+//         const newRecipe = new Recipe({
+//             name: req.body.recipe.name,
+//             user: req.user.id,
+//             ingredients: JSON.parse(req.body.recipe.ingredients),
+//             description: req.body.recipe.description, 
+//             instructions: req.body.recipe.instructions,
+//             additionalInfo: req.body.recipe.additionalInfo
+//         })
+//         newRecipe.save()
+//         .then(recipe => res.json({[recipe.id]:recipe}))
+//         .catch(err=> console.log(err));
+//     });
 
 router.post('/:id/review',
     passport.authenticate('jwt', {session: false}),

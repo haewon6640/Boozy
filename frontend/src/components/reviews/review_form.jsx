@@ -95,7 +95,7 @@ export default class ReviewForm extends Component {
         let reviewSpan;
         if (this.state.formVisible) {
             form = (
-                <form className="review-form " onSubmit={this.handleSubmit}>
+                <form className="review-form two-col" onSubmit={this.handleSubmit}>
                     <div className="form-first-column ratings-container">
                         <span className="rating-header">
                             {" "}
