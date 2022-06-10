@@ -133,7 +133,7 @@ router.post('/',
     upload.single('recipe[photo]'),
     (req, res) => { 
         console.log("hi")
-        console.log(req.body)
+        console.log(req.file)
       const { errors, isValid } = validateRecipeInput(req.body);
   
       if (!isValid) {
