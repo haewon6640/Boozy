@@ -70,8 +70,8 @@ function getRandomSubarray(arr, size) {
 // delete all the ingredients, users, and recipes in the current database then add all the ingredient objects
 
 const seedDB = async () => {
-//   await Ingredient.deleteMany({}); //if you want to delete all ingredients
-//   await Ingredient.insertMany(ingredientSeeds) //insert ingredient seeds created from the string list above
+  await Ingredient.deleteMany({}); //if you want to delete all ingredients
+  await Ingredient.insertMany(ingredientSeeds) //insert ingredient seeds created from the string list above
   
   ingredientSeeds = await Ingredient.find() //takes the ingredient seed objects from the database to use in the creation of users and recipes
   
@@ -96,8 +96,8 @@ const seedDB = async () => {
       password: '$2a$10$NcUeyj5yCHoJTvRgOlw7Cef01EXTP7TfVwAf3qf2ZR.cdz2L0QU3q',
       shelf: shelf})
   }
-//   await User.deleteMany()
-//   await User.insertMany(userSeeds) // insert userSeeds into DB
+  await User.deleteMany()
+  await User.insertMany(userSeeds) // insert userSeeds into DB
   userSeeds = await User.find() // take all the user objects from the database and stick them into an array
 
   // create recipe seeds
@@ -549,70 +549,70 @@ const seedDB = async () => {
 ]
 
 //  recipeSeeds.forEach((recipe => console.log(recipe.name, recipe.description)))
-//  await Recipe.deleteMany();
-//  await Recipe.insertMany(recipeSeeds)
+ await Recipe.deleteMany();
+ await Recipe.insertMany(recipeSeeds)
 
  recipeSeeds = await Recipe.find()
  //create review seeds
 
-  let reviewSeeds = [];
-  let count = 0;
-  let j = 0;
-  let ratingObject;
-  for (let i = 0; i < recipeSeeds.length * 2; i++) {
-    // create 2 times as many reviews as posts
-    // create 2 reviews that emphasize each flavor category
+//   let reviewSeeds = [];
+//   let count = 0;
+//   let j = 0;
+//   let ratingObject;
+//   for (let i = 0; i < recipeSeeds.length * 2; i++) {
+//     // create 2 times as many reviews as posts
+//     // create 2 reviews that emphasize each flavor category
   
-    reviewSeeds[i] = {
-      // assign a random user a review
-      reviewer: getRandomSubarray(userSeeds,1)[0],
-      // assign that review to a random recipe object
-      recipe: recipeSeeds[j],
-      rating: 
-                  {boozy: Math.floor(Math.random()*5),
-                  sweet: Math.floor(Math.random()*5),
-                  sour: Math.floor(Math.random()*5),
-                  bitter: Math.floor(Math.random()*5),
-                  salty: Math.floor(Math.random()*5),
-                  umami: Math.floor(Math.random()*5),
-                  rating: Math.floor(Math.random()*5)},
-      title: faker.company.companyName(),
-      body: faker.lorem.paragraph(),
-    }
-    count ++
-  };
-  //delete all the existing reviews then insert all the reviews into the database
-//   await Review.deleteMany();
-
-for (let i = 0; i < reviewSeeds.length; i++){
-    if (count > 1) {
-        count = 0
-        if (j+1 < recipeSeeds.length) {
-            j++
-        }
-    }
-    console.log(`The receipe ${recipeSeeds[j].name} contains: `, 
-    recipeSeeds[j]
-        .ingredients.map(
-            ingredientId => Ingredient
-                .findOne({_id: ingredientId})
-                    .then(res => console.log(res.name)) )
-                )
-}
+//     reviewSeeds[i] = {
+//       // assign a random user a review
+//       reviewer: getRandomSubarray(userSeeds,1)[0],
+//       // assign that review to a random recipe object
+//       recipe: recipeSeeds[j],
+//       rating: 
+//                   {boozy: Math.floor(Math.random()*5),
+//                   sweet: Math.floor(Math.random()*5),
+//                   sour: Math.floor(Math.random()*5),
+//                   bitter: Math.floor(Math.random()*5),
+//                   salty: Math.floor(Math.random()*5),
+//                   umami: Math.floor(Math.random()*5),
+//                   rating: Math.floor(Math.random()*5)},
+//       title: faker.company.companyName(),
+//       body: faker.lorem.paragraph(),
+//     }
+//     count ++
+// };
+//delete all the existing reviews then insert all the reviews into the database
+await Review.deleteMany();
 //   await Review.insertMany(reviewSeeds)
 
-  // assign the reviews made, to the recipes that they belong to
-  reviewSeeds = await Review.find()
+// for (let i = 0; i < reviewSeeds.length; i++){
+//     if (count > 1) {
+//         count = 0
+//         if (j+1 < recipeSeeds.length) {
+//             j++
+//         }
+//     }
+//     console.log(`The receipe ${recipeSeeds[j].name} contains: `, 
+//     recipeSeeds[j]
+//         .ingredients.map(
+//             ingredientId => Ingredient
+//                 .findOne({_id: ingredientId})
+//                     .then(res => console.log(res.name)) )
+//                 )
+// }
 
-  for (let i = 0; i < reviewSeeds.length; i++) {
-    let review = reviewSeeds[i]
-    // console.log(review.recipe , i )
+  // assign the reviews made, to the recipes that they belong to
+//   reviewSeeds = await Review.find()
+
+//   for (let i = 0; i < reviewSeeds.length; i++) {
+//     let review = reviewSeeds[i]
+//     // console.log(review.recipe , i )
    
-   let recipe =  await Recipe.findByIdAndUpdate(review.recipe, {$addToSet: {reviews: review}}, {new:true});
+//    let recipe =  await Recipe.findByIdAndUpdate(review.recipe, {$addToSet: {reviews: review}}, {new:true});
    
-    // console.log(recipe)
+//     // console.log(recipe)
     
-  }
+//   }
 
 // console.log(reviewSeeds)
 }
