@@ -17,7 +17,7 @@ export default class FilterChoice extends Component {
     return (
       	<div className="radio-box">
           <div className="in-line" onClick={()=>this.props.toggleBarCart("filter_open")}>
-            <h2>Your Peference</h2>
+            <h2>Your Preference</h2>
             {!this.props.filter_open && <IoIosArrowBack className='arrow'/>}
             {this.props.filter_open && <IoIosArrowDown className='arrow'/>}
           </div>

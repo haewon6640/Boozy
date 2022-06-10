@@ -9,7 +9,7 @@ const IngredientSchema = new Schema({
     category: {
         type: String, 
         required: true
-    }
+    },
 });
 
 module.exports = Ingredient = mongoose.model("Ingredient", IngredientSchema);
