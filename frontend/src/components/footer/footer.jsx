@@ -52,7 +52,7 @@ const Footer = (props) => {
                                 <li>Jerry Park</li>
                             </a>
                             <a href="https://github.com/haewon6640">
-                                <li>Keenan</li>
+                                <li>Keenan Parker</li>
                             </a>
                             <a href="https://github.com/haewon6640">
                                 <li>Pamela Jane</li>
