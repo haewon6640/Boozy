@@ -19,7 +19,7 @@ const ReviewIndexItem = (props) => {
     if (!titleExists || !bodyExists) {
         return null;
     }
-    const rating = {boozy: 3, sweet:2, sour: 3, bitter: 2, salty: 4, umami: 1, rating: 3};
+    const rating = props.review.rating;
     return (
         <li className="review-index-item">
             <div className="review-item-top-row">

@@ -111,9 +111,8 @@ export default class ReviewForm extends Component {
                                     type="range"
                                     min={0}
                                     max={10}
-                                    defaultValue={
-                                        this.state.rating[category] ? this.state.rating[category]: null
-                                    }
+                                    value={this.state.rating[category]}
+                                    defaultValue={0}
                                     onChange={(e) =>
                                         this.handleSlide({ category }, e)
                                     }
