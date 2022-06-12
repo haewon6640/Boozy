@@ -76,7 +76,7 @@ class RecipeShow extends React.Component {
 						</div>
 						<div className="graphic-title-box">
 							<h2>Flavor Profile</h2>
-							<ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/>
+							{/* <ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/> */}
 						</div>
 					</div>
                     <div className="recipe-steps">

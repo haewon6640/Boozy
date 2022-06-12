@@ -27,10 +27,10 @@ export default class ReviewForm extends Component {
             body: ""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        console.log("review_form_show props", this.props);
+        // console.log("review_form_show props", this.props);
     }
     reviewDisplay() {
-        console.log("hello");
+        // console.log("hello");
         this.setState({
             formVisible: !this.state.formVisible,
             rating: {
@@ -72,9 +72,10 @@ export default class ReviewForm extends Component {
     }
 
     handleSlide(category, e) {
+      console.log(e.target.value)
         let newRating = { ...this.state.rating };
         newRating[Object.values(category)[0]] = e.target.value;
-        console.log(category, e.target.value, newRating); //you get to this point
+        // console.log(category, e.target.value, newRating); //you get to this point
         this.setState(
             {
                 rating: newRating,
@@ -103,19 +104,17 @@ export default class ReviewForm extends Component {
                         </span>
                         {reviewCategories.map((category, i) => (
                             <div className="ratings-wrapper">
-                                {console.log(category)}
+                                {/* {console.log(category)} */}
                                 <div className="category">{category}</div>
                                 <input
                                     className={`rating-slider ${category}-slider`}
                                     type="range"
                                     min={0}
                                     max={10}
-                                    value={
-                                        this.state.rating[category]
-                                            ? this.state.rating[category]
-                                            : null
+                                    defaultValue={
+                                        this.state.rating[category] ? this.state.rating[category]: null
                                     }
-                                    onClick={(e) =>
+                                    onChange={(e) =>
                                         this.handleSlide({ category }, e)
                                     }
                                 />
