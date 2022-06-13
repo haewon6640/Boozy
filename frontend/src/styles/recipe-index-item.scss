@@ -1,5 +1,5 @@
 .recipe-index-item {
-	height: auto;
+	height: 35vh;
 	margin: 8px 0;
   .photo-title {
     font-size: 20px;
@@ -10,6 +10,14 @@
 
 .photo-box {
   vertical-align: middle;
-  display: table-cell;
+  display: flex;
+  justify-content: center;
   padding: 5px;
+  height: 90%;
+  .recipe-index-show {
+    // height: 250px;
+    width: 90%;
+    object-fit: cover;
+  }
 }
+

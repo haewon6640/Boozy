@@ -2,10 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 const RecipeIndexItem = (props) => {
     return (
-        <Link to={`/recipes/${props.recipe._id}`}>
-            <li className="recipe-index-item">
+        <li className="recipe-index-item">
+            <Link to={`/recipes/${props.recipe._id}`}>
                 <div className="photo-box">
-                    <img src={props.recipe.imgUrl} 
+                    <img 
+                    className="recipe-index-show"
+                    src={props.recipe.imgUrl} 
                     alt={props.recipe.name}
                     />
                 </div>
@@ -14,8 +16,8 @@ const RecipeIndexItem = (props) => {
                 {/* {props.recipe.ingredients.map(ingredient_id=>(
                     <span>{props.ingredients[ingredient_id].name}</span>
                 ))} */}
-            </li>
-        </Link>
+            </Link> 
+        </li>
     )
 }
 export default RecipeIndexItem;
