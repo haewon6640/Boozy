@@ -4,9 +4,14 @@ import { pie } from 'd3';
 
 export default function ReviewGraphic(props) {
   let chartData=[];
-  Object.keys(props.flavor_profile).slice(0,6).filter((key)=>(props.flavor_profile[key] !== 0)).forEach((variable)=>{
-    chartData.push({item:variable, count:props.flavor_profile[variable]})
+  console.log(props)
+  if (props.flavor_profile) {
+      Object.keys(props.flavor_profile).slice(0,6).filter((key)=>(props.flavor_profile[key] !== 0)).forEach((variable)=>{
+      chartData.push({item:variable, count:props.flavor_profile[variable]})
   })
+  }
+  
+
   
   const pieChart = useRef();
   
@@ -54,9 +59,9 @@ export default function ReviewGraphic(props) {
         // })
   });
 
-
+  if (!props.flavor_profile) return null
   return (
-    <div>
+    <div className="review-graphic" >
       <div id='chart-area'></div>
       <svg ref={pieChart} className="review-graphics-container"/>
     </div>
