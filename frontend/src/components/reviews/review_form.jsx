@@ -30,10 +30,7 @@ export default class ReviewForm extends Component {
     }
     reviewDisplay() {
         
-        this.props.openModal('formVisible').then(
-
-          console.log("this is the props after clicking review receipe",this.props.modal)
-        )
+        this.props.openModal('formVisible')
         this.setState({
             
             rating: {
@@ -101,7 +98,7 @@ export default class ReviewForm extends Component {
     closeModal(){
       document.getElementById('modal').classList.remove('showModal')
       document.getElementById('modal').classList.add('hideModal')
-      this.props.closeModal()
+      setTimeout(()=>this.props.closeModal(),250)  
     }
 
   
