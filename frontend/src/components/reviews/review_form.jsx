@@ -44,7 +44,9 @@ export default class ReviewForm extends Component {
             },
             title: "",
             body: "",
-        },()=>console.log("After firing reviewDispaly() this.props is:",this.props));
+        },
+        // ()=>console.log("After firing reviewDispaly() this.props is:",this.props)
+        );
     }
     async handleSubmit(e) {
         e.preventDefault();
@@ -77,7 +79,7 @@ export default class ReviewForm extends Component {
     }
 
     handleSlide(category, e) {
-      console.log(e.target.value)
+      // console.log(e.target.value)
         let newRating = { ...this.state.rating };
         newRating[Object.values(category)[0]] = e.target.value;
         // console.log(category, e.target.value, newRating); //you get to this point
@@ -85,7 +87,7 @@ export default class ReviewForm extends Component {
             {
                 rating: newRating,
             },
-            console.log("State was set to:", this.state.rating)
+            // console.log("State was set to:", this.state.rating)
         );
     }
 
@@ -164,7 +166,7 @@ export default class ReviewForm extends Component {
               </div>
             );
         } 
-        console.log('review form props', this.props)
+        // console.log('review form props', this.props)
         return (
             <div>
                 {form}

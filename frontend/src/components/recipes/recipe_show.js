@@ -14,7 +14,7 @@ class RecipeShow extends React.Component {
             ingredients: [],
             reviews: []
         }
-        console.log('recipe show props:', this.props)
+        // console.log('recipe show props:', this.props)
         this.rerenderPage = this.rerenderPage.bind(this);
     }
     componentDidMount() {
@@ -48,7 +48,7 @@ class RecipeShow extends React.Component {
         }
 
         const recipe = this.state.recipe;
-        console.log("recipe show:",this.props)
+        // console.log("recipe show:",this.props)
 		return (
 		<div className="recipe-show">
 			<div className="two-col">
