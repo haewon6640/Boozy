@@ -11,16 +11,16 @@ class BarCart extends React.Component {
         super(props);
         this.state = {
 			// booleans to control accordian
-			shelf_open: true,
+			      shelf_open: true,
             filter_open: false,
             can_open: true,
             cant_open: true,
 			// to control what is seen in recipe show
             curr_recipe: {},
             user: {},
-			filter_choice:"",
-			can_make:[],
-			loading: true
+			      filter_choice:"",
+			      can_make:[],
+			      loading: true
         };
         this.addItem = this.addItem.bind(this);
         this.toggleBarCart = this.toggleBarCart.bind(this);
@@ -29,7 +29,6 @@ class BarCart extends React.Component {
 		this.findCanDrinks = this.findCanDrinks.bind(this)
     }
     componentDidMount() {
-		console.log("the component mounted")
 		this.props.fetchUser().then(() => {
 			this.props.fetchIngredients().then(()=>this.setState({loading:false}));
 			this.props.fetchRecipes().then(this.findCanDrinks);
@@ -48,7 +47,6 @@ class BarCart extends React.Component {
 				(recipe.avg_rating[this.state.filter_choice] >= 3 || this.state.filter_choice === "")
 		)
 		this.setState({can_make:canMake})
-		console.log() // don't delete this
 	}
 
   autoPopulate(){

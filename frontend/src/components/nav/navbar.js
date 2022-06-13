@@ -78,7 +78,6 @@ class NavBar extends React.Component {
                         <span className='title'>Boozy</span>
                     </a>
                 </div>
-                {/* <form> */}
                     <div className='search-bar-web'>
                         <input type="text"
                             onChange={this.handleSearchType()}
@@ -92,7 +91,6 @@ class NavBar extends React.Component {
                                 <FaSearch className="search-icon"/>
                             </div>
                     </div>
-                {/* </form> */}
                 { this.getLinks() }
             </div>
             <div className='search-bar-phone'>
