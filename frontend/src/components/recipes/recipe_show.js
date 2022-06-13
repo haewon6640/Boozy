@@ -87,7 +87,14 @@ class RecipeShow extends React.Component {
                         </ol>
                     </div>
                     <div className="review-form-container">
-				        <ReviewForm fetchRecipe={this.rerenderPage} createReview={this.props.createReview} recipe={recipe}/>
+				        <ReviewForm 
+                  fetchRecipe={this.rerenderPage} 
+                  createReview={this.props.createReview} 
+                  recipe={recipe}
+                  modal={this.props.modal}
+                  openModal={this.props.openModal}
+                  closeModal={this.props.closeModal}
+                  />
 			        </div>
 				</div>
 			</div>
