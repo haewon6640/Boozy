@@ -29,13 +29,21 @@ class LoginForm extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  handleSubmit=(type)=>(e)=> {
     e.preventDefault();
-
-    let user = {
-      email: this.state.email,
-      password: this.state.password
-    };
+    let user;
+    if (type = "login") {
+      user = {
+        email: this.state.email,
+        password: this.state.password
+      };
+    } else if (type = "demo"){
+      user = {
+        email: "DemoUser@gmail.com",
+        password: "123456"
+      }
+    }
+  
 
     this.props.login(user)
 
@@ -68,7 +76,7 @@ class LoginForm extends React.Component {
 					<a href='/#/signup'>Create Account</a>
 				</div>
 				<form 
-					onSubmit={this.handleSubmit}
+					// onSubmit={this.handleSubmit}
 					className="auth-form">
 				<input type="text"
 					value={this.state.email}
@@ -80,7 +88,10 @@ class LoginForm extends React.Component {
 					onChange={this.update('password')}
 					placeholder="Password"
 				/>
-				<input type="submit" value="Submit" className='btn' />
+        <div className='in-line btns'>
+				  <input type="submit" value="Login" className='btn' onClick={this.handleSubmit("login")}/>
+				  <input type="submit" value="Login Demo" className='btn' onClick={this.handleSubmit("demo")}/>
+        </div>
 				{this.renderErrors()}
 
 				</form>
