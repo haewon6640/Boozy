@@ -76,7 +76,7 @@ class RecipeShow extends React.Component {
 						</div>
 						<div className="graphic-title-box">
 							<h2>Flavor Profile</h2>
-							<ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/>
+							{/* <ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/> */}
 						</div>
 					</div>
                     <div className="recipe-steps">
@@ -87,7 +87,14 @@ class RecipeShow extends React.Component {
                         </ol>
                     </div>
                     <div className="review-form-container">
-				        <ReviewForm fetchRecipe={this.rerenderPage} createReview={this.props.createReview} recipe={recipe}/>
+				        <ReviewForm 
+                  fetchRecipe={this.rerenderPage} 
+                  createReview={this.props.createReview} 
+                  recipe={recipe}
+                  modal={this.props.modal}
+                  openModal={this.props.openModal}
+                  closeModal={this.props.closeModal}
+                  />
 			        </div>
 				</div>
 			</div>
