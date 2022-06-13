@@ -7,6 +7,7 @@ export default function BarCartRecipeShow(props) {
   const recipe = props.recipe;
   useEffect(()=> props.handleSelection('curr_recipe', recipe), [props.shelf])
   const[selectedMissing, setSelectedMissing] = useState();
+  console.log(props)
   
   if (Object.values(recipe).length === 0) {
     return <div className="go-shopping">
@@ -70,7 +71,7 @@ export default function BarCartRecipeShow(props) {
         </div>
         <div className="show-top-right centered-col">
           <h2>Flavor Profile</h2>
-          <ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/>
+          <ReviewGraphic flavor_profile={recipe.avg_rating}/>
         </div>
       </div>
       <div className="two-col">
