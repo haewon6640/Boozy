@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom'
 const reviewCategories = [
     "boozy",
     "sweet",
@@ -48,12 +49,14 @@ export default class ReviewForm extends Component {
     }
     async handleSubmit(e) {
         e.preventDefault();
+        console.log('the props in the review form are', this.props)
         let review = {
             rating: this.state.rating,
             title: this.state.title,
             body: this.state.body,
             recipe: this.props.recipe._id
         };
+
         this.props.createReview(review)
             .then(()=>this.props.fetchRecipe()).then(()=> {
               document.getElementById('modal').classList.remove('showModal')
@@ -106,7 +109,17 @@ export default class ReviewForm extends Component {
     render() {
         let form;
         let reviewSpan;
-      
+        let reviewButton;
+        if (this.props.currentUser) {
+            reviewButton =   (<h2 className="review-form-header"
+            onClick={this.reviewDisplay.bind(this)}>
+              Review this Cocktail!
+          </h2>)
+        } else {
+            reviewButton = (
+                <Link to="/Login" className="review-form-header">Review this Cocktail!</Link>
+            )
+        }
         if (this.props.modal) {
 
             form = (
@@ -169,10 +182,7 @@ export default class ReviewForm extends Component {
             <div>
                 {form}
                 <div className="review-form-initiator">
-                    <h2 className="review-form-header"
-                      onClick={this.reviewDisplay.bind(this)}>
-                        Review this Cocktail!
-                    </h2>
+                  { reviewButton }
                 </div>
             </div>
         );

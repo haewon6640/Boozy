@@ -94,6 +94,7 @@ class RecipeShow extends React.Component {
                   modal={this.props.modal}
                   openModal={this.props.openModal}
                   closeModal={this.props.closeModal}
+                  currentUser={this.props.user}
                   />
 			        </div>
 				</div>

@@ -10,7 +10,7 @@ const mSTP = (state, ownProps) => {
         recipe: state.entities.recipes.all[ownProps.match.params.id],
         ingredients: Object.values(state.entities.ingredients),
         reviews: Object.values(state.entities.reviews),
-        user: state.entities.users,
+        user: state.session.user,
         modal: state.ui.modal
     }
 }
