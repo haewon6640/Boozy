@@ -70,7 +70,7 @@ export default function BarCartRecipeShow(props) {
         </div>
         <div className="show-top-right centered-col">
           <h2>Flavor Profile</h2>
-          <ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/>
+          {/* <ReviewGraphic className="review-graphic" flavor_profile={recipe.avg_rating}/> */}
         </div>
       </div>
       <div className="two-col">
