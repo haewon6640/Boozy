@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { GiOrangeSlice, GiShoppingCart } from 'react-icons/gi';
 import BoozyMap2 from '../map/map2'
 import ReviewGraphic from "../reviews/review_graphic";
+import {Link} from "react-router-dom";
 
 export default function BarCartRecipeShow(props) {
   const recipe = props.recipe;
@@ -34,13 +35,16 @@ export default function BarCartRecipeShow(props) {
   return (
     <div className="barcart-recipe-show">
       <div className="three-col">
-        <div className="show-top-left centered-col">
+        <Link className="show-top-left centered-col"
+        // to={'/'}
+        to={`/recipes/${recipe._id}`}
+        >
           <h2 className="recipe-title">{recipe.name}</h2>
           <div className="show-photo">
             <img src={recipe.imgUrl} alt="" />
           </div>
-      <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p>
-        </div>
+      
+        </Link>
         <div className="show-top-middle">
           <div>
             <div className="triangle"></div>
@@ -63,6 +67,7 @@ export default function BarCartRecipeShow(props) {
                       >
                         <GiOrangeSlice className="orange ico"/> 
                         <p>{ingredient.name}</p>
+                        {/* <span className="tooltiptext">click to find on map</span> */}
                     </li>
                   ))}
               </div>}
@@ -72,6 +77,7 @@ export default function BarCartRecipeShow(props) {
         <div className="show-top-right centered-col">
           <h2>Flavor Profile</h2>
           <ReviewGraphic flavor_profile={recipe.avg_rating}/>
+          <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p>
         </div>
       </div>
       <div className="two-col">
