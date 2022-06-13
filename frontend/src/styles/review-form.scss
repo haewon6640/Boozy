@@ -8,11 +8,39 @@
   cursor: pointer;
   transition-property: font-size;
   transition-duration: 1s;
+    
 }
 .review-form-header:hover {
   color: $warm-pink;
   font-size: 36px;
 }
+.review-title-input {
+    width: 90%;
+}
+.form-second-column  {
+     
+    > label {
+        font-size: 18px;
+        font-weight: 500;
+        padding: 5px 0px;
+    }
+    > .btn {
+        margin: 5px 0px;
+    }
+}
+.review-body-input{
+    width: 90%;
+    height: calc(95% - 155px);
+    
+}
+
+// @media screen and (max-height: 750px) {
+//     .review-body-input{
+//         width: 90%;
+//         height: 40%;
+        
+//     }
+// }
 
 .review-form-initiator {
   padding-top: 5px;
@@ -25,9 +53,17 @@
 }
 
 .rating-header{
-  padding-bottom: 4px;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 0px;
 }
+.form-first-column {
+    width: 70%;
+}
+
 .review-form{
+    width: 40vw;
+    height: 45vh;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 4px 0 $lighter-main-color;
@@ -42,6 +78,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: space-around;
 }
 .ratings-wrapper {
   display: flex;
@@ -117,8 +154,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 350px;
-  height: 350px;
+ 
 }
 
 .hideModal{
