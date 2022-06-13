@@ -18,7 +18,7 @@ mongoose
 let ingredientArr = [
   'dark-rum Alcohol boozy','vodka Alcohol boozy','gin Alcohol',
   'tequila Alcohol','rum Alcohol','whiskey Alcohol',
-  'brandy Alcohol','amaretto Alcohol','coffee-liquer Alcohol',
+  'brandy Alcohol','amaretto Alcohol','coffee-liqueur Alcohol',
   'vermouth Alcohol','irish-cream-liqueur Alcohol',
   'orange-liqueur Alcohol','lemon-juice Mixer','lime-juice Mixer',
   'cranberry-juice Mixer', 'grapefruit-juice Mixer', 'pineapple-juice Mixer',
