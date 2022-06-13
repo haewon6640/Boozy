@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { BiErrorCircle } from 'react-icons/bi';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class LoginForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderErrors = this.renderErrors.bind(this);
+    // this.renderErrors = this.renderErrors.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,29 +30,39 @@ class LoginForm extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  handleSubmit=(type)=>(e)=> {
     e.preventDefault();
-
-    let user = {
-      email: this.state.email,
-      password: this.state.password
-    };
-
+    let user;
+    if (type = "login") {
+      user = {
+        email: this.state.email,
+        password: this.state.password
+      };
+    } else if (type = "demo"){
+      user = {
+        email: "DemoUser@gmail.com",
+        password: "123456"
+      }
+    }
     this.props.login(user)
-
   }
 
-  renderErrors() {
-    return(
-      <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>
-            {this.state.errors[error]}
-          </li>
-        ))}
-      </ul>
-    );
+  renderError(type){
+    return (
+      <div className='error'><BiErrorCircle/>{this.state.errors[type]}</div>
+    )
   }
+  // renderErrors() {
+  //   return(
+  //     <ul>
+  //       {Object.keys(this.state.errors).map((error, i) => (
+  //         <li key={`error-${i}`}>
+  //           {this.state.errors[error]}
+  //         </li>
+  //       ))}
+  //     </ul>
+  //   );
+  // }
 
   render() {
     return (
@@ -68,20 +79,29 @@ class LoginForm extends React.Component {
 					<a href='/#/signup'>Create Account</a>
 				</div>
 				<form 
-					onSubmit={this.handleSubmit}
+					// onSubmit={this.handleSubmit}
 					className="auth-form">
-				<input type="text"
-					value={this.state.email}
-					onChange={this.update('email')}
-					placeholder="Email"
-				/>
-				<input type="password"
-					value={this.state.password}
-					onChange={this.update('password')}
-					placeholder="Password"
-				/>
-				<input type="submit" value="Submit" className='btn' />
-				{this.renderErrors()}
+        <div className='input-error'>
+          <input type="text"
+            value={this.state.email}
+            onChange={this.update('email')}
+            placeholder="Email"
+          />
+          {this.state.errors.email && this.renderError('email')}
+        </div>
+        <div className='input-error'>
+          <input type="password"
+            value={this.state.password}
+            onChange={this.update('password')}
+            placeholder="Password"
+          />
+          {this.state.errors.password && this.renderError('password')}
+        </div>
+        <div className='in-line btns'>
+				  <input type="submit" value="Login" className='btn' onClick={this.handleSubmit("login")}/>
+				  <input type="submit" value="Login Demo" className='btn' onClick={this.handleSubmit("demo")}/>
+        </div>
+				{/* {this.renderErrors()} */}
 
 				</form>
 			</div>

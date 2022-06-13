@@ -18,7 +18,38 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  .input-error {
+    width: 100%;
+    height: 55px;
+    .error {
+      color: $dark-coral;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      // border: 1px solid $dark-coral;
+      // padding-left: 4px;
+      margin-top: 4px;
+      height: 18px;
+      > svg {
+        width: 20px;
+        border-radius: 3px 0px 0px 3px;
+        font-size: 14px;
+        height: 100%;
+        margin-right: 4px;
+        padding: 1px 1px;
+        background-color: $dark-coral;
+        color: white;
+      }
+    }
+    > input {
+      width: 100%;
+    }
+  }
 }
 .webpage.auth {
   padding: 0;
+}
+
+.btns {
+  justify-content: space-between;
 }

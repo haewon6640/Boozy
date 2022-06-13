@@ -57,7 +57,7 @@ export default class ReviewForm extends Component {
         this.props.createReview(review)
             .then(()=>this.props.fetchRecipe()).then(()=> {
               document.getElementById('modal').classList.remove('showModal')
-              document.getElementById('modal').classList.add('hideModal')
+              document.getElementById('modal').classList.add('hidal')
               this.props.closeModal()
               this.setState({
                 rating: {
