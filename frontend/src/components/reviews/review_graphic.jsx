@@ -4,7 +4,7 @@ import { pie } from 'd3';
 
 export default function ReviewGraphic(props) {
   let chartData=[];
-  console.log(props)
+  // console.log(props)
   if (props.flavor_profile) {
       Object.keys(props.flavor_profile).slice(0,6).filter((key)=>(props.flavor_profile[key] !== 0)).forEach((variable)=>{
       chartData.push({item:variable, count:props.flavor_profile[variable]})

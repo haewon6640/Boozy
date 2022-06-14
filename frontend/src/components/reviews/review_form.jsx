@@ -26,7 +26,7 @@ export default class ReviewForm extends Component {
             title: "",
             body: ""
         };
-        // this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         // console.log("review_form_show props", this.props);
     }
     reviewDisplay() {
@@ -74,9 +74,44 @@ export default class ReviewForm extends Component {
       setTimeout(()=>this.props.closeModal(),250)  
     }
 
+    async handleSubmit(e) {
+      e.preventDefault()
+
+      
+      let review = {
+          rating: this.state.rating,
+          title: this.state.title,
+          body: this.state.body,
+          recipe: this.props.recipe._id
+      };
+      this.props.createReview(review)
+          .then(()=>this.props.fetchRecipe())
+              .then(() => this.props.fetchReviews())
+                  .then(()=> {
+                      document.getElementById('modal').classList.remove('showModal')
+                      document.getElementById('modal').classList.add('hideModal')
+                      this.props.closeModal()
+                      this.setState({
+                          rating: {
+                              boozy: 0,
+                              sweet: 0,
+                              sour: 0,
+                              bitter: 0,
+                              salty: 0,
+                              umami: 0,
+                              rating: 0,
+                          },
+                      title: "",
+                      body: "",
+                      });
+                    })
+      
+                  
+    }
   
 
     render() {
+        console.log('review form props:', this.props)
         let form;
         let reviewSpan;
         let reviewButton;
@@ -96,8 +131,7 @@ export default class ReviewForm extends Component {
               // instantly invoking the closeModal function reset the form dont do that.
               <div id= 'modal' className={`modal-background showModal`} onClick={() => this.closeModal()}>
                 <div className="modal-container-background" onClick={e => e.stopPropagation()}>
-                  <form className="review-form two-col" onSubmit={()=> this.props.handleSubmit(
-                    this.state.rating,this.state.title,this.state.body,this.props.recipe._id)}>
+                  <form className="review-form two-col" onSubmit={this.handleSubmit}>
                       <div className="form-first-column ratings-container">
                           <span className="rating-header">
                               {" "}
