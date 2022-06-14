@@ -1,11 +1,11 @@
 import {connect} from "react-redux";
 import { closeModal, openModal } from "../../actions/modal_actions";
 import { fetchRecipe } from "../../actions/recipe_actions";
-import { createReview } from "../../actions/review_actions";
+import { createReview, fetchReviews } from "../../actions/review_actions";
 import RecipeShow from "./recipe_show";
 
 const mSTP = (state, ownProps) => {
-    console.log('recipe show container props:', state)
+    // console.log('recipe show container props:', state)
     return {
         recipe: state.entities.recipes.all[ownProps.match.params.id],
         ingredients: Object.values(state.entities.ingredients),
@@ -20,7 +20,8 @@ const mDTP = (dispatch, ownProps) => {
         fetchRecipe: () => dispatch(fetchRecipe(ownProps.match.params.id)),
         createReview: (review) => dispatch(createReview(review)),
         openModal: (modal) => dispatch(openModal(modal)),
-        closeModal: () => dispatch(closeModal())
+        closeModal: () => dispatch(closeModal()),
+        fetchReviews: () => dispatch(fetchReviews())
     }
 }
 

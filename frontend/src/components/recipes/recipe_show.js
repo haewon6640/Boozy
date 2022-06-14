@@ -14,7 +14,8 @@ class RecipeShow extends React.Component {
             ingredients: [],
             reviews: []
         }
-        console.log('recipe show props:', this.props)
+        // console.log('recipe show props:', this.props)
+        this.handleSubmit = this.handleSubmit.bind(this)
         this.rerenderPage = this.rerenderPage.bind(this);
     }
     componentDidMount() {
@@ -42,13 +43,50 @@ class RecipeShow extends React.Component {
 			return this.state.recipe.instructions.split(". ").map((step,idx)=> (<li key={idx}>{step}</li>))
 		}
 	}
+    async handleSubmit(e,localrating,localtitle,localbody,localrecipeId) {
+        console.log('localrating',localrating)
+        console.log('localtitle',localtitle)
+        console.log('localbody',localbody)
+        console.log('localrecipeId',localrecipeId)
+
+        e.preventDefault();
+        let review = {
+            rating: localrating,
+            title: localtitle,
+            body: localbody,
+            recipe: localrecipeId
+        };
+
+        this.props.createReview(review)
+            .then(()=>this.props.fetchRecipe())
+                .then(() => this.props.fetchReviews())
+                    .then(()=> {
+                        document.getElementById('modal').classList.remove('showModal')
+                        document.getElementById('modal').classList.add('hideModal')
+                        this.props.closeModal()
+                        this.setState({
+                            rating: {
+                                boozy: 0,
+                                sweet: 0,
+                                sour: 0,
+                                bitter: 0,
+                                salty: 0,
+                                umami: 0,
+                                rating: 0,
+                            },
+                        title: "",
+                        body: "",
+                        });
+                     })
+        
+    }
     render() {
         if ( Object.keys(this.state.recipe).length === 0) {
           return <div className="loading"></div>;
         }
 
         const recipe = this.state.recipe;
-        console.log("recipe show:",this.props)
+        // console.log("recipe show:",this.props)
 		return (
 		<div className="recipe-show">
 			<div className="two-col">
@@ -90,11 +128,13 @@ class RecipeShow extends React.Component {
 				        <ReviewForm 
                   fetchRecipe={this.rerenderPage} 
                   createReview={this.props.createReview} 
+                  fetchReviews={this.props.fetchReviews}
                   recipe={recipe}
                   modal={this.props.modal}
                   openModal={this.props.openModal}
                   closeModal={this.props.closeModal}
                   currentUser={this.props.user}
+                  handleSubmit={this.handleSubmit}
                   />
 			        </div>
 				</div>
