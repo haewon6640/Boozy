@@ -152,7 +152,7 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'pickle juice'}),
       await Ingredient.findOne({name: 'lemon'}),
       await Ingredient.findOne({name: 'tabasco'}),
-      await Ingredient.findOne({name: 'worchestershire'}),
+      await Ingredient.findOne({name: 'worcestershire'}),
       await Ingredient.findOne({name: 'olives'}),
       await Ingredient.findOne({name: 'lime'}),
       await Ingredient.findOne({name: 'mango'}),
