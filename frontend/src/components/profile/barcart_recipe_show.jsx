@@ -76,7 +76,7 @@ export default function BarCartRecipeShow(props) {
         </div>
         <div className="show-top-right centered-col">
           <h2>Flavor Profile</h2>
-          <ReviewGraphic flavor_profile={recipe.avg_rating}/>
+          <ReviewGraphic flavor_profile={recipe.creator_flavor_profile}/>
           <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p>
         </div>
       </div>
