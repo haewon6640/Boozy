@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { BiErrorCircle } from 'react-icons/bi';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -20,7 +21,6 @@ class SignupForm extends React.Component {
     if (nextProps.signedIn === true) {
       this.props.history.push('/login');
     }
-
     this.setState({errors: nextProps.errors})
   }
 
@@ -42,8 +42,14 @@ class SignupForm extends React.Component {
     this.props.signup(user)
     .then(() => this.props.history.go(-1))
   }
+  renderError(type){
+    return (
+      <div className='error'><BiErrorCircle/>{this.state.errors[type]}</div>
+    )
+  }
 
   renderErrors() {
+    console.log(this.state.errors)
     return(
       <ul>
         {Object.keys(this.state.errors).map((error, i) => (
@@ -70,28 +76,40 @@ class SignupForm extends React.Component {
 					<a href='/#/login'>Sign In</a>
 				</div>
         <form onSubmit={this.handleSubmit} className="auth-form">
+            <div className='input-error'>
               <input type="text"
                 value={this.state.email}
                 onChange={this.update('email')}
                 placeholder="Email"
               />
+              {this.state.errors.email && this.renderError('email')}
+            </div>
+            <div className='input-error'>
               <input type="text"
                 value={this.state.handle}
                 onChange={this.update('handle')}
                 placeholder="Handle"
               />
+              {this.state.errors.handle && this.renderError('handle')}
+            </div>
+            <div className='input-error'>
               <input type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
                 placeholder="Password"
               />
+              {this.state.errors.password && this.renderError('password')}
+            </div>
+            <div className='input-error'>
               <input type="password"
                 value={this.state.password2}
                 onChange={this.update('password2')}
                 placeholder="Confirm Password"
               />
-            <input type="submit" value="Submit" className='btn' />
-            {this.renderErrors()}
+              {this.state.errors.password2 && this.renderError('password2')}
+            </div>
+            <input type="submit" value="Sign up" className='btn' />
+            {/* {this.renderErrors()} */}
         </form>
         </div>
         </div>

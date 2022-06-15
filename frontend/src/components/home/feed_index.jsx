@@ -1,6 +1,8 @@
 import React from "react";
 import FeedIndexItem from "./feed_index_item";
+import {sortByNew} from "../../reducers/selector";
 const FeedIndex = (props) => {
+    let feed = sortByNew(props.feed);
     return (
         <div className="feed-container-bottom">
             <div className="feed-title web">Drinks Drank</div>
@@ -10,7 +12,7 @@ const FeedIndex = (props) => {
             </div>
             <div className="feed-index-container">
                 <div className="feed-index">
-                    {props.feed.map(item=>
+                    {feed.map(item=>
                         <div>
                             <FeedIndexItem item={item}/>
                             <div className="feed-item-border-bottom"></div>

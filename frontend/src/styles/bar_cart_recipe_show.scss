@@ -6,7 +6,7 @@
     border-radius: 5px;
     color: $dark-grey;
     > div h2 {
-      font-size: 36px;
+      font-size: 32px;
       // font-family: $readible-fancy-font, cursive;
       font-family: $recipe-font;
       color: $dark-grey;
@@ -21,8 +21,9 @@
 .missing-title {
     color: $title-color;
     font-family: $readible-fancy-font;
-}
-.missing-ingredient {
+  }
+  .missing-ingredient {
+    cursor: pointer;
     color: red;
     .orange, p {
         color: red
@@ -55,6 +56,7 @@
     display: flex;
     justify-content: center;
     width: 70%;
+    height: 60%;
     margin-bottom: 10px;
     img {
         border-radius: 7px;
@@ -85,13 +87,11 @@
   }
 }
 
-.show-btm-right {
-
-}
-
-
-
-.show-top-right {
-  
-}
-
+// .tooltiptext  {
+//   visibility: hidden;
+//   position: absolute;
+//   z-index: 1;
+//   &:hover {
+//     visibility: visible;
+//   }
+// }
