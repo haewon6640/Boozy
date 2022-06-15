@@ -7,11 +7,13 @@ export default class ReviewIndex extends Component {
         this.state = {
             reviews: []
         }
+        this.fetchReviews = this.props.fetchReviews.bind(this)
     }
     componentDidMount() {
         this.props.fetchReviews()
         this.setState({reviews: this.props.reviews});
     }
+    
   
     render() {
         // console.log('REVIEW INDEX RENDERED with the review props of:', this.props.reviews)
@@ -21,7 +23,7 @@ export default class ReviewIndex extends Component {
                 <h1 className="review-index-title">Reviews</h1>
                 <ul className="review-index-item-container">
                     {this.props.reviews.map(review=>
-                        <ReviewIndexItem key={review._id} review={review} />
+                        <ReviewIndexItem key={review._id} review={review} fetchReviews={this.props.fetchReviews} />
                     )}
                 </ul>
             </div>
