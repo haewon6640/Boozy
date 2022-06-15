@@ -26,14 +26,7 @@ class RecipeShow extends React.Component {
             })
         );
     }
-    componentDidUpdate(pProps) {
-        if (
-            Object.values(pProps.reviews).length !==
-            Object.values(this.props.reviews).length
-        ) {
-            this.props.fetchReviews();
-        }
-    }
+    
     rerenderPage() {
         this.props.fetchRecipe().then(() =>
             this.setState({
@@ -61,13 +54,13 @@ class RecipeShow extends React.Component {
     }
 
     render() {
-        if (Object.keys(this.state.recipe).length === 0) {
+        if (Object.keys(this.state.recipe).length === 0 ) {
             return <div className="loading"></div>;
         }
 
         const recipe = this.state.recipe;
         let update = null;
-        if (this.props.user.id === recipe.user) {
+        if ( this.props.user && this.props.user.id === recipe.user) {
             update = (
                 <div className="two-col recipe-update">
                     <Link to={`/recipes/${recipe._id}/edit`}>Edit</Link>

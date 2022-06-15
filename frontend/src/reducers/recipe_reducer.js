@@ -5,7 +5,7 @@ import {
     RECEIVE_NEW_RECIPE,
     RECEIVE_DOTD
 } from "../actions/recipe_actions";
-
+import { REMOVE_REVIEW } from "../actions/review_actions";
 const RecipesReducer = (
     state = { all: {}, user: {}, new: undefined },
     action
@@ -29,6 +29,13 @@ const RecipesReducer = (
         case RECEIVE_DOTD:
             newState.today = action.recipe.data;
             return newState;
+        case REMOVE_REVIEW:
+            let recipeArr = newState.all[action.review.data.recipe].reviews
+            // console.log('after REMOVE_REVIEW for the Recipe Review Array',newState.all[action.review.data.recipe].reviews)
+            recipeArr = recipeArr.filter(review => review._id !== action.review.data._id)
+            newState.all[action.review.data.recipe].reviews = recipeArr
+            
+            return newState
         default:
             return state;
     }

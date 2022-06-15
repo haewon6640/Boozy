@@ -16,11 +16,25 @@ class RecipeIndex extends React.Component {
     }
     componentWillReceiveProps(newState) {
         this.setState({recipes: newState.recipes})
-    }
+    } 
     componentDidUpdate(prevProps) {
         if (prevProps.location.search != this.props.location.search) {
             this.props.fetchRecipes();
         }
+    }
+    dummyItem(){
+      const recipe = {
+        dummy: true, 
+        imgUrl: "https://www.kindpng.com/picc/m/87-875382_cocktails-black-and-white-png-transparent-png.png",
+        name: "Create Your Own!"
+      }
+      return (
+        <RecipeIndexItem
+        key="first"
+        recipe={recipe}
+        className="red-text"
+        />
+      )
     }
 
     render() {
@@ -29,8 +43,9 @@ class RecipeIndex extends React.Component {
         } else {
             return (
             <div className="webpage recipe-index">
-                <Link  to="/recipes/new"><AiOutlinePlusCircle className='add-recipe'/></Link>
+                {/* <Link  to="/recipes/new"><AiOutlinePlusCircle className='add-recipe'/></Link> */}
                 <ul className="recipe-index-container">
+                    {this.dummyItem()}
                     {this.state.recipes.map((recipe, idx)=> (
                         <RecipeIndexItem
                             key={recipe._id} 

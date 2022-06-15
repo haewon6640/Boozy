@@ -34,12 +34,12 @@ class LoginForm extends React.Component {
     e.preventDefault();
 
     let user;
-    if (type = "login") {
+    if (type === "login") {
       user = {
         email: this.state.email,
         password: this.state.password
       };
-    } else if (type = "demo"){
+    } else if (type === "demo"){
       user = {
         email: "DemoUser@gmail.com",
         password: "123456"

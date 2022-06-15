@@ -26,7 +26,7 @@ const ReviewIndexItem = (props) => {
 
       modify_review =( <ul className="modify-review">
            <li className='edit-review'>Edit</li>
-           <li onClick={()=>props.deleteReview(review._id)} className='delete-review'>Delete</li>
+           <li onClick={()=>{props.deleteReview(review._id);(this.props.fetchReviews())}} className='delete-review'>Delete</li>
        </ul>)
      }
   
