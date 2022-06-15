@@ -41,10 +41,14 @@ class BarCart extends React.Component {
     }
 
 	findCanDrinks = ()=>{   
+    console.log(this.state.filter_choice)
+    console.log(this.props.recipes.all)
 		let canMake = Object.values(this.props.recipes.all).filter(recipe=>(
 			recipe.ingredients.every(ingredient=>(
 				this.props.user.shelf.includes(ingredient)|| ingredient === null))) &&
-				(recipe.avg_rating[this.state.filter_choice] >= 3 || this.state.filter_choice === "")
+				(recipe.creator_flavor_profile[this.state.filter_choice] >= 3 
+          || this.state.filter_choice === "" 
+          || (this.state.filter_choice === "rating" && recipe.avg_rating >=3) )
 		)
 		this.setState({can_make:canMake})
 	}

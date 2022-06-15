@@ -10,7 +10,7 @@ export default class CanMaybeMake extends Component {
     this.toggleList = this.toggleList.bind(this)
   }
   findDrinks(){
-    let flavor_profile_test = {boozy:4, sweet: 2, sour:4,bitter: 1,salty:3,umami:5, rating:4}
+    // let flavor_profile_test = {boozy:4, sweet: 2, sour:4,bitter: 1,salty:3,umami:5, rating:4}
     let shelf = this.props.shelf  //list of ids
     let recipes = Object.values(this.props.recipes) //has ids as ingredients in array
     let filtered=[];
@@ -25,7 +25,7 @@ export default class CanMaybeMake extends Component {
         }
       })
       if (data.missing_ing.length > 0 && 
-        (flavor_profile_test[this.props.filter_choice] >= 3 || this.props.filter_choice === "")
+        (recipe.creator_flavor_profile[this.props.filter_choice] >= 3 || this.props.filter_choice === "")
         ) filtered.push(data)
     })
     return filtered.sort(this.sortByMissingIng)
