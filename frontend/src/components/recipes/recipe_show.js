@@ -26,14 +26,7 @@ class RecipeShow extends React.Component {
             })
         );
     }
-    componentDidUpdate(pProps) {
-        if (
-            Object.values(pProps.reviews).length !==
-            Object.values(this.props.reviews).length
-        ) {
-            this.props.fetchReviews();
-        }
-    }
+    
     rerenderPage() {
         this.props.fetchRecipe().then(() =>
             this.setState({
