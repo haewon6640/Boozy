@@ -14,12 +14,22 @@ function Star({ filled, onClick }) {
 
 const ReviewIndexItem = (props) => {
     const {review,currUserId} = props
+    let modify_review;
     let titleExists = review.title.length !== 0;
     let bodyExists = review.body.length !== 0;
     if (!titleExists || !bodyExists) {
         return null;
     }
     const rating = props.review.rating;
+    
+    if  (review.reviewer._id === currUserId) {
+
+      modify_review =( <ul className="modify-review">
+           <li className='edit-review'>Edit</li>
+           <li onClick={()=>props.deleteReview(review._id)} className='delete-review'>Delete</li>
+       </ul>)
+     }
+  
     return (
         <li className="review-index-item">
             <div className="review-item-top-row">
@@ -55,12 +65,7 @@ const ReviewIndexItem = (props) => {
             <div className="review-item-body">
                 {review.body}
             </div>
-            {review.reviewer === currUserId &&
-                <ul className="modify-review">
-                    <li className='edit-review'>Edit</li>
-                    <li onClick={()=>props.deleteReview(review._id)} className='delete-review'>Delete</li>
-                </ul>
-            }
+           {modify_review}
         </li>
     )
 

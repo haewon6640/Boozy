@@ -12,7 +12,7 @@ const ReviewsReducer = (state = {}, action) => {
             delete newState[action.reviewId];
             return newState;
         case RECEIVE_REVIEW:
-            debugger;
+            
             newState[action.review.data._id] = action.review.data;
             return newState;
         case RECEIVE_REVIEWS:
