@@ -14,13 +14,40 @@ const multer = require('multer');  // multer used to handle form data
 const Aws = require('aws-sdk');  // aws-sdk lib used to upload images to s3 bucket
 require("dotenv/config");
 
+function getAverageRating(recipe) {
+    let rate = {boozy:0, sweet: 0, sour: 0, bitter: 0, salty: 0, umami: 0};
+    if (recipe.reviews.length === 0) {
+        return rate;
+    }
+    let reviews = recipe.reviews;
+    let count = 0;
+    for (var j = 0; j < reviews.length; j++) {
+        count+=1;
+        rate["boozy"] += reviews[j]["rating"]["boozy"]
+        rate["sweet"] += reviews[j]["rating"]["sweet"]
+        rate["sour"] += reviews[j]["rating"]["sour"]
+        rate["bitter"] += reviews[j]["rating"]["bitter"]
+        rate["salty"] += reviews[j]["rating"]["salty"]
+        rate["umami"] += reviews[j]["rating"]["umami"]
+    }
+    rate["boozy"] = Math.floor(rate["boozy"]/count)
+    rate["sweet"] = Math.floor(rate["sweet"]/count)
+    rate["sour"] = Math.floor(rate["sour"]/count)
+    rate["bitter"] = Math.floor(rate["bitter"]/count)
+    rate["salty"] = Math.floor(rate["salty"]/count)
+    rate["umami"] = Math.floor(rate["umami"]/count)
+    return rate;
+}
+
 router.get("/", (req, res) => {
     Recipe.find({ "name": {"$regex": req.query.search, "$options": "i"}})
+        .populate('reviews')
         .sort({ date: -1 })
         .then((recipes) => {
             let response = {};
             for (var i = 0; i < recipes.length; i++) {
-                response[recipes[i].id] = recipes[i]
+                let recipe = Object.assign({},recipes[i]._doc,{avg_rating: getAverageRating(recipes[i])});
+                response[recipes[i].id] = recipe
             }
             return res.json(response);
         })
@@ -43,11 +70,21 @@ router.get('/user/:user_id', (req, res) => {
         )
     );
 });
+router.get('/random',async (req,res) => {
+    let today = new Date().getDay();
+    let count = await Recipe.count().exec();
+    var random = today % count;
+    console.log(random);
+    let recipe = await Recipe.findOne().skip(random).exec();
+    res.json({[recipe.id]: recipe});
+})
 
 router.get('/:id', (req, res) => {
     Recipe.findById(req.params.id)
+        .populate('reviews')
         .then(async recipe => {
-            let recipeState = {recipe: {[recipe.id] : recipe}};
+            let rec = Object.assign({},recipe._doc,{avg_rating: getAverageRating(recipe)});
+            let recipeState = {recipe: {[recipe.id] : rec}};
             let ingredients = await Ingredient.find({'_id': {$in: recipe.ingredients}});
             let reviews = await Review.find({'_id': {$in: recipe.reviews}})
                 .populate('reviewer');
@@ -124,7 +161,7 @@ router.post('/',
                 additionalInfo: req.body.recipe.additionalInfo
             })
             newRecipe.save()
-            .then(recipe => res.json(recipe))
+            .then(recipe => res.json({[recipe.id]:recipe}))
             .catch(err=> console.log(err));
             
         })

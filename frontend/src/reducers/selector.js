@@ -12,3 +12,13 @@ export const combineAndSortArrByTime = (arr_1, arr_2) => {
     console.log(result_arr);
     return result_arr;
 }
+
+export const sortByNew = (arr) => (
+    arr.sort(function(a,b) {
+        if (a.createdAt < b.createdAt) {
+            return 1
+        } else {
+            return -1;
+        }
+    })
+)
