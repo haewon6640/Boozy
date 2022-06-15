@@ -68,6 +68,6 @@ export const deleteRecipe = (recipeId) => dispatch =>
         .then(()=>dispatch(removeRecipe(recipeId)))
         .catch(err=>{throw "err"});
 
-export const fetchDrinkOfTheDay = () => dispatch =>
-    RecipeApiUtil.getDrinkOfTheDay()
+export const fetchDrinkOfTheDay = (id) => dispatch =>
+    RecipeApiUtil.getRecipe(id)
         .then(recipe =>dispatch(receiveDOTD(recipe)))

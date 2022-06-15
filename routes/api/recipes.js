@@ -202,7 +202,8 @@ router.post(
                     },
                 },
                 { new: true }
-            ).then((recipe) => res.json({ [recipe.id]: recipe }));
+            ).then((recipe) => res.json(recipe));
+            // ).then(recipe => res.json({[recipe.id]: recipe}));
         } catch (err) {
             return res.status(400).send({
                 message: err.message,
@@ -230,4 +231,5 @@ router.post(
             .catch((err) => res.status(400).send({ message: err.message }));
     }
 );
+
 module.exports = router;

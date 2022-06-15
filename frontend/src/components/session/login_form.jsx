@@ -32,6 +32,7 @@ class LoginForm extends React.Component {
 
   handleSubmit=(type)=>(e)=> {
     e.preventDefault();
+
     let user;
     if (type = "login") {
       user = {
@@ -44,7 +45,9 @@ class LoginForm extends React.Component {
         password: "123456"
       }
     }
-    this.props.login(user)
+    this.props.login(user).then(
+        () => this.props.history.go(-1))
+
   }
 
   renderError(type){
