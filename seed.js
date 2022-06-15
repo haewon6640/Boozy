@@ -26,10 +26,10 @@ let ingredientArr = [
   'sour-mix Mixer', 'grenadine Alcohol','cream Mixer',
   'club-soda Mixer', 'tonic-water Alochol', 'ginger-ale Mixer',
   'cola Mixer','lemon Produce','lime Produce',
-  'maraschino-cherries Produce', 'olives Produce',
+  'maraschino-cherry Produce', 'olives Produce',
   'salt Garnish', 'sugar Garnish','mint Garnish',
   'orange Produce', 'campari-bitters Alcohol','pickle-juice Mixer',
-  'horse-radish Produce','worcestershire-sauce Produce', 'pepper Garnish',
+  'horse-radish Produce','worcestershire Produce', 'pepper Garnish',
   'triple-sec Alcohol','bourbon Alcohol','ice Garnish',
   'orange-bitters Alcohol', 'allspice-berries Produce', 'black-peppercorns Produce',
   'ginger-beer Mixer', 'absinthe Alcohol', 'egg Produce',
@@ -38,9 +38,14 @@ let ingredientArr = [
   `rhubarb Garnish`, 'ginger-syrup Garnish', 'whipped-cream Garnish',
   'coffee Produce', 'mango Produce', 'ginger Produce',
   'raspberries Produce', 'champagne Alcohol', 'aperol Alcohol',
-  'prosecco Alcohol', 'orange-juice Mixer', 'drambuie-liqueur Alcohol',
-  `peach-juice Produce`
-
+  'prosecco Alcohol', 'orange-juice Mixer', 
+  'sweet-vermouth Alcohol',
+  'sloe-gin Alcohol',
+  'peach-juice Produce',
+  'tabasco Produce',
+  'celery Produce',
+  'cherry Produce',
+  'celery-salt Produce',
 ]
 
 // convert the string of ingredient names into an array of ingredient objects called ingredientSeed
@@ -108,14 +113,15 @@ const seedDB = async () => {
     imgUrl: 'https://assets.bonappetit.com/photos/626710f327b006dd474788c9/1:1/w_1280,c_limit/0425-negroni-recipe.jpg',
     ingredients: [
       await Ingredient.findOne({ name: 'gin' }).exec(),
-      await Ingredient.findOne({ name: 'vermouth' }).exec(),
+      await Ingredient.findOne({ name: 'sweet vermouth' }).exec(),
       await Ingredient.findOne({ name: 'orange' }).exec(),
       await Ingredient.findOne({ name: 'campari bitters' }).exec()
     ],
     reviews: [],
-    instructions: faker.hacker.phrase(),
+    instructions: "In any order combime 1 oz each of gin, Campari ad sweet vermouth in a rocks glass. Add ice and give a quick stir. Use a pairing knife to cut a strip of orange peel with a small amount of pith attached. Add the orange twist as a garnish.",
     description: 'The Negroni’s bitter intensity and easy equal-parts formula have helped make it a favorite',
     additionalInfo: '',
+    creator_flavor_profile: {bitter: 5, boozy: 4, salty: 0, sour: 0, sweet: 3, umami: 0},
 
   },
   {
@@ -124,14 +130,16 @@ const seedDB = async () => {
     imgUrl: 'https://assets.bonappetit.com/photos/58409ff731e0aa8a6cd383f8/1:1/w_1280,c_limit/bas-best-old-fashioned.jpg',
     ingredients: [
       await Ingredient.findOne({name: 'bitters'}),
-      await Ingredient.findOne({name: 'whiskey'}),
+      await Ingredient.findOne({name: 'bourbon'}),
       await Ingredient.findOne({name: 'orange'}),
-      await Ingredient.findOne({name: 'maraschino cherries'})
+      await Ingredient.findOne({name: 'sugar'}),
+      await Ingredient.findOne({name: 'maraschino cherry'})
     ],
     reviews: [],
-    instructions: faker.hacker.phrase(),
+    instructions: "Place ½ tsp or 1 cube of sugar in a rocks glass. Pour bitters over sugar, then add 1 tsp water and stir until the sugar is nearly dissolved. Fill the glass with large ice cubes, add 1 oz bourbon, and gently stir to combine. Express the oil of an orange peel over the glass, then drop in. (optional) Garnish with charry for a sweeter drink.",
     description: 'This drink is precisely what the word cocktail referred to 200 years ago.',
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 0, boozy: 5, salty: 0, sour: 0, sweet: 3, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -140,17 +148,24 @@ const seedDB = async () => {
     ingredients: [
       await Ingredient.findOne({name: 'tomato juice'}),
       await Ingredient.findOne({name: 'pickle juice'}),
-      await Ingredient.findOne({name: 'lemon juice'}),
+      await Ingredient.findOne({name: 'lemon'}),
+      await Ingredient.findOne({name: 'tabasco'}),
+      await Ingredient.findOne({name: 'worchestershire'}),
+      await Ingredient.findOne({name: 'olives'}),
+      await Ingredient.findOne({name: 'lime'}),
       await Ingredient.findOne({name: 'mango'}),
       await Ingredient.findOne({name: 'horse radish'}),
       await Ingredient.findOne({name: 'pepper'}),
       await Ingredient.findOne({name: 'vodka'}),
+      await Ingredient.findOne({name: 'celery'}),
+      await Ingredient.findOne({name: 'celery salt'}),
       
     ],
     reviews: [],
-    instructions: faker.hacker.phrase(),
+    instructions: "Rub the juicy side of the lemon or lime wedge along the lip of a pint glass. Fill the glass with ice and set aside. Squeeze the lemon and lime wedges into a shaker and drop them in. Add 2 oz vodka, 4oz tomato juice, 2 tsp horseradish, 1 dash Tabasco, 1 dash Worcestershire, black pepper, paprika, plus a pinch of celery salt along with ice and shake gently. Strain into the prepared glass. Garnish with parsley sprig, 2 speared green olives, a lime wedge and a celery stalk (optional).",
     description: 'It’s a hangover cure, a nutritious breakfast, an airport bar staple. This tomato- and vodka-based classic, created in Paris in the 1920s.',
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 0, boozy: 5, salty: 3, sour: 0, sweet: 1, umami: 3},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -164,9 +179,10 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'simple syrup'}),
     ],
     reviews: [],
-    instructions: faker.hacker.phrase(),
+    instructions: "Place salt on small shallow plate. Rim two glasses with lime wedge, then dip in salt to coat rim. Divide 4 oz tequila, 2oz simple syrup, and 1.5 oz lime juice between 2 glasses and stir to combine. Top with ice, garnish with lime, and serve.",
     description: 'when this zesty classic is made correctly—with quality tequila, orange liqueur, and lime juice—the drink carries itself upright',
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 0, boozy: 4, salty: 3, sour: 3, sweet: 5, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -180,24 +196,28 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'ice'}),
     ],
     reviews: [],
-    instructions: faker.hacker.phrase(),
+    instructions: "Muddle 3 lemon wedges in a shaker. Add 2 oz bourbon, ¾ oz simple syrup, mint leaves and ice, and shake until well-chilled. Double-strain into a rocks glass over fresh ice. Garnish with a mint sprig.",
     description: 'the citrus-and-mint combination the perfect cocktail for those who say they’ll never drink whiskey. ',
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 0, boozy: 5, salty: 0, sour: 4, sweet: 4, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
-    name: 'Sloe Gin',
+    name: 'Sloe Gin Fizz',
     imgUrl: 'https://assets.bonappetit.com/photos/57adf8881b3340441497584a/1:1/w_1280%2Cc_limit/sloe-gin.jpg',
     ingredients: [
-      await Ingredient.findOne({name: 'gin'}),
-      await Ingredient.findOne({name: 'tonic water'}),
+      await Ingredient.findOne({name: 'sloe gin'}),
+      await Ingredient.findOne({name: 'simple syrup'}),
+      await Ingredient.findOne({name: 'lemon juice'}),
+      await Ingredient.findOne({name: 'club soda'}),
       await Ingredient.findOne({name: 'lemon'}),
-      await Ingredient.findOne({name: 'orange bitters'}),
+      await Ingredient.findOne({name: 'cherry'}),
     ],
     reviews: [],
-    instructions: faker.hacker.phrase(),
-    description: "This classic cocktail is just Plymouth sloe gin, a dash of orange bitters, and ice.",
-    additionalInfo: ''
+    instructions: "Add 1oz each of sloe gin, gin, lemon juice and simple syrup into a cocktail shaker with ice, and shake until well-chilled. Fill a highball or Collins glass with ice, and strain the contents of the shaker into the glass. Top with the club soda. Garnish with a lemon wedge and a cherry.",
+    description: "A sloe gin fizz is refreshing and delightfully balances sweet against tart. It begins with Sloe Gin then we add fresh lemon, a little sugar and club soda.",
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 2, boozy: 4, salty: 0, sour: 4, sweet: 4, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -206,13 +226,14 @@ const seedDB = async () => {
     ingredients: [
       await Ingredient.findOne({name: 'bourbon'}),
       await Ingredient.findOne({name: 'campari bitters'}),
-      await Ingredient.findOne({name: 'vermouth'}),
+      await Ingredient.findOne({name: 'sweet vermouth'}),
       await Ingredient.findOne({name: 'lemon'}),
     ],
     reviews: [],
-    instructions: faker.hacker.phrase(),
+    instructions: "Add 1.5 oz bourbon, ¾ oz Campari and ¾ oz sweet vermouth into a mixing glass with ice and stir until well-chilled. Strain into a rocks glass over fresh ice. Garnish with a lemon twist.",
     description: 'The boulevardier cocktail is an alcoholic drink composed of whiskey, sweet vermouth, and Campari.',
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 4, boozy: 5, salty: 0, sour: 2, sweet: 2, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -224,9 +245,10 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'lime'}),
     ],
     reviews: [],
-    instructions: faker.hacker.phrase(),
+    instructions: "Fill a highball glass with ice, then add 2 oz gin. Top with the tonic water and gently stir. Garnish with lime wheels or seasonal garnishes",
     description: "A gin and tonic is a highball cocktail made with gin and tonic water poured over a large amount of ice. The ratio of gin to tonic varies according to taste, strength of the gin, other drink mixers being added, etc., with most recipes calling for a ratio between 1:1 and 1:3.",
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 1, boozy: 5, salty: 0, sour: 3, sweet: 2, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -242,9 +264,10 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'lime'})
     ],
     reviews: [],
-    instructions: faker.hacker.phrase(),
+    instructions: "Coarsely grind 2 tsp allspice and 2 tsp peppercorns in spice mill or with mortar and pestle; add spices and orange zest to 750-ml bottle of rum and let infuse at least 2 days. Strain into a clean bottle or a glass jar. Rum can be infused 3 weeks ahead. Store in a dark, dry place. Combine lime juice and 4 oz. spiced rum in a cocktail shaker; fill with ice. Shake until outside is frosty, about 30 seconds. Strain into highball glasses filled with ice, top off with ginger beer, and garnish with lime wedges.",
     description: 'The longer the spices infuse in the rum, the more flavorful this dark and stormy will be.',
-    additionalInfo: ''
+    additionalInfo: 'serves 2',
+    creator_flavor_profile: {bitter: 2, boozy: 5, salty: 0, sour: 2, sweet: 5, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -258,9 +281,10 @@ const seedDB = async () => {
       await Ingredient.findOne({name: 'lemon'}),
     ],
     reviews: [],
-    instructions: `Shake sugar and 1/3 cup hot water in a jar until sugar dissolves; chill until ready to use.Combine whiskey, absinthe, bitters, 1/3 cup simple syrup, and ¾ cup ice water in a large pitcher; chill until very cold, at least 2 hours and uprosemary`,
+    instructions: `Shake sugar and ⅓ cup hot water in a jar until sugar dissolves. Chill until ready to use. Combine whiskey, absinthe, bitters, ⅓ cup simple syrup, and ¾ cup ice water in a large pitcher; chill until very cold, at least 2 hours and uprosemary`,
     description: 'The Sazerac is a local variation of a cognac or whiskey cocktail originally from New Orleans, named for the Sazerac de Forge et Fils brand of cognac brandy.',
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 4, boozy: 5, salty: 0, sour: 2, sweet: 5, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -276,7 +300,8 @@ const seedDB = async () => {
     reviews: [],
     instructions: `Shake 1 large egg white*, pisco, lime juice, and simple syrup in a cocktail shaker until frothy, about 1 minute. Fill with ice; shake until outside is frosty, about 30 seconds. Strain into a coupe glass. Top with Angostura bitters. *Raw egg is not recommended for the elderly, people with weakened immune systems...or people who don’t like raw egg.`,
     description: "A pisco sour is an alcoholic cocktail of Peruvian origin that is typical of the cuisines from Peru and Chile.",
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 4, boozy: 2, salty: 0, sour: 0, sweet: 3, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -300,7 +325,8 @@ const seedDB = async () => {
     reviews: [],
     instructions: `1) Place 1/2-inch-thick cucumber slices in cocktail shaker. Using muddler or handle of wooden spoon, mash well. Add Pimm's, lemon juice, and sugar. Fill 2 pilsner glasses with ice; set aside. Add ice to Pimm's mixture, cover, and shake vigorously 20 times. Strain into glasses. Push 1 rosemary sprig, 1 thyme sprig, 1 mint sprig, 1 lemon slice, and 2 strawberry halves down into each glass. Fill glasses with ginger beer. Garnish with cucumber spears and rhubarb stalks.`,
     description: faker.lorem.paragraph(),
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 0, boozy: 2, salty: 0, sour: 3, sweet: 5, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -314,9 +340,10 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Pour club soda, vodka, and ginger syrup into a Moscow Mule mug filled with ice; stir gently to combine. Garnish with lime wedges.`,
+    instructions: 'Pour club soda, vodka, and ginger syrup into a Moscow Mule mug filled with ice. Stir gently to combine. Garnish with lime wedges.',
     description: 'A Moscow mule is a cocktail made with vodka, ginger beer and lime juice, garnished with a slice or wedge of lime',
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 0, boozy: 5, salty: 0, sour: 2, sweet: 5, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -331,9 +358,10 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Combine sugar, rum, lime juice, and simple syrup in a cocktail shaker; stir until sugar dissolves, about 20 seconds. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Place a large ice cube in a coupe glass; strain cocktail through a Hawthorne strainer or a slotted spoon into glass. Using a small serrated knife, remove a 1" strip of peel from lime (some white pith is okay); it should be stiff enough to provide some resistance when bent. Twist over drink to express oils; discard. Garnish with a lime twist. \n`,
-    description: faker.lorem.sentence,
-    additionalInfo: ''
+    instructions: 'Combine sugar, rum, lime juice, and simple syrup in a cocktail shaker; stir until sugar dissolves, about 20 seconds. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Place a large ice cube in a coupe glass; strain cocktail through a Hawthorne strainer or a slotted spoon into glass. Using a small serrated knife, remove a 1" strip of peel from lime (some white pith is okay); it should be stiff enough to provide some resistance when bent. Twist over drink to express oils; discard. Garnish with a lime twist.',
+    description: "This three-ingredient gift has pleased millions of palates over the ensuing years, including household names like Ernest Hemingway and President JFK.",
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 0, boozy: 4, salty: 0, sour: 4, sweet: 5, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -348,9 +376,10 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Muddle simple syrup and 2 mint sprigs in a cocktail shaker. Add rum and lime juice. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Strain cocktail through a Hawthorne strainer or a slotted spoon into a tall Collins glass filled with ice. Top off with club soda; garnish with more mint`,
+    instructions: `Muddle simple syrup and 2 mint sprigs in a cocktail shaker. Add rum and lime juice. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Strain cocktail through a Hawthorne strainer or a slotted spoon into a tall Collins glass filled with ice. Top off with club soda; garnish with more mint`,
     description: 'The combination of sweetness, citrus, and herbaceous mint flavors is intended to complement the rum, and has made the mojito a popular summer drink',
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 0, boozy: 4, salty: 0, sour: 2, sweet: 5, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -365,12 +394,11 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Combine vodka, cranberry juice, lime juice, and triple sec in a cocktail shaker. Fill shaker with ice, \n
-    cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. \n
-    2) Strain cocktail through a Hawthorne strainer or a slotted spoon into a martini glass. Garnish with \n
-    orange twist.`,
+    instructions: `Combine vodka, cranberry juice, lime juice, and triple sec in a cocktail shaker. Fill shaker with ice,
+    cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Strain cocktail through a Hawthorne strainer or a slotted spoon into a martini glass. Garnish with orange twist.`,
     description:`A cosmopolitan, or informally a cosmo, is a cocktail made with vodka, triple sec, cranberry juice, and freshly squeezed or sweetened lime juice`,
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 3, boozy: 5, salty: 0, sour: 3, sweet: 5, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -383,8 +411,9 @@ const seedDB = async () => {
     ],
     reviews: [],
     instructions: `Put some vodka in your orange juice. Alternatively, put some orange juice in your vodka`,
-    description: faker.lorem.paragraph(),
-    additionalInfo: ''
+    description: "The beauty of the Screwdriver lies in the cocktail’s simplicity and the drink’s adoption as a morning eye-opener",
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 0, boozy: 5, salty: 0, sour: 2, sweet: 4, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -399,10 +428,11 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `1) Place sugar cube in an Irish coffee mug. Add coffee and whiskey and stir to combine. Top with whipped \n
+    instructions: `Place sugar cube in an Irish coffee mug. Add coffee and whiskey and stir to combine. Top with whipped
     cream and bitters, if using.`,
     description: 'Irish coffee is a caffeinated alcoholic drink consisting of Irish whiskey, hot coffee, and sugar, stirred, and topped with cream',
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 3, boozy: 4, salty: 0, sour: 0, sweet: 4, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -422,10 +452,11 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: `Combine gin, lemon juice, and sugar in a pitcher or large measuring glass and stir to dissolve sugar; refrigerate gin mixture if not making drinks right away. Do Ahead: Gin mixture can be made 1 day ahead. Cover and chill. When ready to serve, arrange lemon wedges, mango, cucumber, mint sprigs, ginger, raspberries, and strawberries on a platter or in separate bowls and set out alongside gin mixture, club soda, and a bucket \n
+    instructions: `Combine gin, lemon juice, and sugar in a pitcher or large measuring glass and stir to dissolve sugar; refrigerate gin mixture if not making drinks right away. Do Ahead: Gin mixture can be made 1 day ahead. Cover and chill. When ready to serve, arrange lemon wedges, mango, cucumber, mint sprigs, ginger, raspberries, and strawberries on a platter or in separate bowls and set out alongside gin mixture, club soda, and a bucket
     of ice. For each cocktail, muddle ingredients of your choice (mix and match!) in a Collins glass. Fill with ice, then add ¼ cup gin mixture and top off with club soda.`,
     description: 'This "gin and sparkling lemonade" drink is typically served in a Collins glass over ice',
-    additionalInfo: ''
+    additionalInfo: '',
+    creator_flavor_profile: {bitter: 0, boozy: 4, salty: 0, sour: 2, sweet: 4, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -441,9 +472,10 @@ const seedDB = async () => {
 
     ],
     reviews: [],
-    instructions: ` Combine gin, lemon juice, and simple syrup in a cocktail shaker. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Strain cocktail through a Hawthorne strainer or a slotted spoon into a large flute. Top with Champagne; garnish with lemon twist.`,
+    instructions: `Combine gin, lemon juice, and simple syrup in a cocktail shaker. Fill shaker with ice, cover, and shake vigorously until outside of shaker is very cold, about 20 seconds. Strain cocktail through a Hawthorne strainer or a slotted spoon into a large flute. Top with Champagne; garnish with lemon twist.`,
     description: `French 75 is a cocktail made from gin, champagne, lemon juice, and sugar. It is also called a 75 Cocktail, or in French simply a Soixante Quinze`,
-    additionalInfo: "Hendrick's Gin is recommended"
+    additionalInfo: "Hendrick's Gin is recommended",
+    creator_flavor_profile: {bitter: 2, boozy: 5, salty: 0, sour: 0, sweet: 5, umami: 0},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -451,15 +483,16 @@ const seedDB = async () => {
     imgUrl: 'https://assets.bonappetit.com/photos/5aa9640bcb9d0f23ce858096/1:1/w_1280%2Cc_limit/aperol-spritz.jpg',
     ingredients: [
       await Ingredient.findOne({name: 'olives'}),
-      await Ingredient.findOne({name: `aperol`}),
+      await Ingredient.findOne({name: 'aperol'}),
       await Ingredient.findOne({name: 'prosecco'}),
       await Ingredient.findOne({name: 'club soda'}),
       await Ingredient.findOne({name: 'ice'}),
     ],
     reviews: [],
-    instructions: `Thread olives onto a swizzle stick. Pour Aperol and Prosecco into a rocks glass filled with ice. Top off with soda and gently stir with swizzle stick with olives \n`,
+    instructions: `Thread olives onto a swizzle stick. Pour Aperol and Prosecco into a rocks glass filled with ice. Top off with soda. Gently stir with swizzle stick with olives`,
     description: `A Spritz Veneziano is an Italian wine-based cocktail, commonly served as an aperitif in Northeast Italy`,
-    additionalInfo: ""
+    additionalInfo: "",
+    creator_flavor_profile: {bitter: 4, boozy: 4, salty: 3, sour: 0, sweet: 1, umami: 3},
   },
   {
     user: getRandomSubarray(userSeeds,1)[0],
@@ -473,7 +506,8 @@ const seedDB = async () => {
     reviews: [],
     instructions: `Pour two ounces of gin into a cocktail glass, and top with grapefruit juice to taste`,
     description: `Grapefuit and gin for the win!`,
-    additionalInfo: ''
+    additionalInfo: 'Looking to throw a bone between the citrus and spirit? Add salt to the rim, and you have another canine-related classic, the Salty Dog. This simple variation can also be made with either gin or vodka, and the salted rim lends a savory quality to each electrolyte-laced sip.',
+    creator_flavor_profile: {bitter: 3, boozy: 4, salty: 0, sour: 0, sweet: 3, umami: 0},
     
 },
 {
@@ -486,23 +520,25 @@ const seedDB = async () => {
 
   ],
   reviews: [],
-  instructions: `Two parts whiskey, half part drambuie liqueur`,
+  instructions: `Two parts whiskey, half part drambuie liqueur. Add the whistkey and Drambuie into a mixing glass with ice and stir until well-chilled. Strain into a rocks glass over one large ice cube`,
   description: `Frank Sinatra and the Rat Pack loved this drink!`,
-  additionalInfo: ''
+  additionalInfo: '',
+  creator_flavor_profile: {bitter: 0, boozy: 5, salty: 0, sour: 0, sweet: 3, umami: 0},
 },
 {
   user: getRandomSubarray(userSeeds,1)[0],
   name: `Black Russian`,
-  imgUrl: 'https://www.tasteofhome.com/wp-content/uploads/2018/07/Rusty-nail.jpg?resize=700,700',
+  imgUrl: 'https://www.liquor.com/thmb/QOZuXd5sMdPAVREzFO3p25ub6Ng=/720x540/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__liquor__2019__02__22083816__black-russian-720x720-recipe-294769f33a6d4ccd9331030c158a1a53.jpg',
   ingredients: [
     await Ingredient.findOne({name: 'vodka'}),
     await Ingredient.findOne({name: 'coffee liqueur'})
 
   ],
   reviews: [],
-  instructions: `Vodka and coffee-flavored liqueur`,
+  instructions: `Add 2 parts vodka and 1 part coffee liqueur into a mixing glass with ice and stir until well-chilled. Strain into a rocks glass over fresh ice.`,
   description: `The arch-nemesis of the White Russian!`,
-  additionalInfo: ''
+  additionalInfo: '',
+  creator_flavor_profile: {bitter: 3, boozy: 5, salty: 0, sour: 0, sweet: 2, umami: 0},
 },
 {
   user: getRandomSubarray(userSeeds,1)[0],
@@ -514,9 +550,10 @@ const seedDB = async () => {
 
   ],
   reviews: [],
-  instructions: `Orange juice with champagne`,
+  instructions: `Divide orange juice evenly into two flute glasses; top with chilled Champagne and serve.`,
   description: `The more sophisticated sibling of the screwdriver!`,
-  additionalInfo: ''
+  additionalInfo: '',
+  creator_flavor_profile: {bitter: 0, boozy: 2, salty: 0, sour: 2, sweet: 4, umami: 0},
 },
 {
   user: getRandomSubarray(userSeeds,1)[0],
@@ -528,9 +565,10 @@ const seedDB = async () => {
 
   ],
   reviews: [],
-  instructions: `Peach juice with champagne`,
+  instructions: `Put the peach juice or puree in a Champagne flute up to about 1/3 full. Slowly top up with Prosecco.`,
   description: `A peachy mimosa`,
-  additionalInfo: ''
+  additionalInfo: '',
+  creator_flavor_profile: {bitter: 0, boozy: 2, salty: 0, sour: 0, sweet: 5, umami: 0},
 },
 {
   user: getRandomSubarray(userSeeds,1)[0],
@@ -544,7 +582,8 @@ const seedDB = async () => {
   reviews: [],
   instructions: `Vodka with cranberry juice`,
   description: `The name tells you how to make it!`,
-  additionalInfo: ''
+  additionalInfo: 'Purists do not use Champagne to make this cocktail; it can be too flavorful and hide the subtle peach flavor. If a non-alcoholic cocktail is desired, use sparkling water in place of the sparkling wine',
+  creator_flavor_profile: {bitter: 0, boozy: 2, salty: 0, sour: 0, sweet: 4, umami: 0},
 }
 ]
 
