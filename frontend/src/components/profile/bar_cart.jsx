@@ -140,6 +140,7 @@ class BarCart extends React.Component {
 							showRecipe={this.showRecipe}
 							ingredients={this.props.ingredients}
 							handleSelection={this.handleSelection}
+              // className="sticky"
 						/>
                     </div>
                 </div>
