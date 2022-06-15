@@ -12,6 +12,7 @@ export default class ReviewIndex extends Component {
         this.props.fetchReviews()
         this.setState({reviews: this.props.reviews});
     }
+  
     render() {
         // console.log('REVIEW INDEX RENDERED with the review props of:', this.props.reviews)
         // console.log('REVIEW INDEX STATE is:', this.state.reviews)
