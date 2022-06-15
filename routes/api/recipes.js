@@ -188,7 +188,10 @@ router.post('/:id/review',
                     }
                 },
                 {new: true}
-            ).then(recipe => res.json({[recipe.id]: recipe}));
+                ).then(recipe => res.json(recipe));
+            // ).then(recipe => res.json({[recipe.id]: recipe}));
+
+            
         } catch(err) {
             return res.status(400).send({
                 message: err.message
@@ -210,5 +213,5 @@ router.post('/:id/delete',
         Review.findByIdAndDelete(req.params.id, {new:true})
             .then(review => res.json({[recipe.id]: recipe}))
             .catch(err=>res.status(400).send({message: err.message})) 
-    });
-module.exports = router;
+        });
+        module.exports = router;

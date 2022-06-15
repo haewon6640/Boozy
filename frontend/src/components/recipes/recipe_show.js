@@ -14,7 +14,7 @@ class RecipeShow extends React.Component {
             ingredients: [],
             reviews: []
         }
-        console.log('recipe show props:', this.props)
+        // console.log('recipe show props:', this.props)
         this.rerenderPage = this.rerenderPage.bind(this);
     }
     componentDidMount() {
@@ -25,6 +25,11 @@ class RecipeShow extends React.Component {
                 ingredients: this.props.ingredients,
                 reviews: this.props.reviews
             }))
+    }
+    componentDidUpdate(pProps) {
+        if (Object.values(pProps.reviews).length !== Object.values(this.props.reviews).length) {
+            this.props.fetchReviews()
+        }
     }
     rerenderPage() {
         this.props.fetchRecipe()
@@ -42,13 +47,15 @@ class RecipeShow extends React.Component {
 			return this.state.recipe.instructions.split(". ").map((step,idx)=> (<li key={idx}>{step}</li>))
 		}
 	}
+  
     render() {
+      
         if ( Object.keys(this.state.recipe).length === 0) {
           return <div className="loading"></div>;
         }
 
         const recipe = this.state.recipe;
-        console.log("recipe show:",this.props)
+        // console.log("`recipe show`:",this.props)
 		return (
 		<div className="recipe-show">
 			<div className="two-col">
@@ -88,12 +95,15 @@ class RecipeShow extends React.Component {
                     </div>
                     <div className="review-form-container">
 				        <ReviewForm 
-                  fetchRecipe={this.rerenderPage} 
+                  rerenderPage={this.rerenderPage} 
                   createReview={this.props.createReview} 
+                  fetchReviews={this.props.fetchReviews}
                   recipe={recipe}
                   modal={this.props.modal}
                   openModal={this.props.openModal}
                   closeModal={this.props.closeModal}
+                  currentUser={this.props.user}
+                  onSubmit={() => alert('hello')}
                   />
 			        </div>
 				</div>
@@ -101,7 +111,7 @@ class RecipeShow extends React.Component {
             <div className="separator"></div>
       
 			<div className="review-index-container">
-				<ReviewIndex reviews={this.state.reviews}/>
+				<ReviewIndex  fetchReviews={this.props.fetchReviews} reviews={this.state.reviews}/>
 			</div>
 		</div>
 	)}
