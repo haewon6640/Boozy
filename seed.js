@@ -45,7 +45,6 @@ let ingredientArr = [
   'tabasco Produce',
   'celery Produce',
   'cherry Produce',
-  'sugar Produce',
   'celery-salt Produce',
 ]
 
