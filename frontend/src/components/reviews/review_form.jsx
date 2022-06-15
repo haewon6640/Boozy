@@ -47,7 +47,6 @@ export default class ReviewForm extends Component {
             body: "",
         });
     }
-   
 
     handleSlide(category, e) {
     //   console.log(e.target.value) 
@@ -74,7 +73,7 @@ export default class ReviewForm extends Component {
       setTimeout(()=>this.props.closeModal(),250)  
     }
 
-    async handleSubmit(e) {
+     handleSubmit(e) {
       e.preventDefault()
 
       
@@ -85,8 +84,8 @@ export default class ReviewForm extends Component {
           recipe: this.props.recipe._id
       };
       this.props.createReview(review)
-          .then(()=>this.props.fetchRecipe())
-              .then(() => this.props.fetchReviews())
+          .then(()=>this.props.rerenderPage())
+              .then(() => {this.props.fetchReviews()})
                   .then(()=> {
                       document.getElementById('modal').classList.remove('showModal')
                       document.getElementById('modal').classList.add('hideModal')
@@ -104,25 +103,25 @@ export default class ReviewForm extends Component {
                       title: "",
                       body: "",
                       });
-                    })
+                    }).then(this.props.rerenderPage())
       
                   
     }
   
 
     render() {
-        console.log('review form props:', this.props)
+        // console.log('the current user is:', this.props.currentUser)
         let form;
         let reviewSpan;
         let reviewButton;
-        if (this.props.currentUser) {
+        if (Object.values(this.props.currentUser).length) {
             reviewButton =   (<h2 className="review-form-header"
             onClick={this.reviewDisplay.bind(this)}>
               Review this Cocktail!
           </h2>)
         } else {
             reviewButton = (
-                <Link to="/Login" className="review-form-header">Review this Cocktail!</Link>
+                <Link to="/Login" className="review-form-header">Review this Schlocktail!</Link>
             )
         }
         if (this.props.modal) {

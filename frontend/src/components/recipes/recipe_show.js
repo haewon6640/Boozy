@@ -26,6 +26,11 @@ class RecipeShow extends React.Component {
                 reviews: this.props.reviews
             }))
     }
+    componentDidUpdate(pProps) {
+        if (Object.values(pProps.reviews).length !== Object.values(this.props.reviews).length) {
+            this.props.fetchReviews()
+        }
+    }
     rerenderPage() {
         this.props.fetchRecipe()
         .then(()=> this.setState({
@@ -50,7 +55,7 @@ class RecipeShow extends React.Component {
         }
 
         const recipe = this.state.recipe;
-        console.log("`recipe show`:",this.props)
+        // console.log("`recipe show`:",this.props)
 		return (
 		<div className="recipe-show">
 			<div className="two-col">
@@ -90,7 +95,7 @@ class RecipeShow extends React.Component {
                     </div>
                     <div className="review-form-container">
 				        <ReviewForm 
-                  fetchRecipe={this.rerenderPage} 
+                  rerenderPage={this.rerenderPage} 
                   createReview={this.props.createReview} 
                   fetchReviews={this.props.fetchReviews}
                   recipe={recipe}
@@ -106,7 +111,7 @@ class RecipeShow extends React.Component {
             <div className="separator"></div>
       
 			<div className="review-index-container">
-				<ReviewIndex reviews={this.state.reviews}/>
+				<ReviewIndex  fetchReviews={this.props.fetchReviews} reviews={this.state.reviews}/>
 			</div>
 		</div>
 	)}
