@@ -216,20 +216,26 @@ router.post(
     "/:id/update",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-        console.log(req.body.recipe);
-        const newRecipe = new Recipe({
-            imgUrl: req.body.recipe.imgUrl,
-            name: req.body.recipe.name,
+        let val = {}
+        for (const key in req.body) {
+            val = JSON.parse(key)
+        }
+        const newRecipe = {
+            imgUrl: val["recipe[imgUrl]"],
+            name: val["recipe[name]"],
             user: req.user.id,
-            ingredients: JSON.parse(req.body.recipe.ingredients),
-            description: req.body.recipe.description,
-            instructions: req.body.recipe.instructions,
-            additionalInfo: req.body.recipe.additionalInfo,
-            creator_flavor_profile: JSON.parse(req.body.recipe.rating)
-        });
-        Recipe.findByIdAndUpdate(req.params.id, newRecipe, { new: true })
-            .then((recipe) => res.json({ [recipe.id]: recipe }))
-            .catch((err) => res.status(400).send({ message: err.message }));
+            ingredients: JSON.parse(val["recipe[ingredients]"]),
+            description: val["recipe[description]"],
+            instructions: val["recipe[instructions]"],
+            additionalInfo: val["recipe[additionalInfo]"],
+            creator_flavor_profile: val["recipe[rating]"]
+        };
+        console.log(newRecipe);
+        Recipe.updateOne(
+            {_id: req.params.id},
+            {$set: newRecipe})
+            .then((recipe) => res.json(recipe))
+            .catch((err) => console.log(err));
     }
 );
 
