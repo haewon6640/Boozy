@@ -8,8 +8,6 @@ router.get("/", (req,res) => {
     Review.find()
         .populate('reviewer')
         .populate('recipe')
-        .sort({date:-1})
-        .limit(20)
         .then(reviews => {
             let response = {};
             for (var i = 0; i < reviews.length; i++) {

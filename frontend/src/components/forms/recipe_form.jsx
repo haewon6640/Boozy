@@ -1,10 +1,12 @@
 import React from "react";
 import FilterItem from "./ingredient_filter_item";
 import LoadingSpinner from "../loading/loading";
+import { ReactReduxContext } from "react-redux";
 export default class RecipeForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: "",
             name: "",
             ingredients: [], 
             instructions: "",
@@ -40,6 +42,8 @@ export default class RecipeForm extends React.Component {
     handleFormData(state){
         let formData = new FormData();
         formData.append("recipe[name]", state.name)
+        formData.append("recipe[id]", state.id)
+        formData.append("recipe[imgUrl]", state.imgUrl)
         formData.append("recipe[ingredients]", JSON.stringify(state.ingredients))
         formData.append("recipe[instructions]", state.instructions)
         formData.append("recipe[additionalInfo]", state.additionalInfo)
@@ -59,8 +63,22 @@ export default class RecipeForm extends React.Component {
         return cats;
     }
 
-    componentDidMount() {
-        this.props.fetchIngredients();
+    async componentDidMount() {
+        await this.props.fetchIngredients();
+        // Edit form 
+        if (Boolean(this.props.recipe)) {
+            let recipe = this.props.recipe;
+            console.log(this.props.recipe._id)
+            this.setState({
+                name: recipe.name,
+                ingredients: recipe.ingredients,
+                instructions: recipe.instructions,
+                additionalInfo: recipe.additionalInfo,
+                description: recipe.description,
+                id: recipe._id,
+                imgUrl: recipe.imgUrl
+            })
+        }
     }
 
     update(field) {
@@ -77,7 +95,8 @@ export default class RecipeForm extends React.Component {
             .then(()=>{
                 this.setState({loading: false});
                 this.props.history.push("/recipes");
-            });
+            })
+            .catch((err)=>this.setState({loading: false}));
     }
 
     addToCart(ing) {
@@ -97,7 +116,7 @@ export default class RecipeForm extends React.Component {
         this.mixersArray = this.combineCategories("Mixers")
         this.garnishArray = this.combineCategories("Garnish")
         
-        if (!this.state.loading) {
+        if (this.state.loading) {
             return <LoadingSpinner />
         }
         return (
@@ -105,10 +124,10 @@ export default class RecipeForm extends React.Component {
                 <div className="inner-create-recipe-form">
                     <aside className="ingredient-list">
                         <div className="ingredient-list-title">Add Ingredients</div>
-                        <FilterItem addToCart={this.addToCart} subtitle="Alcohol" array={this.alcoholArray}/>
-                        <FilterItem addToCart={this.addToCart} subtitle="Produce" array={this.produceArray}/>
-                        <FilterItem addToCart={this.addToCart} subtitle="Mixers" array={this.mixersArray}/>
-                        <FilterItem addToCart={this.addToCart} subtitle="Garnish" array={this.garnishArray}/>
+                        <FilterItem addToCart={this.addToCart} ingredients={this.state.ingredients} subtitle="Alcohol" array={this.alcoholArray}/>
+                        <FilterItem addToCart={this.addToCart} ingredients={this.state.ingredients} subtitle="Produce" array={this.produceArray}/>
+                        <FilterItem addToCart={this.addToCart} ingredients={this.state.ingredients} subtitle="Mixers" array={this.mixersArray}/>
+                        <FilterItem addToCart={this.addToCart} ingredients={this.state.ingredients} subtitle="Garnish" array={this.garnishArray}/>
                         {/* {"Ingredient List -   "}
                         {this.state.ingredients.map(ingredient=><span >{ingredient.name}  </span>)} */}
                     </aside>
@@ -131,7 +150,9 @@ export default class RecipeForm extends React.Component {
                             <p className="description-label">{additionalInfo_explanation}</p>
                             <textarea name="additional-info" type="text" onChange={this.update("additionalInfo")} value={this.state.additionalInfo} 
                                 placeholder={additionalInfo_placeholder}/>
+                            
                             <input type="file" name="photo" onChange={this.handleFile} />
+                            
                             <button className="btn">Submit</button>
                         </form>
                     </div>

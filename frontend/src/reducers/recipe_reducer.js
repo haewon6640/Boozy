@@ -3,7 +3,7 @@ import {
     RECEIVE_RECIPE,
     RECEIVE_USER_RECIPES,
     RECEIVE_NEW_RECIPE,
-    RECEIVE_DOTD,
+    RECEIVE_DOTD
 } from "../actions/recipe_actions";
 
 const RecipesReducer = (

@@ -49,7 +49,7 @@ const RecipeSchema = new Schema(
 );
 
 RecipeSchema.pre("remove", function (next) {
-    Review.remove({ reviewer: this._id }).exec();
+    Review.remove({ recipe: this._id }).exec();
     next();
 });
 module.exports = Recipe = mongoose.model("Recipe", RecipeSchema);

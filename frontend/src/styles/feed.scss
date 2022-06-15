@@ -39,6 +39,7 @@
     justify-content: space-between;
     .feed-item-handle, .feed-item-review-recipe-name {
         font-weight: 700;
+        cursor:pointer;
     }
     .feed-item-review-recipe-name {
         color: $warm-pink;
@@ -65,7 +66,6 @@
     }
 }
 .feed-item-border-bottom {
-    margin-top: 20px;
     margin: 20px -16px 0px -16px;
     border-top: 1px solid $light-grey-border;
 }

@@ -17,7 +17,7 @@ class HomePage extends React.Component {
         await this.props.fetchDrinkOfTheDay()
         this.setState({
             dotd: Object.values(this.props.dotd)[0],
-            feed: this.props.reviews.slice(0,20)
+            feed: this.props.reviews
         });
     }
 

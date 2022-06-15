@@ -9,6 +9,7 @@ import BarCartContainer from './profile/bar_cart_container';
 import RecipeIndexContainer from "./recipes/recipe_index_container";
 import CreateRecipeContainer from './forms/create_recipe_container';
 import RecipeShowContainer from './recipes/recipe_show_container'
+import EditRecipeContainer from "./forms/edit_recipe_container";
 import Footer from './footer/footer';
 import '../styles/app.scss'
 const App = () => (
@@ -20,6 +21,7 @@ const App = () => (
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
       <ProtectedRoute exact path="/recipes/new" component={CreateRecipeContainer} />
       <Route exact path="/recipes/:id" component={RecipeShowContainer} />
+      <Route exact path="/recipes/:id/edit" component={EditRecipeContainer} />
       <Route path="/recipes" component={RecipeIndexContainer} />s
       <ProtectedRoute exact path="/profile" component={BarCartContainer} />
     </Switch>

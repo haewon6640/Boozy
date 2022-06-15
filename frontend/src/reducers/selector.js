@@ -15,7 +15,7 @@ export const combineAndSortArrByTime = (arr_1, arr_2) => {
 
 export const sortByNew = (arr) => (
     arr.sort(function(a,b) {
-        if (a.createdAt < b.createdAt) {
+        if (new Date(a.createdAt) < new Date(b.createdAt)) {
             return 1
         } else {
             return -1;

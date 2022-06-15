@@ -47,11 +47,22 @@
         padding-bottom: 2px;
         margin-bottom: 10px;
     }
+    .recipe-update {
+        margin-top: -15px;
+        margin-bottom: 18px;
+        * {
+            color: rgb(154, 154, 154);
+            cursor:pointer;
+            &:hover {
+                color: $light-black;
+            }
+        }
+    }
     .recipe-bottom-left {
         display: flex;
         justify-content: center;
+        width: 70%;
         .recipe-description {
-            width: 70%;
             line-height: 22.5px;
         }
     }

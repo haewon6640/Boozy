@@ -28,7 +28,7 @@ class RecipeIndex extends React.Component {
           return <div className="loading webpage go-shopping"> <h1>No Drinks Found</h1></div>;
         } else {
             return (
-            <div className="webpage">
+            <div className="webpage recipe-index">
                 <Link  to="/recipes/new"><AiOutlinePlusCircle className='add-recipe'/></Link>
                 <ul className="recipe-index-container">
                     {this.state.recipes.map((recipe, idx)=> (

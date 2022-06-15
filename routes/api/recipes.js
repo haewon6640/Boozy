@@ -161,7 +161,6 @@ router.post(
         };
         s3.upload(params, (error, data) => {
             if (error) {
-                console.lo;
                 res.status(500).send({ err: error });
             }
             const newRecipe = new Recipe({
@@ -216,7 +215,17 @@ router.post(
     "/:id/update",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-        Recipe.findByIdAndUpdate(req.params.id, req.body.recipe, { new: true })
+        console.log(req.body.recipe);
+        const newRecipe = new Recipe({
+            imgUrl: req.body.recipe.imgUrl,
+            name: req.body.recipe.name,
+            user: req.user.id,
+            ingredients: JSON.parse(req.body.recipe.ingredients),
+            description: req.body.recipe.description,
+            instructions: req.body.recipe.instructions,
+            additionalInfo: req.body.recipe.additionalInfo,
+        });
+        Recipe.findByIdAndUpdate(req.params.id, newRecipe, { new: true })
             .then((recipe) => res.json({ [recipe.id]: recipe }))
             .catch((err) => res.status(400).send({ message: err.message }));
     }
@@ -226,8 +235,10 @@ router.post(
     "/:id/delete",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-        Review.findByIdAndDelete(req.params.id, { new: true })
-            .then((review) => res.json({ [recipe.id]: recipe }))
+        Recipe.findByIdAndDelete(req.params.id, { new: true })
+            .then((recipe) => {
+                res.json({ [recipe.id]: recipe })
+            })
             .catch((err) => res.status(400).send({ message: err.message }));
     }
 );
