@@ -40,12 +40,14 @@ let ingredientArr = [
   'raspberries Produce', 'champagne Alcohol', 'aperol Alcohol',
   'prosecco Alcohol', 'orange-juice Mixer', 
   'sweet-vermouth Alcohol',
+  'drambuie-liqueur Alcohol',
   'sloe-gin Alcohol',
   'peach-juice Produce',
   'tabasco Produce',
   'celery Produce',
   'cherry Produce',
   'celery-salt Produce',
+
 ]
 
 // convert the string of ingredient names into an array of ingredient objects called ingredientSeed
@@ -567,7 +569,7 @@ const seedDB = async () => {
   reviews: [],
   instructions: `Put the peach juice or puree in a Champagne flute up to about 1/3 full. Slowly top up with Prosecco.`,
   description: `A peachy mimosa`,
-  additionalInfo: '',
+  additionalInfo:  'Purists do not use Champagne to make this cocktail; it can be too flavorful and hide the subtle peach flavor. If a non-alcoholic cocktail is desired, use sparkling water in place of the sparkling wine',
   creator_flavor_profile: {bitter: 0, boozy: 2, salty: 0, sour: 0, sweet: 5, umami: 0},
 },
 {
@@ -576,14 +578,15 @@ const seedDB = async () => {
   imgUrl: 'https://www.tasteofhome.com/wp-content/uploads/2018/07/Vodka-cranberry.jpg?resize=700,700',
   ingredients: [
     await Ingredient.findOne({name: 'cranberry juice'}),
-    await Ingredient.findOne({name: 'vodka'})
+    await Ingredient.findOne({name: 'vodka'}),
+    await Ingredient.findOne({name: 'lime'})
 
   ],
   reviews: [],
-  instructions: `Vodka with cranberry juice`,
+  instructions: `Fill a glass ⅔ full of ice. Pour in the vodka and cranberry juice and stir to combine. Give the lime wedge a light squeeze over the drink before using it as a garnish. Add up to 2 teaspoons of simple syrup if you want a sweeter drink.`,
   description: `The name tells you how to make it!`,
-  additionalInfo: 'Purists do not use Champagne to make this cocktail; it can be too flavorful and hide the subtle peach flavor. If a non-alcoholic cocktail is desired, use sparkling water in place of the sparkling wine',
-  creator_flavor_profile: {bitter: 0, boozy: 2, salty: 0, sour: 0, sweet: 4, umami: 0},
+  additionalInfo:"",
+  creator_flavor_profile: {bitter: 3, boozy: 4, salty: 0, sour: 1, sweet: 4, umami: 0},
 }
 ]
 
