@@ -121,7 +121,7 @@ export default class ReviewForm extends Component {
           </h2>)
         } else {
             reviewButton = (
-                <Link to="/Login" className="review-form-header">Review this Schlocktail!</Link>
+                <Link to="/Login" className="review-form-header">Login to Review this Cocktail!</Link>
             )
         }
         if (this.props.modal) {
@@ -137,6 +137,7 @@ export default class ReviewForm extends Component {
                               How does this drink taste?{" "}
                           </span>
                           {reviewCategories.map((category, i) => (
+                              
                               <div className="ratings-wrapper">
                                   {/* {console.log(category)} */}
                                   <div className="category">{category}</div>
@@ -144,7 +145,7 @@ export default class ReviewForm extends Component {
                                       className={`rating-slider ${category}-slider`}
                                       type="range"
                                       min={0}
-                                      max={10}
+                                      max={(category === 'rating') ? 5 : 10}
                                       value={this.state.rating[category]}
                                       // defaultValue={0}
                                       onChange={(e) =>
