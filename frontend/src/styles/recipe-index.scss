@@ -7,7 +7,7 @@
 	text-align: center;
 	// border: 1px solid magenta;
 	justify-content: space-between;
-  margin-top: -50px;
+  // margin-top: -50px;
   a {
     height: 300px;
   }
@@ -29,4 +29,8 @@
     opacity: 1;
 
   }
+}
+
+.red-text {
+  color: red!important;
 }
