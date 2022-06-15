@@ -16,6 +16,13 @@
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 2px 6px 0px, rgba(0, 0, 0, 0.09) 0px 3px 8px 0px;
 }
+.recipe-ratings {
+    margin-left: 60px;
+    margin-top: 20px;
+    .recipe-rating-header {
+        margin-right: 40px;
+    }
+}
 
 .recipe-form-container {
     flex-basis: 60%;

@@ -2,6 +2,14 @@ import React from "react";
 import FilterItem from "./ingredient_filter_item";
 import LoadingSpinner from "../loading/loading";
 import { ReactReduxContext } from "react-redux";
+const reviewCategories = [
+    "boozy",
+    "sweet",
+    "sour",
+    "bitter",
+    "salty",
+    "umami"
+];
 export default class RecipeForm extends React.Component {
     constructor(props) {
         super(props);
@@ -20,7 +28,15 @@ export default class RecipeForm extends React.Component {
             description: "",
             imageFile: "",
             imgUrl: "",
-            loading: false
+            loading: false,
+            rating: {
+                boozy: 0,
+                sweet: 0,
+                sour: 0,
+                bitter: 0,
+                salty: 0,
+                umami: 0
+            },
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.addToCart = this.addToCart.bind(this);
@@ -48,6 +64,7 @@ export default class RecipeForm extends React.Component {
         formData.append("recipe[instructions]", state.instructions)
         formData.append("recipe[additionalInfo]", state.additionalInfo)
         formData.append("recipe[description]", state.description)
+        formData.append("recipe[rating]", JSON.stringify(state.rating))
         formData.append("recipe[photo]", state.imageFile)
         
         return formData;
@@ -69,6 +86,7 @@ export default class RecipeForm extends React.Component {
         if (Boolean(this.props.recipe)) {
             let recipe = this.props.recipe;
             console.log(this.props.recipe._id)
+            console.log(recipe.creator_flavor_profile)
             this.setState({
                 name: recipe.name,
                 ingredients: recipe.ingredients,
@@ -76,7 +94,8 @@ export default class RecipeForm extends React.Component {
                 additionalInfo: recipe.additionalInfo,
                 description: recipe.description,
                 id: recipe._id,
-                imgUrl: recipe.imgUrl
+                imgUrl: recipe.imgUrl,
+                rating: recipe.creator_flavor_profile
             })
         }
     }
@@ -101,6 +120,19 @@ export default class RecipeForm extends React.Component {
 
     addToCart(ing) {
         this.setState({ingredients: this.state.ingredients.concat([ing])})
+    }
+
+    handleSlide(category, e) {
+        //   console.log(e.target.value)
+        let newRating = { ...this.state.rating };
+        newRating[Object.values(category)[0]] = e.target.value;
+        // console.log(category, e.target.value, newRating); //you get to this point
+        this.setState(
+            {
+                rating: newRating,
+            }
+            // console.log("State was set to:", this.state.rating)
+        );
     }
 
     render() {
@@ -130,6 +162,36 @@ export default class RecipeForm extends React.Component {
                         <FilterItem addToCart={this.addToCart} ingredients={this.state.ingredients} subtitle="Garnish" array={this.garnishArray}/>
                         {/* {"Ingredient List -   "}
                         {this.state.ingredients.map(ingredient=><span >{ingredient.name}  </span>)} */}
+                        <div className="form-first-column ratings-container recipe-ratings">
+                                <span className="rating-header recipe-rating-header">
+                                    Flavor Profile
+                                </span>
+                                {reviewCategories.map((category, i) => (
+                                    <div className="ratings-wrapper recipe-ratings-wrapper">
+                                        {/* {console.log(category)} */}
+                                        <div className="category">
+                                            {category}
+                                        </div>
+                                        <input
+                                            className={`rating-slider ${category}-slider`}
+                                            type="range"
+                                            min={0}
+                                            max={category === "rating" ? 5 : 10}
+                                            value={this.state.rating[category]}
+                                            // defaultValue={0}
+                                            onChange={(e) =>
+                                                this.handleSlide(
+                                                    { category },
+                                                    e
+                                                )
+                                            }
+                                        />
+                                        <div className="category-value-text">
+                                            {this.state.rating[category]}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                     </aside>
                     <div className="recipe-form-container">
                         <form onSubmit={this.handleSubmit} className="create-recipe-form">

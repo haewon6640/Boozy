@@ -171,6 +171,7 @@ router.post(
                 description: req.body.recipe.description,
                 instructions: req.body.recipe.instructions,
                 additionalInfo: req.body.recipe.additionalInfo,
+                creator_flavor_profile: JSON.parse(req.body.recipe.rating)
             });
             newRecipe
                 .save()
@@ -224,6 +225,7 @@ router.post(
             description: req.body.recipe.description,
             instructions: req.body.recipe.instructions,
             additionalInfo: req.body.recipe.additionalInfo,
+            creator_flavor_profile: JSON.parse(req.body.recipe.rating)
         });
         Recipe.findByIdAndUpdate(req.params.id, newRecipe, { new: true })
             .then((recipe) => res.json({ [recipe.id]: recipe }))
@@ -235,11 +237,9 @@ router.post(
     "/:id/delete",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-        Recipe.findByIdAndDelete(req.params.id, { new: true })
-            .then((recipe) => {
-                res.json({ [recipe.id]: recipe })
-            })
-            .catch((err) => res.status(400).send({ message: err.message }));
+        let recipe = await Recipe.findById(req.params.id);
+        recipe.remove();
+        res.json(recipe);
     }
 );
 
