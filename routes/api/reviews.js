@@ -42,9 +42,9 @@ router.post('/:id/update',
 router.post('/:id/delete',
     passport.authenticate('jwt', { session: false }),
     async (req,res) => {
-        Review.findByIdAndDelete(req.params.id, {new:true})
-            .then(review => res.json(review))
-            .catch(err=>res.status(400).send({message: err.message})) 
+        let review = await Review.findById(req.params.id);
+        review.remove();
+        res.json(review);
     });
 
 

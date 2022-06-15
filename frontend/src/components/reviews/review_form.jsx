@@ -45,37 +45,7 @@ export default class ReviewForm extends Component {
             body: "",
         });
     }
-    async handleSubmit(e) {
-        e.preventDefault();
-        let review = {
-            rating: this.state.rating,
-            title: this.state.title,
-            body: this.state.body,
-            recipe: this.props.recipe._id,
-        };
-        this.props
-            .createReview(review)
-            .then(() => this.props.fetchRecipe())
-            .then(() => {
-                document.getElementById("modal").classList.remove("showModal");
-                document.getElementById("modal").classList.add("hidal");
-                this.props.closeModal();
-                this.setState({
-                    rating: {
-                        boozy: 0,
-                        sweet: 0,
-                        sour: 0,
-                        bitter: 0,
-                        salty: 0,
-                        umami: 0,
-                        rating: 0,
-                    },
-                    title: "",
-                    body: "",
-                });
-            });
-    }
-
+    
     handleSlide(category, e) {
         //   console.log(e.target.value)
         let newRating = { ...this.state.rating };
@@ -142,7 +112,7 @@ export default class ReviewForm extends Component {
         let form;
         let reviewSpan;
         let reviewButton;
-        if (Object.values(this.props.currentUser).length) {
+        if (this.props.currentUser && Object.values(this.props.currentUser).length) {
             reviewButton = (
                 <h2
                     className="review-form-header"
