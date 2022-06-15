@@ -42,7 +42,7 @@ class LoginForm extends React.Component {
     } else if (type = "demo"){
       user = {
         email: "DemoUser@gmail.com",
-        password: "123456"
+        password: "$2a$10$NcUeyj5yCHoJTvRgOlw7Cef01EXTP7TfVwAf3qf2ZR.cdz2L0QU3q"
       }
     }
     this.props.login(user).then(
