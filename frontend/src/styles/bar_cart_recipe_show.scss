@@ -64,6 +64,17 @@
   }
 }
 
+.show-btm-right {
+  overflow-y: auto;
+}
+.show-top-right {
+   #profile {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  // overflow-y: auto;
+}
+
 .show-top-middle {
   padding: 0 20px;
   font-family: $recipe-font;

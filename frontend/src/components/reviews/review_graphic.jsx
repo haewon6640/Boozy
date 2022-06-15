@@ -10,20 +10,20 @@ export default function ReviewGraphic(props) {
       chartData.push({item:variable, count:props.flavor_profile[variable]})
   })
   }
-  
+  const size = props.size
 
   
   const pieChart = useRef();
   
   useEffect(()=>{
     const pieData = d3.pie().value(d=>d.count)(chartData)
-    const arc = d3.arc().innerRadius(0).outerRadius(75)
+    const arc = d3.arc().innerRadius(0).outerRadius(size)
     const colors = d3.scaleOrdinal(["#fe4040", "#fd7e53", "#f8c77b", "#fe7f70", "#cd5d45", "#f6ac87"])
     const svg = d3.select(pieChart.current)
-        .attr('width', '150')
-        .attr('height', '150')
+        .attr('width', `${size*2}`)
+        .attr('height', `${size*2}`)
         .append('g')
-        .attr('transform', 'translate(75, 75)');
+        .attr('transform', `translate(${size}, ${size})`);
 
     // const tooldiv = d3.select('#chart-area')
     //       .append('div')
