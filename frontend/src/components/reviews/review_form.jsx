@@ -46,7 +46,7 @@ export default class ReviewForm extends Component {
             title: "",
             body: "",
 
-        }
+        })
     }
     async handleSubmit(e) {
         e.preventDefault();
