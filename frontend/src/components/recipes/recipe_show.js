@@ -105,6 +105,7 @@ class RecipeShow extends React.Component {
                                 <ReviewGraphic
                                     className="review-graphic"
                                     flavor_profile={recipe.creator_flavor_profile}
+                                    size={100}
                                 />
                             </div>
                         </div>

@@ -75,8 +75,8 @@ export default function BarCartRecipeShow(props) {
         </div>
         </div>
         <div className="show-top-right centered-col">
-          <h2>Flavor Profile</h2>
-          <ReviewGraphic flavor_profile={recipe.creator_flavor_profile}/>
+          <h2 id="profile">Flavor Profile</h2>
+          <ReviewGraphic flavor_profile={recipe.creator_flavor_profile} size={68}/>
           <p className="recipe-description">{recipe.description ? recipe.description : "A classical drink with hint of sweet and bitterness."}</p>
         </div>
       </div>
