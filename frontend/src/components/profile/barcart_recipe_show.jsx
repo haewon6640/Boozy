@@ -8,7 +8,7 @@ export default function BarCartRecipeShow(props) {
   const recipe = props.recipe;
   useEffect(()=> props.handleSelection('curr_recipe', recipe), [props.shelf])
   const[selectedMissing, setSelectedMissing] = useState();
-  console.log(props)
+
   
   if (Object.values(recipe).length === 0) {
     return <div className="go-shopping">
@@ -88,7 +88,15 @@ export default function BarCartRecipeShow(props) {
         <div className="show-btm-right">
           <h2>How to Make It</h2>
           <ol>
-            {props.recipe.instructions.split("\n").map((step,idx)=> (<li key={idx}>{step}</li>))}
+            {props.recipe.instructions.split("...")
+            .filter(el=> el!=="")
+            .join(" ")
+            .split(". ")
+            .filter(el=> el!=="")
+            .join(".")
+            .split(".")
+            .filter(el=> el!=="")
+            .map((step,idx)=> (<li key={idx}>{step}.</li>))}
           </ol>
         </div>
       </div>
