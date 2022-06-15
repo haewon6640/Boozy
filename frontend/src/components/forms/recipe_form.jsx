@@ -1,6 +1,6 @@
 import React from "react";
 import FilterItem from "./ingredient_filter_item";
-
+import LoadingSpinner from "../loading/loading";
 export default class RecipeForm extends React.Component {
     constructor(props) {
         super(props);
@@ -17,7 +17,8 @@ export default class RecipeForm extends React.Component {
             }, 
             description: "",
             imageFile: "",
-            imgUrl: ""
+            imgUrl: "",
+            loading: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.addToCart = this.addToCart.bind(this);
@@ -71,8 +72,12 @@ export default class RecipeForm extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
+        this.setState({loading: true})
         this.props.action(this.handleFormData(this.state))
-            .then(()=>this.props.history.push("/recipes"))
+            .then(()=>{
+                this.setState({loading: false});
+                this.props.history.push("/recipes");
+            });
     }
 
     addToCart(ing) {
@@ -91,6 +96,10 @@ export default class RecipeForm extends React.Component {
         this.produceArray = this.combineCategories("Produce")
         this.mixersArray = this.combineCategories("Mixers")
         this.garnishArray = this.combineCategories("Garnish")
+        
+        if (!this.state.loading) {
+            return <LoadingSpinner />
+        }
         return (
             <div className="webpage outer-create-recipe-form">
                 <div className="inner-create-recipe-form">
