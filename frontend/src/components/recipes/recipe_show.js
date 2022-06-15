@@ -111,14 +111,13 @@ class RecipeShow extends React.Component {
                                 <h2>Flavor Profile</h2>
                                 <ReviewGraphic
                                     className="review-graphic"
-                                    flavor_profile={recipe.avg_rating}
+                                    flavor_profile={recipe.creator_flavor_profile}
                                 />
                             </div>
                         </div>
                         <div className="recipe-steps">
                             <h2>Steps</h2>
                             <ol>
-                                {/* {this.state.recipe.instructions.split("\n").map((step,idx)=> (<li key={idx}>{step}</li>))} */}
                                 {this.parseSteps()}
                             </ol>
                         </div>
