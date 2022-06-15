@@ -111,7 +111,6 @@ export default class RecipeForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.setState({loading: true})
-        console.log(this.state);
         this.props.action(this.handleFormData(this.state))
             .then((val)=>{
                 console.log(val);
@@ -219,9 +218,9 @@ export default class RecipeForm extends React.Component {
                             <p className="description-label">{additionalInfo_explanation}</p>
                             <textarea name="additional-info" type="text" onChange={this.update("additionalInfo")} value={this.state.additionalInfo} 
                                 placeholder={additionalInfo_placeholder}/>
-                            
+                            {(!Boolean(this.props.recipe)) &&
                             <input type="file" name="photo" onChange={this.handleFile} />
-                            
+                            }
                             <button className="btn">Submit</button>
                         </form>
                     </div>
