@@ -4,8 +4,7 @@ class FilterItem extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            open: false,
-            checked: new Array(this.props.array.length)
+            open: false
         }
     }
     toggleHeader(){
@@ -18,9 +17,7 @@ class FilterItem extends React.Component{
 
     checkBox(el, i){
         return e => {
-            let arr = this.state.checked
-            arr[i] = e.target.checked
-            this.setState({checked: arr}, () => this.props.addToCart(el))
+            this.props.addToCart(el)
         }
     }
 
@@ -36,7 +33,7 @@ class FilterItem extends React.Component{
                     {this.state.open && <div className={`subject-box ${this.state.open ? "open" : ""}`}>
                         {this.props.array.map((el, i) => (
                             <div key={el._id} className="mycheckbox">
-                                <input name="ing-box" type="checkbox" className="check" checked={this.state.checked[i]} onChange={this.checkBox(el, i)} />
+                                <input name="ing-box" type="checkbox" className="check" checked={this.props.ingredients.filter(e => e._id === el._id).length > 0} onChange={this.checkBox(el, i)} />
                                 <label htmlFor="ing-box">{el.name}</label>
                             </div>
                         ))}

@@ -81,12 +81,13 @@ export default class RecipeForm extends React.Component {
     }
 
     async componentDidMount() {
+        if (Boolean(this.props.fetchRecipe)) {
+            await this.props.fetchRecipe()
+        }
         await this.props.fetchIngredients();
         // Edit form 
         if (Boolean(this.props.recipe)) {
             let recipe = this.props.recipe;
-            console.log(this.props.recipe._id)
-            console.log(recipe.creator_flavor_profile)
             this.setState({
                 name: recipe.name,
                 ingredients: recipe.ingredients,
@@ -110,8 +111,10 @@ export default class RecipeForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.setState({loading: true})
+        console.log(this.state);
         this.props.action(this.handleFormData(this.state))
-            .then(()=>{
+            .then((val)=>{
+                console.log(val);
                 this.setState({loading: false});
                 this.props.history.push("/recipes");
             })
@@ -119,7 +122,11 @@ export default class RecipeForm extends React.Component {
     }
 
     addToCart(ing) {
-        this.setState({ingredients: this.state.ingredients.concat([ing])})
+        if (this.state.ingredients.filter(e => e._id === ing._id).length > 0) {
+            this.setState({ingredients: this.state.ingredients.filter(e => e._id !== ing._id)})
+        } else {
+            this.setState({ingredients: this.state.ingredients.concat([ing])})
+        }
     }
 
     handleSlide(category, e) {

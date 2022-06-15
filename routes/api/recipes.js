@@ -29,6 +29,7 @@ function getAverageRating(recipe) {
         rate["bitter"] += reviews[j]["rating"]["bitter"];
         rate["salty"] += reviews[j]["rating"]["salty"];
         rate["umami"] += reviews[j]["rating"]["umami"];
+        rate["rating"] += reviews[j]["rating"]["rating"];
     }
     rate["boozy"] = Math.floor(rate["boozy"] / count);
     rate["sweet"] = Math.floor(rate["sweet"] / count);
@@ -36,6 +37,7 @@ function getAverageRating(recipe) {
     rate["bitter"] = Math.floor(rate["bitter"] / count);
     rate["salty"] = Math.floor(rate["salty"] / count);
     rate["umami"] = Math.floor(rate["umami"] / count);
+    rate["rating"] = Math.floor(rate["rating"] / count);
     return rate;
 }
 
@@ -85,6 +87,7 @@ router.get("/random", async (req, res) => {
 router.get("/:id", (req, res) => {
     Recipe.findById(req.params.id)
         .populate("reviews")
+        .populate("ingredients")
         .then(async (recipe) => {
             let rec = Object.assign({}, recipe._doc, {
                 avg_rating: getAverageRating(recipe),
@@ -220,6 +223,7 @@ router.post(
         for (const key in req.body) {
             val = JSON.parse(key)
         }
+        console.log(JSON.parse(val["recipe[ingredients]"]))
         const newRecipe = {
             imgUrl: val["recipe[imgUrl]"],
             name: val["recipe[name]"],
@@ -233,7 +237,8 @@ router.post(
         console.log(newRecipe);
         Recipe.updateOne(
             {_id: req.params.id},
-            {$set: newRecipe})
+            {$set: newRecipe},
+            {new: true})
             .then((recipe) => res.json(recipe))
             .catch((err) => console.log(err));
     }
