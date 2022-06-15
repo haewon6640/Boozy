@@ -6,6 +6,10 @@
     font-size: 20px;
     color: $dark-grey;
     font-family: $reg-font;
+    &:hover {
+        color: $warm-pink;
+        font-weight: bold;
+    }
   }
 }
 
@@ -15,6 +19,13 @@
   justify-content: center;
   padding: 5px;
   height: 90%;
+  img {
+    border-radius: 7px;
+      &:hover {
+        border: 2px solid $warm-pink;
+        border-radius: 7px;
+      }
+  }
   .recipe-index-show {
     // height: 250px;
     width: 90%;

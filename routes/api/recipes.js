@@ -228,7 +228,7 @@ router.post(
             description: val["recipe[description]"],
             instructions: val["recipe[instructions]"],
             additionalInfo: val["recipe[additionalInfo]"],
-            creator_flavor_profile: val["recipe[rating]"]
+            creator_flavor_profile: JSON.parse(val["recipe[rating]"])
         };
         console.log(newRecipe);
         Recipe.updateOne(
