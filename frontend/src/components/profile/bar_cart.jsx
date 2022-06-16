@@ -41,8 +41,6 @@ class BarCart extends React.Component {
     }
 
 	findCanDrinks = ()=>{   
-    console.log(this.state.filter_choice)
-    console.log(this.props.recipes.all)
 		let canMake = Object.values(this.props.recipes.all).filter(recipe=>(
 			recipe.ingredients.every(ingredient=>(
 				this.props.user.shelf.includes(ingredient)|| ingredient === null))) &&

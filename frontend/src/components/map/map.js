@@ -25,11 +25,6 @@ class BoozyMap extends React.Component {
         let success = function success(pos) {
             var crd = pos.coords;
             // debugger
-            console.log('Your current position is:');
-            console.log(`Latitude : ${crd.latitude}`);
-            console.log(`Longitude: ${crd.longitude}`);
-            console.log(`More or less ${crd.accuracy} meters.`);
-            
             this.setState({
                 center: { lat: crd.latitude, lng: crd.longitude},
 
@@ -47,7 +42,6 @@ class BoozyMap extends React.Component {
     }
 
     onMapLoad = (mapProps, map) => {
-        console.log(this.props)
         const {google} = mapProps
         let coords= []
         let request = {
@@ -94,7 +88,6 @@ class BoozyMap extends React.Component {
 
   
     render() {
-        console.log(this.state)
       return (
         <div className="map-container">   
             <Map

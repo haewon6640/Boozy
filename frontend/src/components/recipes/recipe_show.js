@@ -125,7 +125,6 @@ class RecipeShow extends React.Component {
                                 openModal={this.props.openModal}
                                 closeModal={this.props.closeModal}
                                 currentUser={this.props.user}
-                                onSubmit={() => alert("hello")}
                             />
                         </div>
                     </div>
@@ -134,8 +133,9 @@ class RecipeShow extends React.Component {
 
                 <div className="review-index-container">
                     <ReviewIndex
-                        fetchReviews={this.props.fetchReviews}
+                        rerenderPage={this.rerenderPage}
                         reviews={this.state.reviews}
+                        propReviews={this.props.reviews}
                     />
                 </div>
             </div>

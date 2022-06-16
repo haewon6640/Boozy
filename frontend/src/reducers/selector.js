@@ -9,7 +9,6 @@ export const combineAndSortArrByTime = (arr_1, arr_2) => {
         }
     }
     result_arr = result_arr.concat(arr1, arr2);
-    console.log(result_arr);
     return result_arr;
 }
 

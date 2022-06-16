@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Recipe = require('./Recipe');
 const Schema = mongoose.Schema;
 
 const ReviewSchema = new Schema({
@@ -31,11 +30,11 @@ const ReviewSchema = new Schema({
 })
 
 ReviewSchema.pre('remove',function(next) {
-    Recipe.update(
-        {reviews: this._id},
-        {$pull: { reviews: this._id}},
-        {multi:true}
-    ).exec();
+    const Recipe = require("./Recipe");
+    Recipe.updateOne(
+        {_id: this.recipe},
+        {$pull: {reviews: this._id}}
+    );
     next();
 });
 

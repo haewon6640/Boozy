@@ -20,7 +20,6 @@ export const createRecipe = (data) => {
 };
 
 export const updateRecipe = (data) => {
-    console.log(data.get("recipe[id]"));
     var object = {};
     data.forEach(function (value, key) {
         object[key] = value;

@@ -79,7 +79,6 @@ router.get("/random", async (req, res) => {
     let today = new Date().getDay();
     let count = await Recipe.count().exec();
     var random = today % count;
-    console.log(random);
     let recipe = await Recipe.findOne().skip(random).exec();
     res.json({ [recipe.id]: recipe });
 });
@@ -223,7 +222,6 @@ router.post(
         for (const key in req.body) {
             val = JSON.parse(key)
         }
-        console.log(JSON.parse(val["recipe[ingredients]"]))
         const newRecipe = {
             imgUrl: val["recipe[imgUrl]"],
             name: val["recipe[name]"],
@@ -234,7 +232,6 @@ router.post(
             additionalInfo: val["recipe[additionalInfo]"],
             creator_flavor_profile: JSON.parse(val["recipe[rating]"])
         };
-        console.log(newRecipe);
         Recipe.updateOne(
             {_id: req.params.id},
             {$set: newRecipe},

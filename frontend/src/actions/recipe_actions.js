@@ -37,7 +37,6 @@ export const receiveNewRecipe = (recipe) => ({
 });
 
 export const fetchRecipes = (searchString) => (dispatch) => {
-    console.log(searchString);
     searchString = searchString ? searchString : "";
     return RecipeApiUtil.getRecipes(searchString)
         .then((recipes) => dispatch(receiveRecipes(recipes.data)))

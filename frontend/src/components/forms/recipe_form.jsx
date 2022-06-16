@@ -113,7 +113,6 @@ export default class RecipeForm extends React.Component {
         this.setState({loading: true})
         this.props.action(this.handleFormData(this.state))
             .then((val)=>{
-                console.log(val);
                 this.setState({loading: false});
                 this.props.history.push("/recipes");
             })

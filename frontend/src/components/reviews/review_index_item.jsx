@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { FaStar } from "react-icons/fa";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {updateReview, deleteReview} from "../../actions/review_actions";
-
+import EditReviewForm from "./edit_review_form";
 function Star({ filled, onClick }) {
   return (
     <FaStar 
@@ -13,6 +13,8 @@ function Star({ filled, onClick }) {
 }
 
 const ReviewIndexItem = (props) => {
+    const [showEditForm, setShowEditForm] = useState(false);
+
     const {review,currUserId} = props
     let modify_review;
     let titleExists = review.title.length !== 0;
@@ -25,13 +27,14 @@ const ReviewIndexItem = (props) => {
     if  (review.reviewer._id === currUserId) {
 
       modify_review =( <ul className="modify-review">
-           <li className='edit-review'>Edit</li>
-           <li onClick={()=>{props.deleteReview(review._id);(this.props.fetchReviews())}} className='delete-review'>Delete</li>
+           <li onClick={()=>setShowEditForm(!showEditForm)} className='edit-review'>Edit</li>
+           <li onClick={()=>{props.deleteReview(review._id); props.rerenderPage()}} className='delete-review'>Delete</li>
        </ul>)
-     }
-  
+    }
+
     return (
         <li className="review-index-item">
+            <EditReviewForm show={showEditForm} setShow={setShowEditForm} review={review} rerenderPage={props.rerenderPage}/>
             <div className="review-item-top-row">
                 <span className='overall-rating'>
                     {[1, 2, 3, 4, 5].map((value) => (
@@ -79,7 +82,7 @@ const mSTP = state => {
     }
 }
 
-const mDTP = dispatch => ({
+const mDTP = (dispatch,ownProps) => ({
     updateReview: (review)=> dispatch(updateReview(review)),
     deleteReview: (reviewId) => dispatch(deleteReview(reviewId))
 })
