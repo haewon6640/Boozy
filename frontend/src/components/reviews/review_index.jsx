@@ -10,7 +10,7 @@ export default class ReviewIndex extends Component {
         this.fetchReviews = this.props.fetchReviews.bind(this)
     }
     componentDidMount() {
-        this.props.fetchReviews()
+        // this.props.fetchReviews()
         this.setState({reviews: this.props.reviews});
     }
     
