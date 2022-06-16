@@ -3,7 +3,15 @@ import { Link, withRouter } from "react-router-dom";
 import {connect } from "react-redux";
 import { closeModal, openModal } from "../../actions/modal_actions";
 import {updateReview} from "../../actions/review_actions"
-
+import { FaStar } from "react-icons/fa";
+import { BiErrorCircle } from 'react-icons/bi';
+function Star({ filled, onClick }) {
+  return (
+    <FaStar 
+     color={filled ? "orange" : "lightgray"} 
+     onClick={onClick} />
+  );
+}
 const reviewCategories = [
     "boozy",
     "sweet",
@@ -11,7 +19,6 @@ const reviewCategories = [
     "bitter",
     "salty",
     "umami",
-    "rating",
 ];
 
 
@@ -23,6 +30,7 @@ class EditReviewForm extends Component {
             rating: props.review.rating,
             title: props.review.title,
             body: props.review.body,
+            overallRating:0
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         // console.log("review_form_show props", this.props);
@@ -42,38 +50,49 @@ class EditReviewForm extends Component {
     }
 
     update(field) {
-        return (e) =>
-            this.setState({
-                [field]: e.currentTarget.value,
-            });
-    }
+      let errorName = `${field}Error`
+      return (e) =>
+          this.setState({
+              [field]: e.currentTarget.value,[errorName]:false
+          });
+  }
 
     closeModal() {
         this.props.setShow(false);
         document.getElementById("modal").classList.remove("showModal");
         document.getElementById("modal").classList.add("hideModal");
         setTimeout(() => this.props.closeModal(), 250);
+        this.setState({titleError:false, ratingError:false, bodyError:false})
     }
-
+    handleClick=(value)=> {
+      this.setState({overallRating:value, ratingError:false})
+    }
     handleSubmit(e) {
         e.preventDefault();
-
-        let review = {
-            _id: this.state._id,
-            rating: this.state.rating,
-            title: this.state.title,
-            body: this.state.body,
-            recipe: this.props.recipe._id,
-        };
-        this.props
-            .updateReview(review)
-            .then(() => {
-                document.getElementById("modal").classList.remove("showModal");
-                document.getElementById("modal").classList.add("hideModal");
-                this.props.setShow(false);
-                this.props.closeModal();
-            })
-            .then(this.props.rerenderPage());
+        if (this.state.overallRating !== 0 && this.state.title !== "" && this.state.body !== "" ) {
+          let newRating = (Object.assign({}, this.state.rating))
+          newRating.rating= this.state.overallRating
+          let review = {
+              _id: this.state._id,
+              rating: newRating,
+              title: this.state.title,
+              body: this.state.body,
+              recipe: this.props.recipe._id,
+          };
+          this.props
+              .updateReview(review)
+              .then(() => {
+                  document.getElementById("modal").classList.remove("showModal");
+                  document.getElementById("modal").classList.add("hideModal");
+                  this.props.setShow(false);
+                  this.props.closeModal();
+              })
+              .then(this.props.rerenderPage());
+            } else {
+              if (this.state.title ==='') this.setState({titleError:true})
+              if (this.state.overallRating === 0) this.setState({ratingError:true})
+              if (this.state.body === '')  this.setState({bodyError:true})
+            }     
     }
 
     render() {
@@ -113,7 +132,7 @@ class EditReviewForm extends Component {
                                             className={`rating-slider ${category}-slider`}
                                             type="range"
                                             min={0}
-                                            max={category === "rating" ? 5 : 10}
+                                            max={10}
                                             value={this.state.rating[category]}
                                             // defaultValue={0}
                                             onChange={(e) =>
@@ -130,20 +149,42 @@ class EditReviewForm extends Component {
                                 ))}
                             </div>
                             <div className="form-second-column">
-                                <label> Title</label>
-                                <input
-                                    className="review-title-input"
-                                    type="text"
-                                    value={this.state.title}
-                                    onChange={this.update("title")}
-                                />
+                              <div className="input-error">
+                                  <div className="in-line" id="rating-stars">
+                                      <label >Rating</label>
+                                          <div className='overall-rating'>
+                                              {[1, 2, 3, 4, 5].map((value) => (
+                                                  <Star
+                                                      key={value}
+                                                      onClick={()=>this.handleClick(value)}
+                                                      filled={value <= this.state.overallRating}
+                                                      
+                                                  />
+                                              ))}
+                                        </div>
+                                    </div>
+                                  {this.state.ratingError === true && <div className='error'><BiErrorCircle/> Reviews must have a rating </div>}
+                              </div>                                  
+                              <div className="input-error">                                  
+                                  <label> Title</label>
+                                  <input
+                                      className="review-title-input"
+                                      type="text"
+                                      value={this.state.title}
+                                      onChange={this.update("title")}
+                                  />
+                                  {this.state.titleError === true && <div className='error'><BiErrorCircle/> Reviews must have a title </div>}
+                                </div>
+                                <div className="input-error">                                  
                                 <label> Body</label>
-                                <textarea
+                                  <textarea
                                     className="review-body-input"
                                     type="text"
                                     value={this.state.body}
                                     onChange={this.update("body")}
-                                />
+                                    />
+                                    {this.state.bodyError === true && <div className='error'><BiErrorCircle/> Reviews must have a body </div>}
+                                  </div>
                                 <button className="btn">
                                     <span className="">Update Review</span>
                                 </button>
