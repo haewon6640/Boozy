@@ -68,6 +68,7 @@ class RecipeShow extends React.Component {
                 </div>
             )
         }
+        console.log('The props in the recipe show are',this.props)
         return (
             <div className="recipe-show">
                 <div className="two-col">
@@ -136,6 +137,7 @@ class RecipeShow extends React.Component {
                     <ReviewIndex
                         fetchReviews={this.props.fetchReviews}
                         reviews={this.state.reviews}
+                        propReviews={this.props.reviews}
                     />
                 </div>
             </div>
