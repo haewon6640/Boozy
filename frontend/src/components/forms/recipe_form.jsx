@@ -150,7 +150,7 @@ export default class RecipeForm extends React.Component {
 
         this.alcoholArray = this.combineCategories("Alcohol")
         this.produceArray = this.combineCategories("Produce")
-        this.mixersArray = this.combineCategories("Mixers")
+        this.mixersArray = this.combineCategories("Mixer")
         this.garnishArray = this.combineCategories("Garnish")
         
         if (this.state.loading) {
