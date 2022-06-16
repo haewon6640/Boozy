@@ -18,7 +18,7 @@ class LoginForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser === true) {
-      this.props.history.push('/tweets');
+      this.props.history.push('/');
     }
 
     this.setState({errors: nextProps.errors})
@@ -45,8 +45,14 @@ class LoginForm extends React.Component {
         password: "123456"
       }
     }
-    this.props.login(user).then(
-        () => this.props.history.go(-1))
+
+    this.props.login(user)
+        .then(() => {
+            if (Object.values(this.state.errors).length === 0) {
+                this.props.history.go(-1)
+            }
+        })
+
 
   }
 
