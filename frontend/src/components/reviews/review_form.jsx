@@ -1,5 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { BiErrorCircle } from 'react-icons/bi';
+import { FaStar } from "react-icons/fa";
+function Star({ filled, onClick }) {
+  return (
+    <FaStar 
+     color={filled ? "orange" : "lightgray"} 
+     onClick={onClick} />
+  );
+}
+
+
 const reviewCategories = [
     "boozy",
     "sweet",
@@ -7,7 +18,6 @@ const reviewCategories = [
     "bitter",
     "salty",
     "umami",
-    "rating",
 ];
 
 export default class ReviewForm extends Component {
@@ -47,7 +57,7 @@ export default class ReviewForm extends Component {
     }
     
     handleSlide(category, e) {
-        //   console.log(e.target.value)
+          // console.log(e.target.value)
         let newRating = { ...this.state.rating };
         newRating[Object.values(category)[0]] = e.target.value;
         // console.log(category, e.target.value, newRating); //you get to this point
@@ -60,52 +70,65 @@ export default class ReviewForm extends Component {
     }
 
     update(field) {
+        let errorName = `${field}Error`
         return (e) =>
             this.setState({
-                [field]: e.currentTarget.value,
+                [field]: e.currentTarget.value,[errorName]:false
             });
     }
     closeModal() {
         document.getElementById("modal").classList.remove("showModal");
         document.getElementById("modal").classList.add("hideModal");
         setTimeout(() => this.props.closeModal(), 250);
+        this.setState({titleError:false, ratingError:false, bodyError:false})
     }
-
+    handleClick=(value)=> {
+      let newRating = Object.assign({}, this.state.rating.rating)
+      newRating.rating = value
+      this.setState({rating:newRating, ratingError:false})
+    }
     handleSubmit(e) {
-        e.preventDefault();
-
-        let review = {
-            rating: this.state.rating,
-            title: this.state.title,
-            body: this.state.body,
-            recipe: this.props.recipe._id,
-        };
-        this.props
-            .createReview(review)
-            .then(() => this.props.rerenderPage())
-            .then(() => {
-                this.props.fetchReviews();
-            })
-            .then(() => {
-                document.getElementById("modal").classList.remove("showModal");
-                document.getElementById("modal").classList.add("hideModal");
-                this.props.closeModal();
-                this.setState({
-                    rating: {
-                        boozy: 0,
-                        sweet: 0,
-                        sour: 0,
-                        bitter: 0,
-                        salty: 0,
-                        umami: 0,
-                        rating: 0,
-                    },
-                    title: "",
-                    body: "",
-                });
-            })
-            .then(this.props.rerenderPage());
-    }
+      e.preventDefault();
+      
+      if (this.state.rating.rating !== 0 && this.state.title !== "" && this.state.body !== "" ) {
+          let review = {
+              rating: this.state.rating,
+              title: this.state.title,
+              body: this.state.body,
+              recipe: this.props.recipe._id,
+          };
+          this.props
+              .createReview(review)
+              .then(() => this.props.rerenderPage())
+              .then(() => {
+                  this.props.fetchReviews();
+              })
+              .then(() => {
+                  document.getElementById("modal").classList.remove("showModal");
+                  document.getElementById("modal").classList.add("hideModal");
+                  this.props.closeModal();
+                  this.setState({
+                      rating: {
+                          boozy: 0,
+                          sweet: 0,
+                          sour: 0,
+                          bitter: 0,
+                          salty: 0,
+                          umami: 0,
+                          rating: 0,
+                      },
+                      title: "",
+                      body: "",
+                  });
+              })
+              .then(this.props.rerenderPage());
+        } else {
+          if (this.state.title ==='') this.setState({titleError:true})
+          if (this.state.rating.rating === 0) this.setState({ratingError:true})
+          if (this.state.body === '')  this.setState({bodyError:true})
+        }          
+         
+  }
 
     render() {
         // console.log('the current user is:', this.props.currentUser)
@@ -159,7 +182,7 @@ export default class ReviewForm extends Component {
                                             className={`rating-slider ${category}-slider`}
                                             type="range"
                                             min={0}
-                                            max={category === "rating" ? 5 : 10}
+                                            max={10}
                                             value={this.state.rating[category]}
                                             // defaultValue={0}
                                             onChange={(e) =>
@@ -176,20 +199,42 @@ export default class ReviewForm extends Component {
                                 ))}
                             </div>
                             <div className="form-second-column">
-                                <label> Title</label>
-                                <input
-                                    className="review-title-input"
-                                    type="text"
-                                    value={this.state.title}
-                                    onChange={this.update("title")}
-                                />
+                              <div className="input-error">
+                                  <div className="in-line" id="rating-stars">
+                                      <label >Rating</label>
+                                          <div className='overall-rating'>
+                                              {[1, 2, 3, 4, 5].map((value) => (
+                                                  <Star
+                                                      key={value}
+                                                      onClick={()=>this.handleClick(value)}
+                                                      filled={value <= this.state.rating.rating}
+                                                      
+                                                  />
+                                              ))}
+                                        </div>
+                                    </div>
+                                  {this.state.ratingError === true && <div className='error'><BiErrorCircle/> Reviews must have a rating </div>}
+                              </div>                                  
+                              <div className="input-error">                                  
+                                  <label> Title</label>
+                                  <input
+                                      className="review-title-input"
+                                      type="text"
+                                      value={this.state.title}
+                                      onChange={this.update("title")}
+                                  />
+                                  {this.state.titleError === true && <div className='error'><BiErrorCircle/> Reviews must have a title </div>}
+                                </div>
+                                <div className="input-error">                                  
                                 <label> Body</label>
-                                <textarea
+                                  <textarea
                                     className="review-body-input"
                                     type="text"
                                     value={this.state.body}
                                     onChange={this.update("body")}
-                                />
+                                    />
+                                    {this.state.bodyError === true && <div className='error'><BiErrorCircle/> Reviews must have a body </div>}
+                                  </div>
                                 <button className="btn">
                                     <span className="">Submit Review</span>
                                 </button>
