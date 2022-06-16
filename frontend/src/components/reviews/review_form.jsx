@@ -35,6 +35,7 @@ export default class ReviewForm extends Component {
             },
             title: "",
             body: "",
+            overallRating:0
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         // console.log("review_form_show props", this.props);
@@ -53,6 +54,7 @@ export default class ReviewForm extends Component {
             },
             title: "",
             body: "",
+            overallRating:0
         });
     }
     
@@ -83,16 +85,16 @@ export default class ReviewForm extends Component {
         this.setState({titleError:false, ratingError:false, bodyError:false})
     }
     handleClick=(value)=> {
-      let newRating = Object.assign({}, this.state.rating.rating)
-      newRating.rating = value
-      this.setState({rating:newRating, ratingError:false})
+      this.setState({overallRating:value, ratingError:false})
     }
     handleSubmit(e) {
       e.preventDefault();
       
-      if (this.state.rating.rating !== 0 && this.state.title !== "" && this.state.body !== "" ) {
+      if (this.state.overallRating !== 0 && this.state.title !== "" && this.state.body !== "" ) {
+          let newRating = (Object.assign({}, this.state.rating))
+          newRating.rating= this.state.overallRating
           let review = {
-              rating: this.state.rating,
+              rating: newRating,
               title: this.state.title,
               body: this.state.body,
               recipe: this.props.recipe._id,
@@ -124,7 +126,7 @@ export default class ReviewForm extends Component {
               .then(this.props.rerenderPage());
         } else {
           if (this.state.title ==='') this.setState({titleError:true})
-          if (this.state.rating.rating === 0) this.setState({ratingError:true})
+          if (this.state.overallRating === 0) this.setState({ratingError:true})
           if (this.state.body === '')  this.setState({bodyError:true})
         }          
          
@@ -207,7 +209,7 @@ export default class ReviewForm extends Component {
                                                   <Star
                                                       key={value}
                                                       onClick={()=>this.handleClick(value)}
-                                                      filled={value <= this.state.rating.rating}
+                                                      filled={value <= this.state.overallRating}
                                                       
                                                   />
                                               ))}
