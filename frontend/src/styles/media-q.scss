@@ -70,6 +70,15 @@
     // align-items: center;
     // text-align: center;
   }
+  .review-form {
+    height: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    padding-left: 5px;
+    .ratings-container{
+      padding-right: 5px;
+    }
+  }
 
   .inner-create-recipe-form {
     grid-template-columns: 1fr;
