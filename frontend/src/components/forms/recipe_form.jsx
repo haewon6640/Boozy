@@ -2,6 +2,8 @@ import React from "react";
 import FilterItem from "./ingredient_filter_item";
 import LoadingSpinner from "../loading/loading";
 import { ReactReduxContext } from "react-redux";
+import { BiErrorCircle } from 'react-icons/bi';
+
 const reviewCategories = [
     "boozy",
     "sweet",
@@ -56,17 +58,18 @@ export default class RecipeForm extends React.Component {
     }
 
     handleFormData(state){
-        let formData = new FormData();
-        formData.append("recipe[name]", state.name)
-        formData.append("recipe[id]", state.id)
-        formData.append("recipe[imgUrl]", state.imgUrl)
-        formData.append("recipe[ingredients]", JSON.stringify(state.ingredients))
-        formData.append("recipe[instructions]", state.instructions)
-        formData.append("recipe[additionalInfo]", state.additionalInfo)
-        formData.append("recipe[description]", state.description)
-        formData.append("recipe[rating]", JSON.stringify(state.rating))
-        formData.append("recipe[photo]", state.imageFile)
-        
+      let formData = new FormData();
+      formData.append("recipe[name]", state.name)
+      formData.append("recipe[id]", state.id)
+      formData.append("recipe[imgUrl]", state.imgUrl)
+      formData.append("recipe[ingredients]", JSON.stringify(state.ingredients))
+      formData.append("recipe[instructions]", state.instructions)
+      formData.append("recipe[additionalInfo]", state.additionalInfo)
+      formData.append("recipe[description]", state.description)
+      formData.append("recipe[rating]", JSON.stringify(state.rating))
+      formData.append("recipe[photo]", state.imageFile)
+      
+      console.log(formData)
         return formData;
     }
 
@@ -102,21 +105,41 @@ export default class RecipeForm extends React.Component {
     }
 
     update(field) {
+        let fieldError = field+'Error'
+       
         return e => (
             this.setState({
-                [field]: e.target.value
+                [field]: e.target.value,
+                [fieldError]:false
             })
         )
     }
     handleSubmit(e) {
         e.preventDefault();
         this.setState({loading: true})
-        this.props.action(this.handleFormData(this.state))
-            .then((val)=>{
-                this.setState({loading: false});
-                this.props.history.push("/recipes");
-            })
-            .catch((err)=>this.setState({loading: false}));
+        let ratingSum = Object.values(this.state.rating).reduce((sum,el) => sum+el,0)
+
+
+        if (ratingSum !== 0 && Object.values(this.state.ingredients).length !== 0 && this.state.name !== "" && this.state.description !== "" && this.state.instructions !== ""){
+          alert('valid submission')
+          this.props.action(this.handleFormData(this.state))
+              .then((val)=>{
+                  this.setState({loading: false});
+                  this.props.history.push("/recipes");
+              })
+              .catch((err)=>this.setState({loading: false}));
+        } 
+          
+          this.setState({loading: false})
+          if (ratingSum === 0) this.setState({ratingError:true})
+          if (Object.values(this.state.ingredients).length === 0) this.setState({ingredientsError:true})
+          if (this.state.name === "")  this.setState({nameError:true})
+          if (this.state.description === "")  this.setState({descriptionError:true})
+          if (this.state.instructions === "")  this.setState({instructionsError:true})
+
+
+          
+
     }
 
     addToCart(ing) {
@@ -135,6 +158,7 @@ export default class RecipeForm extends React.Component {
         this.setState(
             {
                 rating: newRating,
+                ratingError: false
             }
             // console.log("State was set to:", this.state.rating)
         );
@@ -148,6 +172,12 @@ export default class RecipeForm extends React.Component {
         const additionalInfo_explanation = "Provide suggested alcohol brands, or ingredient replacements."
         const additionalInfo_placeholder = "Use high quality vodka such as Hangar 1, Square One. \n Fresh lime juice is best. Don't throw that peel away! You can use it as a garnish." 
 
+        const ratingError = "recipe must have a minimum rating"
+        const ingredientsError = "recipe must have ingredients"
+        const nameError = "recipe name cannot be blank"
+        const descriptionError = "recipe description cannot be blank"
+        const instructionsError = "recipe instructions cannot be blank"
+        
         this.alcoholArray = this.combineCategories("Alcohol")
         this.produceArray = this.combineCategories("Produce")
         this.mixersArray = this.combineCategories("Mixer")
@@ -196,27 +226,33 @@ export default class RecipeForm extends React.Component {
                                         </div>
                                     </div>
                                 ))}
+                                {this.state.ratingError === true && <div className='error'><BiErrorCircle/> {ratingError} </div>}
                             </div>
                     </aside>
                     <div className="recipe-form-container">
+                      
                         <form onSubmit={this.handleSubmit} className="create-recipe-form">
                             <h1 className="form-title">{this.props.formType}</h1>
                             <label className="main-label">Recipe Name</label>
                                 <input onChange={this.update("name")} type="text" value={this.state.name} placeholder="Cosmopolitan" />
+                                {this.state.nameError === true && <div className='error'><BiErrorCircle/> {ratingError} </div>}
                             <label className="main-label" htmlFor="description">Description</label>
-                            <p className="description-label">{description_explanation}</p>
-                            <textarea name="description" type="text" onChange={this.update("description")} value={this.state.description} 
+                                <p className="description-label">{description_explanation}</p>
+                                <textarea name="description" type="text" onChange={this.update("description")} value={this.state.description} 
                                 placeholder={description_placeholder}/>
+                                {this.state.descriptionError === true && <div className='error'><BiErrorCircle/> {descriptionError} </div>}
 
                             <label className="main-label" htmlFor="instruction">Instructions</label>
-                            <p className="description-label">{instructions_explanation}</p>
-                            <textarea name="instruction" type="text" onChange={this.update("instructions")} value={this.state.instructions} 
+                              <p className="description-label">{instructions_explanation}</p>
+                              <textarea name="instruction" type="text" onChange={this.update("instructions")} value={this.state.instructions} 
                                 placeholder={instructions_placeholder}/>
-
+                                {this.state.instructionsError === true && <div className='error'><BiErrorCircle/> {instructionsError} </div>}
+                              
                             <label className="main-label" htmlFor="additional-info">Additional Info</label>
                             <p className="description-label">{additionalInfo_explanation}</p>
                             <textarea name="additional-info" type="text" onChange={this.update("additionalInfo")} value={this.state.additionalInfo} 
                                 placeholder={additionalInfo_placeholder}/>
+                                
                             {(!Boolean(this.props.recipe)) &&
                             <input type="file" name="photo" onChange={this.handleFile} />
                             }

@@ -42,19 +42,19 @@ const Footer = (props) => {
                             Developers
                         </a>
                         <ul>
-                            <a href="https://www.linkedin.com/in/hae-won-park-64820714a/">
+                            <a href="https://github.com/AndersKindall">
                                 <li>Anders Kindall</li>
                             </a>
-                            <a href="https://github.com/haewon6640">
+                            <a href="https://github.com/JemComp">
                                 <li>Jeremy Pietila</li>
                             </a>
                             <a href="https://github.com/haewon6640">
                                 <li>Jerry Park</li>
                             </a>
-                            <a href="https://github.com/haewon6640">
+                            <a href="https://github.com/Chuck-Woody">
                                 <li>Keenan Parker</li>
                             </a>
-                            <a href="https://github.com/haewon6640">
+                            <a href="https://github.com/Pamm-j">
                                 <li>Pamela Jane</li>
                             </a>
 
